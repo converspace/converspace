@@ -1,6 +1,20 @@
 {
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "michelf/php-markdown-extra",
+				"version": "1.2.5",
+				"dist": {
+					"url": "http://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.5.zip",
+					"type": "zip"
+				}
+			}
+		}
+	],
 	"require": {
 		"phpish/app": "dev-master",
-		"phpish/template": "dev-master"
+		"phpish/template": "dev-master",
+		"michelf/php-markdown-extra": "1.2.*"
 	}
 }

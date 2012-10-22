@@ -1,6 +1,18 @@
 {
-    "hash": "4f9a9dcb31e459e68b0996429b5caeeb",
+    "hash": "b27178000d05b32a3eac152629d2dc28",
     "packages": [
+        {
+            "name": "michelf/php-markdown-extra",
+            "version": "1.2.5",
+            "dist": {
+                "type": "zip",
+                "url": "http://littoral.michelf.ca/code/php-markdown/php-markdown-extra-1.2.5.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
+        },
         {
             "name": "phpish/app",
             "version": "dev-master",
