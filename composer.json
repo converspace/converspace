@@ -1,0 +1,6 @@
+{
+	"require": {
+		"phpish/app": "dev-master",
+		"phpish/template": "dev-master"
+	}
+}

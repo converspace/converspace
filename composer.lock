@@ -1,0 +1,82 @@
+{
+    "hash": "4f9a9dcb31e459e68b0996429b5caeeb",
+    "packages": [
+        {
+            "name": "phpish/app",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpish/app",
+                "reference": "00ff4a989c2448b51be8aeee615aebb30b2826d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/phpish/app/zipball/00ff4a989c2448b51be8aeee615aebb30b2826d5",
+                "reference": "00ff4a989c2448b51be8aeee615aebb30b2826d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "1349777929",
+            "type": "library",
+            "installation-source": "source",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Request Handler",
+            "homepage": "https://github.com/phpish/app"
+        },
+        {
+            "name": "phpish/template",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpish/template",
+                "reference": "a49560796a9fe0791749f1e783ed362a9c431f10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/phpish/template/zipball/a49560796a9fe0791749f1e783ed362a9c431f10",
+                "reference": "a49560796a9fe0791749f1e783ed362a9c431f10",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "1349553930",
+            "type": "library",
+            "installation-source": "source",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Capture output of and compose plain old PHP templates",
+            "homepage": "https://github.com/phpish/template"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "phpish/app": 20,
+        "phpish/template": 20
+    }
+}
