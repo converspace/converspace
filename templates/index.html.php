@@ -1,34 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Converspace</title>
-
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-	<style>
-
-		.alone { margin-top: 20px; }
-		.tab-pane { padding: 0 20px; }
-
-	</style>
-
-</head>
-<body>
-
-<!--
-<div class="navbar navbar-static-top">
-	<div class="navbar-inner">
-		<a class="brand" href="#">Converspace</a>
-		<ul class="nav pull-right">
-			<li><a href="#">Login</a></li>
-		</ul>
-	</div>
-</div>
--->
-<div class="container alone">
 	<div class="row">
 		<div class="span3">
 			<div class="about">
@@ -93,9 +62,3 @@
 		</div>
 
 	</div>
-</div>
-
-<script src="assets/js/jquery-1.8.2.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-</body>
-</html>

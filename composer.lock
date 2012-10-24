@@ -1,5 +1,5 @@
 {
-    "hash": "b27178000d05b32a3eac152629d2dc28",
+    "hash": "d6fcb21b4f84d8700b0979a435de7ed4",
     "packages": [
         {
             "name": "michelf/php-markdown-extra",
@@ -48,23 +48,62 @@
             "homepage": "https://github.com/phpish/app"
         },
         {
-            "name": "phpish/template",
+            "name": "phpish/http",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpish/template",
-                "reference": "a49560796a9fe0791749f1e783ed362a9c431f10"
+                "url": "https://github.com/phpish/http",
+                "reference": "370f90657be68a676f34704c2d29c7146e784506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/template/zipball/a49560796a9fe0791749f1e783ed362a9c431f10",
-                "reference": "a49560796a9fe0791749f1e783ed362a9c431f10",
+                "url": "https://github.com/phpish/http/zipball/370f90657be68a676f34704c2d29c7146e784506",
+                "reference": "370f90657be68a676f34704c2d29c7146e784506",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1349553930",
+            "time": "1349635398",
+            "type": "library",
+            "installation-source": "source",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Convenience wrapper around PHP's cURL library for making HTTP requests",
+            "homepage": "https://github.com/phpish/http",
+            "keywords": [
+                "curl",
+                "http",
+                "api"
+            ]
+        },
+        {
+            "name": "phpish/template",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpish/template",
+                "reference": "75fb36174b45075fe54e6889d44e4aaec0481b1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/phpish/template/zipball/75fb36174b45075fe54e6889d44e4aaec0481b1f",
+                "reference": "75fb36174b45075fe54e6889d44e4aaec0481b1f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "1351097275",
             "type": "library",
             "installation-source": "source",
             "license": [
@@ -89,6 +128,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "phpish/app": 20,
-        "phpish/template": 20
+        "phpish/template": 20,
+        "phpish/http": 20
     }
 }

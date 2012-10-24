@@ -2,14 +2,46 @@
 
 	require __DIR__.'/vendor/phpish/app/app.php';
 	require __DIR__.'/vendor/phpish/template/template.php';
+	require __DIR__.'/vendor/phpish/http/http.php';
 
 	use phpish\app;
 	use phpish\template;
+	use phpish\http;
 
 
 	app\get('/', function() {
 
-		return template\render('index.html');
+		return template\compose('index.html', array(), 'layout.html');
+	});
+
+
+	app\get('/signin', function() {
+
+		session_start();
+		return template\compose('signin.html', array(), 'layout.html');
+	});
+
+
+	app\post('/signout', function() {
+
+		session_start();
+		unset($_SESSION['user']);
+		session_destroy();
+	});
+
+
+	app\post('/persona-verifier', function($req) {
+
+		session_start();
+		if (isset($req['form']['assertion'])) {
+			$response = http\request(
+				"POST https://verifier.login.persona.org/verify",
+				'',
+				array('assertion'=>$req['form']['assertion'], 'audience'=>'http://127.0.0.1:80')
+			);
+
+			if ('okay' == $response['status']) $_SESSION['user'] = $response;
+		}
 	});
 
 
