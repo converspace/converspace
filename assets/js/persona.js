@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-	var $signin_button = $('#signin');
-	var $signout_button = $('#signout');
-	$signin_button.hide();
-	$signout_button.hide();
-
 	$('#signin').click(function (e) {
 		e.preventDefault();
 		navigator.id.request({siteName: 'Converspace'});
@@ -16,13 +11,13 @@ $(document).ready(function() {
 	});
 
 	navigator.id.watch({
+		loggedInUser: $loggedInUser,
 		onlogin: function ($assertion) {
 			$.post(
 				'persona-verifier',
 				{assertion: $assertion},
 				function(data) {
-					$signin_button.hide();
-					$signout_button.show();
+					window.location.reload();
 				}
 			);
 		},
@@ -31,8 +26,7 @@ $(document).ready(function() {
 				'signout',
 				{},
 				function() {
-					$signin_button.show();
-					$signout_button.hide();
+					window.location.reload();
 				}
 			);
 		}
