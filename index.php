@@ -15,11 +15,19 @@
 	});
 
 
-	app\get('/signin', function() {
+	app\get('/post', function() {
 
 		session_start();
-		return template\compose('signin.html', array(), 'layout.html');
+		return template\compose('post.html', array(), 'layout.html');
 	});
+
+
+	app\post('/post', function() {
+
+		# Validate user email
+		# Create new post
+	});
+
 
 
 	app\post('/signout', function() {
@@ -44,17 +52,6 @@
 		}
 	});
 
-
-	app\get('/post', function() {
-
-		# temp interface for posting
-	});
-
-
-	app\post('/post', function() {
-
-		# temp interface for posting
-	});
 
 
 # TODO: look at AtomPub?
