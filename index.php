@@ -2,11 +2,10 @@
 
 	require __DIR__.'/vendor/phpish/app/app.php';
 	require __DIR__.'/vendor/phpish/template/template.php';
-	require __DIR__.'/vendor/phpish/http/http.php';
+
 
 	use phpish\app;
 	use phpish\template;
-	use phpish\http;
 
 
 	app\get('/', function() {
@@ -14,44 +13,10 @@
 		return template\compose('index.html', 'layout.html');
 	});
 
+	app\path_macro(array('/post', '/signout', '/persona-verifier'), function() {
 
-	app\get('/post', function() {
-
-		session_start();
-		return template\compose('post.html', 'layout.html');
+		require __DIR__.'/post.php';
 	});
-
-
-	app\post('/post', function() {
-
-		# Validate user email
-		# Create new post
-	});
-
-
-
-	app\post('/signout', function() {
-
-		session_start();
-		unset($_SESSION['user']);
-		session_destroy();
-	});
-
-
-	app\post('/persona-verifier', function($req) {
-
-		session_start();
-		if (isset($req['form']['assertion'])) {
-			$response = http\request(
-				"POST https://verifier.login.persona.org/verify",
-				'',
-				array('assertion'=>$req['form']['assertion'], 'audience'=>'http://127.0.0.1:80')
-			);
-
-			if ('okay' == $response['status']) $_SESSION['user'] = $response;
-		}
-	});
-
 
 
 # TODO: look at AtomPub?
