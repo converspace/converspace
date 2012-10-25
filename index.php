@@ -11,14 +11,14 @@
 
 	app\get('/', function() {
 
-		return template\compose('index.html', array(), 'layout.html');
+		return template\compose('index.html', 'layout.html');
 	});
 
 
 	app\get('/post', function() {
 
 		session_start();
-		return template\compose('post.html', array(), 'layout.html');
+		return template\compose('post.html', 'layout.html');
 	});
 
 
