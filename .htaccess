@@ -7,6 +7,10 @@
 	# Follow symbolic links
 	Options +FollowSymLinks
 
+	# Disable Content Negotiation to stop `RewriteCond %{REQUEST_FILENAME} !-f` from matching .php files
+	# /post will match /post.php if this is enabled
+	Options -Multiviews
+
 
 	<IfModule mod_rewrite.c>
 
