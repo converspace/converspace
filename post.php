@@ -3,6 +3,7 @@
 	require __DIR__.'/vendor/phpish/http/http.php';
 
 	use phpish\app;
+	use phpish\mysql;
 	use phpish\template;
 	use phpish\http;
 
