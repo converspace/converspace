@@ -15,7 +15,8 @@
 		return template\compose('index.html', 'layout.html');
 	});
 
-	app\path_macro(array('/post', '/signout', '/persona-verifier'), function() {
+# TODO: Remove this duplication of routes:
+	app\path_macro(array('/post[/[{id}]]', '/signout', '/persona-verifier'), function() {
 
 		require __DIR__.'/post.php';
 	});

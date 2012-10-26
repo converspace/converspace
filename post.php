@@ -14,14 +14,32 @@
 	});
 
 
-	app\get('/post', function() {
+	app\get('/post[/[{id}]]', function($req) {
 
-		return template\compose('post.html', 'layout.html');
+		# TODO: /post/123 breaks relative paths for css, js, etc. Need to convert them to absolute paths
+		# TODO: Edit interface for $req['matches']['id']
+
+		$template_vars = !isset($_SESSION['user']) ? array('alert'=>'Not signed in! Please sign in first.', 'alert_type'=>'error') : array();
+		return template\compose('post.html', $template_vars, 'layout.html');
 	});
 
 
 	app\post('/post', function() {
 
+		$template_vars = array();
+
+		if (!isset($_SESSION['user']))
+		{
+			$template_vars['alert'] = 'Not signed in! Please sign in first.';
+			$template_vars['alert_type'] = 'error';
+		}
+		else
+		{
+			$template_vars['alert'] = 'Sorry! Not yet implemented. Coming soon...';
+			$template_vars['alert_type'] = 'info';
+		}
+
+		return template\compose('post.html', $template_vars, 'layout.html');
 		# Validate user email
 		# Create new post
 	});
@@ -36,6 +54,9 @@
 
 
 	app\post('/persona-verifier', function($req) {
+
+# If users.id = 1 does not exist create it.
+# Only login user if users.id = 1
 
 		if (isset($req['form']['assertion'])) {
 			$response = http\request(
