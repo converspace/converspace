@@ -92,18 +92,18 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/phpish/mysql",
-                "reference": "7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3"
+                "reference": "448a323e24d165518f0dd8c96fddc60b1c7bb15e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/mysql/zipball/7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3",
-                "reference": "7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3",
+                "url": "https://github.com/phpish/mysql/zipball/448a323e24d165518f0dd8c96fddc60b1c7bb15e",
+                "reference": "448a323e24d165518f0dd8c96fddc60b1c7bb15e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1351216571",
+            "time": "1351218134",
             "type": "library",
             "installation-source": "source",
             "license": [
