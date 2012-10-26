@@ -52,9 +52,10 @@
 			$template_vars['alert_type'] = 'info';
 		}
 
+		# TODO: Create new post!
+
 		return template\compose('post.html', $template_vars, 'layout.html');
-		# Validate user email
-		# Create new post
+
 	});
 
 
