@@ -24,7 +24,7 @@ CREATE TABLE `posts` (
     KEY `user` (`user_id`),
     KEY `created` (`created_at`),
     KEY `updated` (`updated_at`),
-    KEY `draft` (`draft`),
+    KEY `draft` (`draft`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `channels` (
@@ -42,14 +42,14 @@ CREATE TABLE `channels` (
     KEY `userchannel` (`user_id`,`channel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `users` (:
+CREATE TABLE `users` (
     `id` int(11) unsigned NOT NULL auto_increment,
     `name` varchar(255) NOT NULL default '',
     `email` varchar(255) NOT NULL,
     `created_at` datetime NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `email` (`email`),
+    UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```
