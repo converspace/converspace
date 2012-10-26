@@ -1,10 +1,12 @@
 <?php
 
 	require __DIR__.'/vendor/phpish/app/app.php';
+	require __DIR__.'/vendor/phpish/mysql/mysql.php';
 	require __DIR__.'/vendor/phpish/template/template.php';
 
 
 	use phpish\app;
+	use phpish\mysql;
 	use phpish\template;
 
 

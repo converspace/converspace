@@ -1,5 +1,5 @@
 {
-    "hash": "d6fcb21b4f84d8700b0979a435de7ed4",
+    "hash": "73d4bf3952c05ed0d5c4e044d640ccdc",
     "packages": [
         {
             "name": "michelf/php-markdown-extra",
@@ -53,18 +53,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/http",
-                "reference": "370f90657be68a676f34704c2d29c7146e784506"
+                "reference": "9f2f1a5de6aaec0c4975a2779113747b9d7e90bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/http/zipball/370f90657be68a676f34704c2d29c7146e784506",
-                "reference": "370f90657be68a676f34704c2d29c7146e784506",
+                "url": "https://github.com/phpish/http/zipball/9f2f1a5de6aaec0c4975a2779113747b9d7e90bf",
+                "reference": "9f2f1a5de6aaec0c4975a2779113747b9d7e90bf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1349635398",
+            "time": "1351205337",
             "type": "library",
             "installation-source": "source",
             "license": [
@@ -78,12 +78,52 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Convenience wrapper around PHP's cURL library for making HTTP requests",
+            "description": "Convenience wrapper around cURL",
             "homepage": "https://github.com/phpish/http",
             "keywords": [
                 "curl",
                 "http",
                 "api"
+            ]
+        },
+        {
+            "name": "phpish/mysql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "http://github.com/phpish/mysql",
+                "reference": "7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/phpish/mysql/zipball/7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3",
+                "reference": "7331b9d2e188d9c3933e07c4a2da37f6d6b1fdd3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "1351216571",
+            "type": "library",
+            "installation-source": "source",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Convenience wrapper around Mysqli",
+            "homepage": "https://github.com/phpish/mysql",
+            "keywords": [
+                "database",
+                "db",
+                "mysql",
+                "mysqli"
             ]
         },
         {
@@ -129,6 +169,7 @@
     "stability-flags": {
         "phpish/app": 20,
         "phpish/template": 20,
+        "phpish/mysql": 20,
         "phpish/http": 20
     }
 }
