@@ -1,13 +1,13 @@
 
-Create the converspace database and user:
-```console
+### Create database and user:
+```bash
 $ mysql -u root -p
 mysql> CREATE DATABASE converspace;
 mysql> GRANT ALL PRIVILEGES ON converspace.* TO 'converspace'@'localhost' IDENTIFIED BY 'password';
 mysql> FLUSH PRIVILEGES;
 ```
 
-
+### Create Tables:
 ```sql
 
 CREATE TABLE `posts` (
