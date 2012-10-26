@@ -83,7 +83,7 @@
 				$row = mysql\row('SELECT email FROM users where id = 1');
 				if (empty($row))
 				{
-					mysql\query("INSERT INTO users (email) VALUES ('%s')", array($response['email']));
+					mysql\query("INSERT INTO users (email, created_at) VALUES ('%s', NOW())", array($response['email']));
 					if (mysql\affected_rows() === 1) $_SESSION['user'] = $response;
 				}
 				elseif ($row['email'] == $response['email']) $_SESSION['user'] = $response;
