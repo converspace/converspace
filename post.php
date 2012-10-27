@@ -37,7 +37,7 @@
 	});
 
 
-	app\post('/post', function() {
+	app\post('/post', function($req) {
 
 		$template_vars = array();
 
@@ -48,11 +48,21 @@
 		}
 		else
 		{
-			$template_vars['alert'] = 'Sorry! Not yet implemented. Coming soon...';
-			$template_vars['alert_type'] = 'info';
-		}
 
-		# TODO: Create new post!
+			# TODO: Create new post!
+			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', NOW(), NOW())", array($req['form']['post']));
+			if (mysql\affected_rows() === 1)
+			{
+				$template_vars['alert'] = 'Post Saved!';
+				$template_vars['alert_type'] = 'success';
+			}
+			else
+			{
+				error_log('Error while saving post: '.mysql\error());
+				$template_vars['alert'] = 'Sorry! Error while saving post! ';
+				$template_vars['alert_type'] = 'error';
+			}
+		}
 
 		return template\compose('post.html', $template_vars, 'layout.html');
 

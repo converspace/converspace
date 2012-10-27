@@ -16,7 +16,7 @@
 			<legend>New Post</legend>
 
 			<label></label>
-			<textarea class="span12" rows="16"></textarea>
+			<textarea class="span12" rows="16" name="post"></textarea>
 			<span class="help-block"></span>
 
 			<button type="submit" class="btn">Publish</button>
