@@ -16,11 +16,9 @@ CREATE TABLE `posts` (
     `post` longtext NOT NULL,
     `created_at` datetime NOT NULL,
     `updated_at` datetime NOT NULL,
-    `draft` binary(1) DEFAULT '0',
-    `slug` varchar(255) NOT NULL default '',
+    `draft` tinyint(1) DEFAULT '0',
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `slug` (`slug`),
     KEY `user` (`user_id`),
     KEY `created` (`created_at`),
     KEY `updated` (`updated_at`),
