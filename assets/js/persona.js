@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	$('#signin').click(function (e) {
 		e.preventDefault();
+		// TODO add returnTo: '/pathToReturnTo.html',
 		navigator.id.request({siteName: 'Converspace'});
 	});
 
