@@ -51,9 +51,10 @@
 			# TODO: Don't do this for the post title?
 			# Tested against: this is #-fake_tag #test #Post #123 #one-more, #another_one #_test_
 			# TODO: Update Channels after saving post
-			preg_match_all('/ #([a-zA-Z0-9_][a-zA-Z0-9\-_]*)/ms', $req['form']['post'], $channels);
+			# Maybe just allow any character except space and comma '/(?:^|\s)(#([ ,]*))/ms'
+			preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $req['form']['post'], $channels);
 			# TODO: Might want to directly use <a> so that I can add a rel attribute.
-			$linkified_channels = preg_replace('/ (#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)',$req['form']['post']);
+			$linkified_channels = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)',$req['form']['post']);
 			# TODO: Convert to Markdown
 
 			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', NOW(), NOW())", array($req['form']['post']));
