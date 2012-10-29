@@ -11,45 +11,45 @@ mysql> FLUSH PRIVILEGES;
 ```sql
 
 CREATE TABLE `posts` (
-    `id` int(11) unsigned NOT NULL auto_increment,
-    `user_id` int(11) unsigned NOT NULL,
-    `post` longtext NOT NULL,
-    `created_at` datetime NOT NULL,
-    `updated_at` datetime NOT NULL,
-    `draft` tinyint(1) DEFAULT '0',
-    `private` tinyint(1) DEFAULT '1',
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`user_id` int(11) unsigned NOT NULL,
+	`post` longtext NOT NULL,
+	`created_at` datetime NOT NULL,
+	`updated_at` datetime NOT NULL,
+	`draft` tinyint(1) DEFAULT '0',
+	`private` tinyint(1) DEFAULT '1',
 
-    PRIMARY KEY (`id`),
-    KEY `user` (`user_id`),
-    KEY `created` (`created_at`),
-    KEY `updated` (`updated_at`),
-    KEY `draft` (`draft`),
-    KEY `private` (`private`)
+	PRIMARY KEY (`id`),
+	KEY `user` (`user_id`),
+	KEY `created` (`created_at`),
+	KEY `updated` (`updated_at`),
+	KEY `draft` (`draft`),
+	KEY `private` (`private`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `channels` (
-    `id` int(11) unsigned NOT NULL auto_increment,
-    `channel` varchar(255) NOT NULL,
-    `user_id` int(11) unsigned NOT NULL,
-    `post_id` int(11) unsigned NOT NULL,
-    `created_at` datetime NOT NULL,
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`channel` varchar(255) NOT NULL,
+	`user_id` int(11) unsigned NOT NULL,
+	`post_id` int(11) unsigned NOT NULL,
+	`created_at` datetime NOT NULL,
 
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `userpostchannel` (`user_id`,`post_id`,`channel`),
-    KEY `user` (`user_id`),
-    KEY `channel` (`channel`),
-    KEY `post` (`post_id`),
-    KEY `userchannel` (`user_id`,`channel`)
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `userpostchannel` (`user_id`,`post_id`,`channel`),
+	KEY `user` (`user_id`),
+	KEY `channel` (`channel`),
+	KEY `post` (`post_id`),
+	KEY `userchannel` (`user_id`,`channel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `users` (
-    `id` int(11) unsigned NOT NULL auto_increment,
-    `name` varchar(255) NOT NULL default '',
-    `email` varchar(255) NOT NULL,
-    `created_at` datetime NOT NULL,
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`name` varchar(255) NOT NULL default '',
+	`email` varchar(255) NOT NULL,
+	`created_at` datetime NOT NULL,
 
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `email` (`email`)
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```
