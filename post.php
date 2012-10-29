@@ -48,14 +48,24 @@
 		}
 		else
 		{
-			# TODO: Don't do this for the post title?
-			# Tested against: this is #-fake_tag #test #Post #123 #one-more, #another_one #_test_
+
+			if (substr($req['form']['post'], 0, 2) == '# ')
+			list($post_title,$post_body) = preg_split('/\n/', $req['form']['post'], 2);
+
 			# TODO: Update Channels after saving post
 			# Maybe just allow any character except space and comma '/(?:^|\s)(#([ ,]*))/ms'
-			preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $req['form']['post'], $channels);
+			preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $post_body, $channels);
+
+			foreach($channels[2] as $channel)
+			{
+				# TODO: insert channels!
+			}
+
 			# TODO: Might want to directly use <a> so that I can add a rel attribute.
-			$linkified_channels = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)',$req['form']['post']);
-			# TODO: Convert to Markdown
+			/* This is required during display
+			$linkified_channels = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)', $post_body);
+			$post = "$post_title\n$post_body";
+			*/
 
 			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', NOW(), NOW())", array($req['form']['post']));
 			if (mysql\affected_rows() === 1)
