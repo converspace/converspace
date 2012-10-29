@@ -17,12 +17,14 @@ CREATE TABLE `posts` (
     `created_at` datetime NOT NULL,
     `updated_at` datetime NOT NULL,
     `draft` tinyint(1) DEFAULT '0',
+    `private` tinyint(1) DEFAULT '1',
 
     PRIMARY KEY (`id`),
     KEY `user` (`user_id`),
     KEY `created` (`created_at`),
     KEY `updated` (`updated_at`),
-    KEY `draft` (`draft`)
+    KEY `draft` (`draft`),
+    KEY `private` (`private`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `channels` (
