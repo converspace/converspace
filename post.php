@@ -50,7 +50,7 @@
 		{
 			$post = $req['form']['post'];
 			$now = date('Y-m-d H:i:s');
-			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', '%s', '%s')", array($post, $now, $now));
+			mysql\query("INSERT INTO posts (user_id, content, created_at, updated_at) VALUES (1, '%s', '%s', '%s')", array($post, $now, $now));
 			if (mysql\affected_rows() === 1)
 			{
 				$post_id = mysql\insert_id();

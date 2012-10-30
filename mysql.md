@@ -13,7 +13,7 @@ mysql> FLUSH PRIVILEGES;
 CREATE TABLE `posts` (
 	`id` int(11) unsigned NOT NULL auto_increment,
 	`user_id` int(11) unsigned NOT NULL,
-	`post` longtext NOT NULL,
+	`content` longtext NOT NULL,
 	`created_at` datetime NOT NULL,
 	`updated_at` datetime NOT NULL,
 	`draft` tinyint(1) DEFAULT '0',
