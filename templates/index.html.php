@@ -26,7 +26,6 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 					<h3>Author Name</h3>
 					<p>A few words about the Author</p>
 				</div>
-				<hr />
 				<ul class="unstyled">
 					<li><a href="#">Twitter</a></li>
 					<li><a href="#">Facebook</a></li>
