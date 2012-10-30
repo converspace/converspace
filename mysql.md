@@ -33,12 +33,14 @@ CREATE TABLE `channels` (
 	`user_id` int(11) unsigned NOT NULL,
 	`post_id` int(11) unsigned NOT NULL,
 	`created_at` datetime NOT NULL,
+	`private` tinyint(1) DEFAULT '1',
 
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `userpostchannel` (`user_id`,`post_id`,`name`),
 	KEY `user` (`user_id`),
 	KEY `channel` (`name`),
 	KEY `post` (`post_id`),
+	KEY `private` (`private`),
 	KEY `userchannel` (`user_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
