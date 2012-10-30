@@ -26,9 +26,9 @@
 		if (!empty($row)) $email = $row['email'];
 		else $email = '';
 
-		$channels = mysql\rows('select channel, count(*) as count from channels group by channel order by count desc');
+		$channels = mysql\rows('select name, count(*) as count from channels where user_id = 1 group by name order by count desc');
 
-		$posts = mysql\rows('select * from posts order by created_at desc limit 10');
+		$posts = mysql\rows('select * from posts order by created_at desc limit 10 where user_id = 1');
 
 		/*
 		TODO: Might want to directly use <a> so that I can add a rel attribute.

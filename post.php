@@ -57,9 +57,9 @@
 				if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
 				preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $post, $channels);
 
-				foreach($channels[2] as $channel)
+				foreach($channels[2] as $channel_name)
 				{
-					mysql\query("INSERT INTO channels (channel, user_id, post_id, created_at) VALUES ('%s', 1, %d, '%s')", array($channel, $post_id, $now));
+					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at) VALUES ('%s', 1, %d, '%s')", array($channel_name, $post_id, $now));
 				}
 
 				$template_vars['alert'] = 'Post Saved!';

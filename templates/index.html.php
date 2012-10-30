@@ -71,7 +71,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 						<li><a href="#">All</a></li>
 						<!--<li><a href="#">Drafts</a> (only visible to logged in user)</li>-->
 						<?php foreach ($channels as $channel): ?>
-						<li><a href="#"><?php echo $channel['name'] ?> (<?php echo $channel['count'] ?>)</a></li>
+						<li><a href="#channels/<?php echo $channel['name'] ?>"><?php echo $channel['name'] ?> (<?php echo $channel['count'] ?>)</a></li>
 						<?php endforeach; ?>
 					</ul>
 				</div>
