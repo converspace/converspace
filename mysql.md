@@ -29,7 +29,7 @@ CREATE TABLE `posts` (
 
 CREATE TABLE `channels` (
 	`id` int(11) unsigned NOT NULL auto_increment,
-	`channel` varchar(255) NOT NULL,
+	`name` varchar(255) NOT NULL,
 	`user_id` int(11) unsigned NOT NULL,
 	`post_id` int(11) unsigned NOT NULL,
 	`created_at` datetime NOT NULL,
