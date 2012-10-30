@@ -48,28 +48,20 @@
 		}
 		else
 		{
-
-			if (substr($req['form']['post'], 0, 2) == '# ')
-			list($post_title,$post_body) = preg_split('/\n/', $req['form']['post'], 2);
-
-			# TODO: Update Channels after saving post
-			# Maybe just allow any character except space and comma '/(?:^|\s)(#([ ,]*))/ms'
-			preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $post_body, $channels);
-
-			foreach($channels[2] as $channel)
-			{
-				# TODO: insert channels!
-			}
-
-			# TODO: Might want to directly use <a> so that I can add a rel attribute.
-			/* This is required during display
-			$linkified_channels = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)', $post_body);
-			$post = "$post_title\n$post_body";
-			*/
-
-			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', NOW(), NOW())", array($req['form']['post']));
+			$post = $req['form']['post'];
+			$now = date('Y-m-d H:i:s');
+			mysql\query("INSERT INTO posts (user_id, post, created_at, updated_at) VALUES (1, '%s', '%s', '%s')", array($post, $now, $now));
 			if (mysql\affected_rows() === 1)
 			{
+				$post_id = mysql\insert_id();
+				if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
+				preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $post, $channels);
+
+				foreach($channels[2] as $channel)
+				{
+					mysql\query("INSERT INTO channels (channel, user_id, post_id, created_at) VALUES ('%s', 1, %d, '%s')", array($channel, $post_id, $now));
+				}
+
 				$template_vars['alert'] = 'Post Saved!';
 				$template_vars['alert_type'] = 'success';
 			}
