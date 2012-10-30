@@ -48,9 +48,10 @@
 		}
 		else
 		{
+			$is_private = 0;
 			$post = $req['form']['post'];
 			$now = date('Y-m-d H:i:s');
-			mysql\query("INSERT INTO posts (user_id, content, created_at, updated_at) VALUES (1, '%s', '%s', '%s')", array($post, $now, $now));
+			mysql\query("INSERT INTO posts (user_id, content, created_at, updated_at, private) VALUES (1, '%s', '%s', '%s', %d)", array($post, $now, $now, $is_private));
 			if (mysql\affected_rows() === 1)
 			{
 				$post_id = mysql\insert_id();
@@ -59,7 +60,7 @@
 
 				foreach($channels[2] as $channel_name)
 				{
-					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at) VALUES ('%s', 1, %d, '%s')", array($channel_name, $post_id, $now));
+					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at, private) VALUES ('%s', 1, %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 				}
 
 				$template_vars['alert'] = 'Post Saved!';

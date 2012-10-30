@@ -7,6 +7,7 @@
 	require __DIR__.'/vendor/phpish/app/app.php';
 	require __DIR__.'/vendor/phpish/mysql/mysql.php';
 	require __DIR__.'/vendor/phpish/template/template.php';
+	require __DIR__.'/vendor/michelf/php-markdown-extra/markdown.php';
 
 
 	use phpish\app;
@@ -26,16 +27,21 @@
 		if (!empty($row)) $email = $row['email'];
 		else $email = '';
 
-		$channels = mysql\rows('select name, count(*) as count from channels where user_id = 1 group by name order by count desc');
+		$channels = mysql\rows('select name, count(*) as count from channels where user_id = 1 and private = 0 group by name order by count desc');
+		$md_posts = mysql\rows('select * from posts where user_id = 1 and private = 0 order by created_at desc limit 10');
 
-		$posts = mysql\rows('select * from posts order by created_at desc limit 10 where user_id = 1');
+		$posts = array();
+		foreach ($md_posts as $md_post)
+		{
+			$content = $title = '';
+			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
+			else $content = $md_post['content'];
 
-		/*
-		TODO: Might want to directly use <a> so that I can add a rel attribute.
-		if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
-		$linkified_channels = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' [$1](channels/$2)', $post);
-		$post = "$title\n$post";
-		*/
+			$content = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' <a href="#channels/$2" rel="tag">$1</a>', $content);
+			if (!empty($title)) $content = "$title\n$content";
+			$content = Markdown($content);
+			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+		}
 
 		return template\compose('index.html', compact('email', 'channels', 'posts'), 'layout.html');
 	});
