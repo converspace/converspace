@@ -1,7 +1,27 @@
+<?php
+
+function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
+{
+	$url = 'http://www.gravatar.com/avatar/';
+	$url .= md5(strtolower(trim($email)));
+	$url .= "?s=$s&d=$d&r=$r";
+	if ( $img )
+	{
+		$url = "<img src=\"$url\"";
+		foreach ($atts as $key=>$val) $url .= " $key=\"$val\"";
+		$url .= ' />';
+	}
+
+	return $url;
+}
+
+
+?>
 	<div class="row">
 		<div class="span3">
 			<div class="about">
-				<a href="#about"><img src="assets/img/222x222.gif" class="img-polaroid"></a>
+				<!--<img src="assets/img/222x222.gif" class="img-polaroid">-->
+				<a href="#about"><?php echo gravatar($email, 420, 'mm', 'g', true, array('class'=>'img-polaroid', 'height'=>222, "width"=>222)) ?></a>
 				<div class="caption">
 					<h3>Author Name</h3>
 					<p>A few words about the Author</p>
@@ -49,13 +69,10 @@
 					<h3>Channels</h3>
 					<ul class="unstyled">
 						<li><a href="#">All</a></li>
-						<li><a href="#">Drafts</a> (only visible to logged in user)</li>
-						<li><a href="#">Personal</a></li>
-						<li><a href="#">Technology</a></li>
-						<li><a href="#">Business</a></li>
-						<li><a href="#">Cooking</a></li>
-						<li><a href="#">Fitness</a></li>
-						<li><a href="#">This is a reallyreally long testchannel</a></li>
+						<!--<li><a href="#">Drafts</a> (only visible to logged in user)</li>-->
+						<?php foreach ($channels as $channel): ?>
+						<li><a href="#"><?php echo $channel['name'] ?> (<?php echo $channel['count'] ?>)</a></li>
+						<?php endforeach; ?>
 					</ul>
 				</div>
 			</div>
