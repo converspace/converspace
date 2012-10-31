@@ -41,7 +41,7 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' <a href="#channels/$2" rel="tag">$1</a>', $content);
+			$content = preg_replace('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', ' <span class="hash">#</span><a href="channels/$2" rel="tag">$2</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
 			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
@@ -61,14 +61,12 @@
 
 	app\get('/posts/[{id}]', function() {
 
-		# get post from db
-		# convert hashtags into links
-		# apply markdown
+		return "Coming Soon...";
 	});
 
 	app\get('/channels/[{id}]', function() {
 
-		# /channels/ is ordered by count of posts in the channel. Used by the channel sidebar.
+		return "Coming Soon...";
 	});
 
 ?>
