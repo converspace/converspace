@@ -25,7 +25,7 @@
 		.content {margin-left: 0; padding: 30px 0;}
 		.post {padding: 30px; border-bottom: 1px solid #eee; font-size: 1.4em;}
 		.post:first-child, .post:first-child h1 {margin-top: 0; padding-top: 0;}
-		.post:last-child {border-bottom: 0 none;}
+		/* .post:last-child {border-bottom: 0 none;} */
 		.post-permalink a { font-size: 0.6em; color: #999;}
 
 		.channels { border-top: 1px solid #EEE; margin-bottom: 0;}
