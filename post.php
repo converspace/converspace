@@ -56,9 +56,9 @@
 			{
 				$post_id = mysql\insert_id();
 				if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
-				preg_match_all('/(?:^|\s)(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms', $post, $channels);
+				preg_match_all('/'.TAG_REGEX.'/ms', $post, $channels);
 
-				foreach($channels[2] as $channel_name)
+				foreach($channels[3] as $channel_name)
 				{
 					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at, private) VALUES ('%s', 1, %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 				}
