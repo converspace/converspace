@@ -28,6 +28,8 @@
 	app\get('/', function() {
 
 		$user = mysql\row('SELECT name, email, bio FROM users where id = 1');
+
+// TODO: Do channels also need a draft flag? Maybe just don't save channels for draft till they are published?
 		$channels = mysql\rows('select name, count(*) as count from channels where user_id = 1 and private = 0 group by name order by count desc');
 		$md_posts = mysql\rows('select * from posts where user_id = 1 and private = 0 order by created_at desc limit 10');
 
