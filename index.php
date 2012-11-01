@@ -19,6 +19,7 @@
 
 
 	app\any('.*', function($req) {
+		session_start();
 		mysql\connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE_NAME);
 		return app\next($req);
 	});

@@ -8,13 +8,6 @@
 	use phpish\http;
 
 
-	app\any('.*', function($req) {
-
-		session_start();
-		return app\next($req);
-	});
-
-
 	app\get('/post[/[{id}]]', function($req) {
 
 		# TODO: /post/123 breaks relative paths for css, js, etc. Need to convert them to absolute paths
