@@ -56,7 +56,7 @@
 			{
 				$post_id = mysql\insert_id();
 				if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
-				preg_match_all('/'.TAG_REGEX.'/ms', $post, $channels);
+				preg_match_all(TAG_REGEX, $post, $channels);
 
 				foreach($channels[3] as $channel_name)
 				{
