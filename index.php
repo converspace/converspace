@@ -26,14 +26,7 @@
 
 	app\get('/', function() {
 
-		$row = mysql\row('SELECT name, email FROM users where id = 1');
-		if (!empty($row))
-		{
-			$email = $row['email'];
-			$name = $row['name'];
-		}
-		else $email = $name = '';
-
+		$user = mysql\row('SELECT name, email, bio FROM users where id = 1');
 		$channels = mysql\rows('select name, count(*) as count from channels where user_id = 1 and private = 0 group by name order by count desc');
 		$md_posts = mysql\rows('select * from posts where user_id = 1 and private = 0 order by created_at desc limit 10');
 
@@ -50,7 +43,7 @@
 			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('name', 'email', 'channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('user', 'channels', 'posts'), 'layout.html');
 	});
 
 # TODO: Remove this duplication of routes:

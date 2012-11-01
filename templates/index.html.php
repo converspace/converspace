@@ -20,9 +20,9 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 	<div class="row">
 		<div class="span3 sidebar">
 			<div class="about">
-				<?php echo gravatar($email, 420, 'mm', 'g', true, array('class'=>'img-polaroid', "width"=>175)) ?>
-					<h3 class="author-name"><?php echo $name ?></h3>
-					<p class="author-bio">Short author bio goes here</p>
+				<?php echo gravatar($user['email'], 420, 'mm', 'g', true, array('class'=>'img-polaroid', "width"=>175)) ?>
+					<h3 class="author-name"><?php echo isset($user['name']) ? $user['name'] : '' ?></h3>
+					<p class="author-bio"><?php echo isset($user['bio']) ? $user['bio'] : ''?></p>
 			</div>
 
 			<ul class="unstyled channels">
