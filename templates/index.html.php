@@ -26,7 +26,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 			</div>
 
 			<ul class="unstyled channels">
-				<li><a href="#" class="active channel">All Channels <i class="icon-chevron-right icon-white pull-right"></i></a></li>
+				<li><a href="#" class="active channel">Home (All Channels) <i class="icon-chevron-right icon-white pull-right"></i></a></li>
 				<!--<li><a href="#">Drafts</a> (only visible to logged in user)</li>-->
 				<?php foreach ($channels as $channel): ?>
 				<li><a class="channel" href="channels/<?php echo $channel['name'] ?>"><span class="hash">#</span><?php echo $channel['name'] ?> <i class="icon-chevron-right pull-right"></i></a></li>
