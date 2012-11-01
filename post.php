@@ -41,7 +41,7 @@
 		}
 		else
 		{
-			$is_private = 0;
+			$is_private = isset($req['form']['private']) ? 1 : 0;
 			$post = $req['form']['post'];
 			$now = date('Y-m-d H:i:s');
 			mysql\query("INSERT INTO posts (user_id, content, created_at, updated_at, private) VALUES (1, '%s', '%s', '%s', %d)", array($post, $now, $now, $is_private));
