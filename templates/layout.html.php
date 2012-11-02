@@ -11,35 +11,34 @@
 	<script src="https://login.persona.org/include.js"></script>
 	<style>
 
-		html, body {min-height: 100%;}
-		.container { min-height: 100%; /*background: url(assets/img/separator.png) repeat-y 220px top;*/}
+		html ,body, .stream-container { min-height: 100% }
 
-		.about {margin-bottom: 30px;}
-		.author-name { letter-spacing: -1px; margin-bottom: 8px; line-height: 1em;}
-		body {color: #5A5A5A;} /* #495961 */
-		body {color: #333;}
-		h1, h2, h3, h4, h5, h6 {color: #5A5A5A;}
-		author-bio {color: #666;}
+		.stream-container { margin-bottom: 20px; background: url(assets/img/separator.png) repeat-y 720px top; }
+		.sidebar { margin-left: 0; }
+		.content { margin-left: 0; width: 740px; }
+		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; background-color: #FFF; }
+		.post { padding: 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
+		.post:hover { background-color: #F5F5F5; }
+		.post:last-child { border-bottom: 0 none; }
+		.post-permalink a { font-size: 10px; color: #999;}
+		.post h1 { font-weight: 200; font-size: 28px; }
+		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
+		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 
-		.sidebar { margin: 0; padding: 0;}
-		.content {margin: 0; padding: 0;}
-		.post, .author {padding: 30px; border-bottom: 1px solid #eee; font-size: 1.4em;}
-		/*.post:first-child, .post:first-child h1 {margin-top: 0; padding-top: 0;}*/
-		/* .post:last-child {border-bottom: 0 none;} */
-		.post-permalink a { font-size: 0.6em; color: #999;}
-		.post h1 {margin-bottom: 20px;}
 
-		.channels { border-left: 1px solid #EEE; margin-bottom: 0;}
+		.hash { color: #08C; opacity: 0.6; font-weight: lighter ;}
+		.channels { margin-bottom: 0; }
+		.channels a { text-decoration: none; }
+		.channel { display: block; padding: 8px 14px; text-decoration: none; }
+		.channel .icon-chevron-left { opacity: 0.25; }
+		.channel:hover, .channel:hover .hash { background-color: #F5F5F5; color: #005580; }
+		.channel:hover .icon-chevron-left { opacity: 0.5; }
+		.channels .active, .channels .active:hover { background-color: #08C; color: #FFF;}
+		.channels .active .icon-chevron-left, .channels .active:hover .icon-chevron-right { opacity: 1; }
 
-		.channels li {padding: 0; margin: 0;}
-		.channels a {text-decoration: none;}
-		.channel {display: block; padding: 8px 14px; text-decoration: none;}
-		.channel .icon-chevron-left {opacity: 0.25;}
-		.channels .active, .channels .active:hover {background-color: #08C; color: white;}
-		.channels .active .icon-chevron-left, .channels .active:hover .icon-chevron-right {opacity: 1;}
-		.channel:hover {background-color: whiteSmoke; color: #005580;}
-		.channel:hover .icon-chevron-left {opacity: 0.5;}
-		.hash {color: #08C; opacity: 0.6; font-weight: lighter;}
+		.channel.first-child {-webkit-border-radius: 6px 6px 0 0;
+-moz-border-radius: 6px 6px 0 0;
+border-radius: 6px 6px 0 0;}
 
 	</style>
 
@@ -59,7 +58,7 @@
 </div>
 <?php endif; ?>
 
-<div class="container">
+<div class="container stream-container">
 <?php echo $content; ?>
 </div>
 
