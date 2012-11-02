@@ -40,23 +40,40 @@
 -moz-border-radius: 6px 6px 0 0;
 border-radius: 6px 6px 0 0;}
 
+		.persona-button { margin-top: 7px; }
+
 	</style>
 
 </head>
 <body>
 
-<?php if (isset($_SESSION['user'])) : ?>
 <div class="navbar navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<ul class="nav">
-				<li class="active"><a href="#">Public</a></li>
-				<li><a href="#private">Private</a></li>
-			</ul>
+			<?php if (isset($_SESSION['persona'])) : ?>
+
+				<?php if (isset($_SESSION['user'])) : ?>
+				<ul class="nav">
+					<li class="active"><a href="#">Public</a></li>
+					<li><a href="#private">Private</a></li>
+				</ul>
+				<?php endif; ?>
+
+				<script>
+					var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
+				</script>
+				<a id="signout" href="#" class="persona-button orange pull-right"><span>Sign out <?php echo $_SESSION['persona']['email'] ?></span></a>
+
+			<?php else: ?>
+				<script>
+					var $loggedInUser = null;
+				</script>
+				<a id="signin" href="#" class="persona-button pull-right"><span>Sign in with Mozilla Persona</span></a>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
-<?php endif; ?>
+
 
 <div class="container stream-container">
 <?php echo $content; ?>

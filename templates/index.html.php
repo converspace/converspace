@@ -63,13 +63,3 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 		</div>
 
 	</div>
-
-<?php if (isset($_SESSION['persona'])) : ?>
-	<script>
-		var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
-	</script>
-<?php else: ?>
-	<script>
-		var $loggedInUser = null;
-	</script>
-<?php endif; ?>
