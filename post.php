@@ -32,12 +32,12 @@
 
 	app\post('/post', function($req) {
 
-		$template_vars = array();
+		$_SESSION['alert'] = array();
 
 		if (!isset($_SESSION['user']))
 		{
-			$template_vars['alert'] = 'You are not authorized to post.';
-			$template_vars['alert_type'] = 'error';
+			$_SESSION['alert']['msg'] = 'You are not authorized to post.';
+			$_SESSION['alert']['type'] = 'error';
 		}
 		else
 		{
@@ -56,21 +56,20 @@
 					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at, private) VALUES ('%s', 1, %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 				}
 
-				$template_vars['alert'] = 'Post Saved!';
-				$template_vars['alert_type'] = 'success';
+				$_SESSION['alert']['msg'] = 'Post Saved!';
+				$_SESSION['alert']['type'] = 'success';
 			}
 			else
 			{
 				error_log('Error while saving post: '.mysql\error());
-				$template_vars['alert'] = 'Sorry! Error while saving post! ';
-				$template_vars['alert_type'] = 'error';
+				$_SESSION['alert']['msg'] = 'Sorry! Error while saving post! ';
+				$_SESSION['alert']['type'] = 'error';
 			}
 		}
 
-		return template\compose('post.html', $template_vars, 'layout.html');
+		return app\response_302(BASE_URL);
 
 	});
-
 
 
 	app\post('/signout', function() {

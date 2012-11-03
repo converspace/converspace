@@ -1,1 +1,3 @@
-* Add post form at the top of the stream.
+* Delete post
+* Edit post
+* fullscreen mode for writing posts

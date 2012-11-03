@@ -17,7 +17,7 @@
 		.sidebar { margin-left: 0; }
 		.content { margin-left: 0; width: 740px; }
 		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; background-color: #FFF; }
-		.post { padding: 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
+		.post, .post-form { padding: 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
 		.post:hover { background-color: #F5F5F5; }
 		.post:last-child { border-bottom: 0 none; }
 		.post-permalink a { font-size: 10px; color: #999;}

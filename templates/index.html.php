@@ -35,6 +35,28 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 	<div class="row">
 		<div class="span9 content">
 
+			<?php if (isset($_SESSION['user'])) : ?>
+			<div class="post-form">
+
+				<?php if (!empty($_SESSION['alert'])) : ?>
+				<div style="padding: 5px 0;">
+				<div class="alert alert-<?php echo $_SESSION['alert']['type'] ?>">
+					<button type="button" class="close" data-dismiss="alert">x</button>
+					<?php echo $_SESSION['alert']['msg'] ?>
+				</div>
+				</div>
+				<?php unset($_SESSION['alert']) ?>
+				<?php endif; ?>
+
+				<form method="post" action="post">
+					<textarea class="span9" rows="4" name="post" placeholder="What's on your mind?"></textarea>
+					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
+					<button type="submit" class="btn pull-right">Post</button>
+				</form>
+			</div>
+			<?php endif; ?>
+
+
 			<?php foreach ($posts as $post): ?>
 			<div class="post">
 				<?php echo $post['content'] ?>
