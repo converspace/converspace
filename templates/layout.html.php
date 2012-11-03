@@ -50,6 +50,8 @@ border-radius: 6px 6px 0 0;}
 <div class="navbar navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
+			<a class="brand" href="<?php echo BASE_URL ?>">Title</a>
+
 			<?php if (isset($_SESSION['persona'])) : ?>
 
 				<?php if (isset($_SESSION['user'])) : ?>
