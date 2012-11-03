@@ -1,3 +1,4 @@
+* Make title configurable (maybe add col to users table?)
 * View a specific channel
 * View individual post
 * Delete post
