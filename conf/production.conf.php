@@ -1,6 +1,7 @@
 <?php
 
 	define('BASE_URL', '');
+	define('TITLE', 'Title');
 
 	define("DB_HOST", 'localhost');
 	define("DB_USER", 'converspace');
