@@ -1,5 +1,5 @@
-* Make title configurable (maybe add col to users table?)
 * View a specific channel
+--- Launch ---
 * View individual post
 * Delete post
 * Edit post
