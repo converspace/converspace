@@ -10,7 +10,6 @@
 
 	app\get('/post[/[{id}]]', function($req) {
 
-		# TODO: /post/123 breaks relative paths for css, js, etc. Need to convert them to absolute paths
 		# TODO: Edit interface for $req['matches']['id']
 
 		$template_vars = array();
@@ -67,7 +66,7 @@
 			}
 		}
 
-		return app\response_302(BASE_URL);
+		return app\response_302(SITE_BASE_URL);
 
 	});
 

@@ -21,7 +21,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 		<div class="span12">
 			<div class="author">
 				<div class="media">
-					<a class="pull-left" href="">
+					<a class="pull-left" href="#about">
 						<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
 					</a>
 					<div class="media-body">

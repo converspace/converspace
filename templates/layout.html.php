@@ -6,8 +6,8 @@
 
 	<title>Converspace</title>
 
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/persona-buttons.css" rel="stylesheet">
+	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo SITE_BASE_URL ?>assets/css/persona-buttons.css" rel="stylesheet">
 	<script src="https://login.persona.org/include.js"></script>
 	<style>
 
@@ -81,8 +81,8 @@ border-radius: 6px 6px 0 0;}
 <?php echo $content; ?>
 </div>
 
-<script src="assets/js/jquery-1.8.2.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/persona.js"></script>
+<script src="<?php echo SITE_BASE_URL ?>assets/js/jquery-1.8.2.min.js"></script>
+<script src="<?php echo SITE_BASE_URL ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo SITE_BASE_URL ?>assets/js/persona.js"></script>
 </body>
 </html>
