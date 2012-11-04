@@ -74,6 +74,7 @@
 			{
 				$_SESSION['persona'] = $response;
 				if (USER_EMAIL == $response['email']) $_SESSION['user'] = $response;
+				else error_log('Somebody logged in.')
 			}
 		}
 	});
