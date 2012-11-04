@@ -1,11 +1,15 @@
 <?php
 
-	define('BASE_URL', '');
-	define('TITLE', 'Title');
+	define('SITE_TITLE', '');
+	define('SITE_BASE_URL', '');
 
-	define("DB_HOST", 'localhost');
-	define("DB_USER", 'converspace');
-	define("DB_PASSWORD", 'password');
-	define("DB_DATABASE_NAME", 'converspace');
+	define('USER_EMAIL', '');
+	define('USER_NAME', '');
+	define('USER_BIO', '');
+
+	define('DB_HOST', '');
+	define('DB_USER', '');
+	define('DB_PASSWORD', '');
+	define('DB_DATABASE_NAME', '');
 
 ?>

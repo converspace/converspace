@@ -12,7 +12,6 @@ mysql> FLUSH PRIVILEGES;
 
 CREATE TABLE `posts` (
 	`id` int(11) unsigned NOT NULL auto_increment,
-	`user_id` int(11) unsigned NOT NULL,
 	`content` longtext NOT NULL,
 	`created_at` datetime NOT NULL,
 	`updated_at` datetime NOT NULL,
@@ -20,7 +19,6 @@ CREATE TABLE `posts` (
 	`private` tinyint(1) DEFAULT '1',
 
 	PRIMARY KEY (`id`),
-	KEY `user` (`user_id`),
 	KEY `created` (`created_at`),
 	KEY `updated` (`updated_at`),
 	KEY `draft` (`draft`),
@@ -30,29 +28,14 @@ CREATE TABLE `posts` (
 CREATE TABLE `channels` (
 	`id` int(11) unsigned NOT NULL auto_increment,
 	`name` varchar(255) NOT NULL,
-	`user_id` int(11) unsigned NOT NULL,
 	`post_id` int(11) unsigned NOT NULL,
 	`created_at` datetime NOT NULL,
 	`private` tinyint(1) DEFAULT '1',
 
 	PRIMARY KEY (`id`),
-	UNIQUE KEY `userpostchannel` (`user_id`,`post_id`,`name`),
-	KEY `user` (`user_id`),
 	KEY `channel` (`name`),
 	KEY `post` (`post_id`),
 	KEY `private` (`private`),
-	KEY `userchannel` (`user_id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `users` (
-	`id` int(11) unsigned NOT NULL auto_increment,
-	`name` varchar(255) NOT NULL default '',
-	`email` varchar(255) NOT NULL,
-	`bio` text NOT NULL,
-	`created_at` datetime NOT NULL,
-
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```

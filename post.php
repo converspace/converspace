@@ -44,7 +44,7 @@
 			$is_private = isset($req['form']['private']) ? 1 : 0;
 			$post = $req['form']['post'];
 			$now = date('Y-m-d H:i:s');
-			mysql\query("INSERT INTO posts (user_id, content, created_at, updated_at, private) VALUES (1, '%s', '%s', '%s', %d)", array($post, $now, $now, $is_private));
+			mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post, $now, $now, $is_private));
 			if (mysql\affected_rows() === 1)
 			{
 				$post_id = mysql\insert_id();
@@ -53,7 +53,7 @@
 
 				foreach($channels[3] as $channel_name)
 				{
-					mysql\query("INSERT INTO channels (name, user_id, post_id, created_at, private) VALUES ('%s', 1, %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
+					mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 				}
 
 				$_SESSION['alert']['msg'] = 'Post Saved!';
@@ -93,14 +93,7 @@
 			if ('okay' == $response['status'])
 			{
 				$_SESSION['persona'] = $response;
-
-				$row = mysql\row('SELECT email FROM users where id = 1');
-				if (empty($row))
-				{
-					mysql\query("INSERT INTO users (email, created_at) VALUES ('%s', NOW())", array($response['email']));
-					if (mysql\affected_rows() === 1) $_SESSION['user'] = $response;
-				}
-				elseif ($row['email'] == $response['email']) $_SESSION['user'] = $response;
+				if (USER_EMAIL == $response['email']) $_SESSION['user'] = $response;
 			}
 		}
 	});
