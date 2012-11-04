@@ -60,7 +60,8 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 			<?php foreach ($posts as $post): ?>
 			<div class="post">
 				<?php echo $post['content'] ?>
-				<div class="post-permalink"><a href="posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a></div>
+				<!-- <div class="post-permalink"><a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a></div> -->
+				<div class="post-permalink"><?php echo $post['created_at'] ?></div>
 			</div>
 			<?php endforeach; ?>
 
@@ -69,9 +70,9 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 		<div class="span3 sidebar">
 
 			<ul class="unstyled channels ">
-				<li><a href="#" class="channel active"><i class="icon-chevron-left icon-white"></i> Home</a></li>
+				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel active"><i class="icon-chevron-left icon-white"></i> Home</a></li>
 				<?php foreach ($channels as $channel): ?>
-				<li><a class="channel" href="channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+				<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
 
 				<?php endforeach; ?>
 			</ul>

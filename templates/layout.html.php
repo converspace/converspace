@@ -20,7 +20,8 @@
 		.post, .post-form { padding: 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
 		.post:hover { background-color: #F5F5F5; }
 		.post:last-child { border-bottom: 0 none; }
-		.post-permalink a { font-size: 10px; color: #999;}
+		.post-permalink { font-size: 10px; color: #999;}
+		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
 		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
 		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
@@ -56,7 +57,7 @@ border-radius: 6px 6px 0 0;}
 
 				<?php if (isset($_SESSION['user'])) : ?>
 				<ul class="nav">
-					<li class="active"><a href="#">Public</a></li>
+					<li class="active"><a href="<?php echo SITE_BASE_URL ?>">Public</a></li>
 					<li><a href="#private">Private</a></li>
 				</ul>
 				<?php endif; ?>

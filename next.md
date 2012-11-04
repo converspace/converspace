@@ -1,4 +1,3 @@
-* View a specific channel
 --- Launch ---
 * View individual post
 * Delete post
