@@ -22,11 +22,11 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 			<div class="author">
 				<div class="media">
 					<a class="pull-left" href="">
-						<?php echo gravatar($user['email'], 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
+						<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
 					</a>
 					<div class="media-body">
-						<h1 class="author-name media-heading"><?php echo isset($user['name']) ? $user['name'] : '' ?></h1>
-						<?php echo isset($user['bio']) ? Markdown($user['bio']) : ''?>
+						<h1 class="author-name media-heading"><?php echo USER_NAME ?></h1>
+						<?php echo Markdown(USER_BIO) ?>
 					</div>
 				</div>
 			</div>
@@ -67,13 +67,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 		</div>
 
 		<div class="span3 sidebar">
-		<!--
-			<div class="about">
-				<?php echo gravatar($user['email'], 420, 'mm', 'g', true, array('class'=>'img-polaroid', "width"=>180)) ?>
-					<h3 class="author-name"><?php echo isset($user['name']) ? $user['name'] : '' ?></h3>
-					<p class="author-bio"><?php echo isset($user['bio']) ? $user['bio'] : ''?></p>
-			</div>
-		-->
+
 			<ul class="unstyled channels ">
 				<li><a href="#" class="channel active"><i class="icon-chevron-left icon-white"></i> Home</a></li>
 				<?php foreach ($channels as $channel): ?>

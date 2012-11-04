@@ -27,8 +27,6 @@
 
 	app\get('/', function() {
 
-		$user = array('email'=>USER_EMAIL, 'name'=>USER_NAME, 'bio'=>USER_BIO);
-
 // TODO: Do channels also need a draft flag? Maybe just don't save channels for draft till they are published?
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
 		$md_posts = mysql\rows('select * from posts where private = 0 order by created_at desc limit 10');
@@ -46,7 +44,7 @@
 			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('user', 'channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
 	});
 
 # TODO: Remove this duplication of routes:
