@@ -8,25 +8,6 @@
 	use phpish\http;
 
 
-	app\get('/post[/[{id}]]', function($req) {
-
-		# TODO: Edit interface for $req['matches']['id']
-
-		$template_vars = array();
-
-		if (!isset($_SESSION['persona']))
-		{
-			$template_vars['alert'] = 'Sign in to post.	';
-			$template_vars['alert_type'] = 'info';
-		}
-		elseif (!isset($_SESSION['user']))
-		{
-			$template_vars['alert'] = 'You are not authorized to post.';
-			$template_vars['alert_type'] = 'error';
-		}
-
-		return template\compose('post.html', $template_vars, 'layout.html');
-	});
 
 
 	app\post('/post', function($req) {
