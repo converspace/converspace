@@ -53,18 +53,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/http",
-                "reference": "9f2f1a5de6aaec0c4975a2779113747b9d7e90bf"
+                "reference": "535f516f45685b675d21932b84b5e0897f5cc022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/http/zipball/9f2f1a5de6aaec0c4975a2779113747b9d7e90bf",
-                "reference": "9f2f1a5de6aaec0c4975a2779113747b9d7e90bf",
+                "url": "https://github.com/phpish/http/archive/535f516f45685b675d21932b84b5e0897f5cc022.zip",
+                "reference": "535f516f45685b675d21932b84b5e0897f5cc022",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1351205337",
+            "time": "1352102100",
             "type": "library",
             "installation-source": "source",
             "license": [
