@@ -11,10 +11,10 @@
 	<script src="https://login.persona.org/include.js"></script>
 	<style>
 
-		html ,body, .stream-container { min-height: 100% }
+		html ,body, #stream-content { min-height: 100% }
 
-		.stream-container { margin-bottom: 20px; }
-		#stream-content { background: url(assets/img/separator.png) repeat-y 740px top;  }
+		#stream-container { margin-bottom: 20px; }
+		#stream-content { background: url(<?php echo SITE_BASE_URL ?>assets/img/separator.png) repeat-y 740px top;  }
 		.sidebar { margin-left: 0; }
 		.content { margin-left: 0; width: 740px; }
 		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; }
@@ -79,7 +79,7 @@ border-radius: 6px 6px 0 0;}
 </div>
 
 
-<div class="container stream-container">
+<div class="container" id="stream-container">
 <?php echo $content; ?>
 </div>
 
