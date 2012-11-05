@@ -32,7 +32,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" id="stream-content">
 		<div class="span9 content">
 
 			<?php if (isset($_SESSION['user'])) : ?>

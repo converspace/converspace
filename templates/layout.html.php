@@ -13,7 +13,8 @@
 
 		html ,body, .stream-container { min-height: 100% }
 
-		.stream-container { margin-bottom: 20px; background: url(assets/img/separator.png) repeat-y 720px top; }
+		.stream-container { margin-bottom: 20px; }
+		#stream-content { background: url(assets/img/separator.png) repeat-y 740px top;  }
 		.sidebar { margin-left: 0; }
 		.content { margin-left: 0; width: 740px; }
 		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; }
