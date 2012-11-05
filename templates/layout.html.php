@@ -16,7 +16,7 @@
 		.stream-container { margin-bottom: 20px; background: url(assets/img/separator.png) repeat-y 720px top; }
 		.sidebar { margin-left: 0; }
 		.content { margin-left: 0; width: 740px; }
-		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; background-color: #FFF; }
+		#stream-header { padding: 30px 30px 30px 0; border-bottom: 1px solid #eee; }
 		.post, .post-form { padding: 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
 		.post:hover { background-color: #F5F5F5; }
 		.post:last-child { border-bottom: 0 none; }
