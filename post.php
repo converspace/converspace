@@ -67,7 +67,7 @@
 				"POST https://verifier.login.persona.org/verify",
 				'',
 				//TODO: Remove hardcoded audience 127.0.0.1
-				array('assertion'=>$req['form']['assertion'], 'audience'=>'http://127.0.0.1:80')
+				array('assertion'=>$req['form']['assertion'], 'audience'=>PERSONA_AUDIENCE)
 			);
 
 			if ('okay' == $response['status'])

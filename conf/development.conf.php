@@ -1,5 +1,7 @@
 <?php
 
+	define('PERSONA_AUDIENCE', '');
+
 	define('SITE_TITLE', '');
 	define('SITE_BASE_URL', '');
 
