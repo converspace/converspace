@@ -38,7 +38,7 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="channels/$3" rel="tag">$3</a>', $content);
+			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
 			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
@@ -73,7 +73,7 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="channels/$3" rel="tag">$3</a>', $content);
+			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
 			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
