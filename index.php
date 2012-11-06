@@ -41,7 +41,7 @@
 			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
-			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
 		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
@@ -71,7 +71,7 @@
 			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
-			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
 		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
@@ -92,7 +92,7 @@
 			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
-			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
 		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
