@@ -48,7 +48,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 				<?php unset($_SESSION['alert']) ?>
 				<?php endif; ?>
 
-				<form method="post" action="post">
+				<form method="post" action="<?php echo SITE_BASE_URL ?>post">
 					<textarea class="span9" rows="4" name="post" placeholder="What's on your mind?"></textarea>
 					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
 					<button type="submit" class="btn pull-right">Post</button>
