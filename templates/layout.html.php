@@ -85,6 +85,46 @@ border-radius: 6px 6px 0 0;}
 
 <script src="<?php echo SITE_BASE_URL ?>assets/js/jquery-1.8.2.min.js"></script>
 <script src="<?php echo SITE_BASE_URL ?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo SITE_BASE_URL ?>assets/js/persona.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	$('#signin').click(function (e) {
+		e.preventDefault();
+		// TODO add returnTo: '/pathToReturnTo.html',
+		navigator.id.request({siteName: 'Converspace'});
+	});
+
+	$('#signout').click(function (e) {
+		e.preventDefault();
+		navigator.id.logout();
+	});
+
+	navigator.id.watch({
+		loggedInUser: $loggedInUser,
+		onlogin: function ($assertion) {
+			$.post(
+				'<?php echo SITE_BASE_URL ?>persona-verifier',
+				{assertion: $assertion},
+				function(data) {
+					window.location.reload();
+				}
+			);
+		},
+		onlogout: function () {
+			$.post(
+				'<?php echo SITE_BASE_URL ?>signout',
+				{},
+				function() {
+					window.location.reload();
+				}
+			);
+		}
+	});
+
+});
+
+</script>
 </body>
 </html>
