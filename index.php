@@ -56,15 +56,31 @@
 
 # TODO: look at AtomPub?
 
-	app\get('/posts/[{id}]', function() {
+	app\get('/posts/[{post_id}]', function($req) {
 
-		return "Coming Soon...";
+		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
+		$md_posts = mysql\rows("select * from posts where id = %d", array($req['matches']['post_id']));
+
+		$posts = array();
+		foreach ($md_posts as $md_post)
+		{
+			$content = $title = '';
+			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
+			else $content = $md_post['content'];
+
+			$content = preg_replace(TAG_REGEX, '$1<span class="hash">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
+			if (!empty($title)) $content = "$title\n$content";
+			$content = Markdown($content);
+			$posts[] = array('content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+		}
+
+		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
 	});
 
 	app\get('/channels/[{channel}]', function($req) {
 
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows("select * from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 limit 10", array($req['matches']['channel']));
+		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 10", array($req['matches']['channel']));
 
 		$posts = array();
 		foreach ($md_posts as $md_post)

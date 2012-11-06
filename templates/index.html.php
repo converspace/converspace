@@ -60,8 +60,7 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 			<?php foreach ($posts as $post): ?>
 			<div class="post">
 				<?php echo $post['content'] ?>
-				<!-- <div class="post-permalink"><a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a></div> -->
-				<div class="post-permalink"><?php echo $post['created_at'] ?></div>
+				<div class="post-permalink"><a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a></div>
 			</div>
 			<?php endforeach; ?>
 
