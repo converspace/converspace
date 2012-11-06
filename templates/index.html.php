@@ -66,9 +66,12 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 
 					<?php if (isset($_SESSION['user'])) : ?>
 						-
-						<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Syndicate to Twitter</a>
+						<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
 						-
-						<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Syndicate to Facebook</a>
+						<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
+						-
+						<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>" target="_blank">Share on Google+</a>
+
 					<?php endif; ?>
 
 				</div>
