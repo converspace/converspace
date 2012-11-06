@@ -29,7 +29,7 @@
 
 // TODO: Do channels also need a draft flag? Maybe just don't save channels for draft till they are published?
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows('select * from posts where private = 0 order by created_at desc limit 10');
+		$md_posts = mysql\rows('select * from posts where private = 0 order by created_at desc limit 20');
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
@@ -80,7 +80,7 @@
 	app\get('/channels/[{channel}]', function($req) {
 
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 10", array($req['matches']['channel']));
+		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 20", array($req['matches']['channel']));
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
