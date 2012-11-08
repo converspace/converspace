@@ -2,12 +2,12 @@
 <html>
 	<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0" -->
 
 	<title><?php echo SITE_TITLE ?></title>
 
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<!-- link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet" -->
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/persona-buttons.css" rel="stylesheet">
 	<script src="https://login.persona.org/include.js"></script>
 	<style>
