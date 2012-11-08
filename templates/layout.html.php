@@ -13,16 +13,18 @@
 	<style>
 
 		html ,body, #stream-content { min-height: 100% }
+		/*
 		body { padding: 0 20px; }
 		.navbar { margin: 0 -20px }
+		*/
 
 		#stream-container { margin-bottom: 20px; }
 		#stream-content { background: url(<?php echo SITE_BASE_URL ?>assets/img/separator.png) repeat-y 719px top;  }
 		#stream-header { border-bottom: 1px solid #eee; }
-		.author { padding: 30px 0; }
+		.author { padding: 30px 20px; }
 
 
-		.post, .post-form { padding: 20px 0; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
+		.post, .post-form { padding: 20px 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
 		.post:hover { background-color: #F5F5F5; }
 		.post:last-child { border-bottom: 0 none; }
 		.post-permalink { font-size: 10px; color: #999;}
