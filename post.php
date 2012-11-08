@@ -9,7 +9,6 @@
 
 
 
-
 	app\post('/post', function($req) {
 
 		$_SESSION['alert'] = array();
@@ -18,6 +17,19 @@
 		{
 			$_SESSION['alert']['msg'] = 'You are not authorized to post.';
 			$_SESSION['alert']['type'] = 'error';
+
+			return app\response_302(SITE_BASE_URL);
+		}
+		else return app\next($req);
+
+	});
+
+
+	app\post('/post', function($req) {
+
+		if (isset($req['form']['post']['id']))
+		{
+			//print_r($req['form']);exit;
 		}
 		else
 		{

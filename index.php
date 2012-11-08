@@ -58,6 +58,7 @@
 
 	app\get('/posts/[{post_id}]', function($req) {
 
+		$post_edit = true;
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
 		$md_posts = mysql\rows("select * from posts where id = %d", array($req['matches']['post_id']));
 
@@ -74,13 +75,14 @@
 			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('channels', 'posts', 'post_edit'), 'layout.html');
 	});
 
 	app\get('/channels/[{channel}]', function($req) {
 
+		$channel_name = $req['matches']['channel'];
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 20", array($req['matches']['channel']));
+		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 20", array($channel_name));
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
@@ -95,7 +97,7 @@
 			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('channel_name', 'channels', 'posts'), 'layout.html');
 	});
 
 ?>

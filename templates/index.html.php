@@ -1,37 +1,4 @@
-<?php
 
-function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
-{
-	$url = 'http://www.gravatar.com/avatar/';
-	$url .= md5(strtolower(trim($email)));
-	$url .= "?s=$s&d=$d&r=$r";
-	if ( $img )
-	{
-		$url = "<img src=\"$url\"";
-		foreach ($atts as $key=>$val) $url .= " $key=\"$val\"";
-		$url .= ' />';
-	}
-
-	return $url;
-}
-
-
-?>
-	<div class="row" id="stream-header">
-		<div class="span12">
-			<div class="author">
-				<div class="media">
-					<a class="pull-left" href="<?php echo SITE_BASE_URL ?>channels/about">
-						<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
-					</a>
-					<div class="media-body">
-						<h1 class="author-name media-heading"><?php echo USER_NAME ?></h1>
-						<?php echo Markdown(USER_BIO) ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="row" id="stream-content">
 		<div class="span9 content">
 
@@ -49,9 +16,16 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 				<?php endif; ?>
 
 				<form method="post" action="<?php echo SITE_BASE_URL ?>post">
-					<textarea class="span9" rows="4" name="post" placeholder="What's on your mind?"></textarea>
+				<?php if (isset($post_edit)) : ?>
+					<textarea class="span8" rows="4" name="post[content]" placeholder="What's on your mind?"><?php if (isset($post_edit)) echo $posts[0]['raw'] ?></textarea>
+					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
+					<input type="hidden" name="post[id]" value="<?php echo $posts[0]['id'] ?>">
+					<button type="submit" class="btn pull-right">Update</button>
+				<?php else: ?>
+					<textarea class="span8" rows="4" name="post" placeholder="What's on your mind?"></textarea>
 					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
 					<button type="submit" class="btn pull-right">Post</button>
+				<?php endif; ?>
 				</form>
 			</div>
 			<?php endif; ?>
@@ -83,9 +57,14 @@ function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
 		<div class="span3 sidebar">
 
 			<ul class="unstyled channels ">
-				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel active"><i class="icon-chevron-left icon-white"></i> Home</a></li>
+				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name)) echo 'active' ?>"><i class="icon-chevron-left <?php if (!isset($channel_name)) echo 'icon-white' ?>"></i> Home</a></li>
 				<?php foreach ($channels as $channel): ?>
-				<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+
+					<?php if ($channel_name == $channel['name']): ?>
+					<li><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left  icon-white"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<?php else: ?>
+					<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<?php endif; ?>
 
 				<?php endforeach; ?>
 			</ul>
