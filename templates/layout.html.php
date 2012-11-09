@@ -23,7 +23,7 @@
 
 		.sidebar { margin-top: 30px; }
 
-		div.post, .post-form { padding: 20px 0; /*border-bottom: 1px solid #eee;*/ border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 18px; line-height: 1.5; }
+		div.post, .post-form { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
 		.post:first-child { border-top: none; }
 		.post:last-child { border-bottom: none; }
 		.post-permalink { font-size: 10px; color: #999;}
