@@ -14,6 +14,7 @@
 
 		body { background-color: #F3F3F3; padding: 0 20px; }
 		.navbar { margin: 0 -20px; }
+		.navbar-inner { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
 		#stream-container { margin-bottom: 20px; }
 		#stream-header { border-bottom: 1px solid #E5E5E5; }
 		#stream-content { border-top: 1px solid white; }
@@ -49,8 +50,8 @@
 </head>
 <body>
 
-<div class="navbar navbar-static-top">
-	<div class="navbar-inner">
+<div class="navbar navbar-static-top" style="">
+	<div class="navbar-inner" style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;">
 		<div class="container">
 
 		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -97,7 +98,7 @@
 </div>
 
 
-<div class="container" id="stream-container">
+<div class="container" id="stream-container" style="border-top: 1px solid white;">
 
 	<div class="row" id="stream-header">
 		<!-- div class="span12">
