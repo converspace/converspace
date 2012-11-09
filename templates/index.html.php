@@ -38,26 +38,28 @@
 			<?php endif; ?>
 
 
-			<?php foreach ($posts as $post): ?>
-			<div class="post">
-				<?php echo $post['content'] ?>
-				<div class="post-permalink">
+			<div class="posts">
+				<?php foreach ($posts as $post): ?>
+				<div class="post">
+					<?php echo $post['content'] ?>
+					<div class="post-permalink">
 
-					<a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a>
+						<a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo $post['created_at'] ?></a>
 
-					<?php if (isset($_SESSION['user'])) : ?>
-						-
-						<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
-						-
-						<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
-						-
-						<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>" target="_blank">Share on Google+</a>
+						<?php if (isset($_SESSION['user'])) : ?>
+							-
+							<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
+							-
+							<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
+							-
+							<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>" target="_blank">Share on Google+</a>
 
-					<?php endif; ?>
+						<?php endif; ?>
 
+					</div>
 				</div>
+				<?php endforeach; ?>
 			</div>
-			<?php endforeach; ?>
 
 		</div>
 

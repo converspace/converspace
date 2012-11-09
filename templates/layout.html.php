@@ -12,32 +12,35 @@
 	<style>
 
 
+		body { background-color: #F3F3F3; padding: 0 20px; }
+		.navbar { margin: 0 -20px; }
 		#stream-container { margin-bottom: 20px; }
-		#stream-header { border-bottom: 1px solid #eee; }
-		.author { padding: 30px 20px; }
+		#stream-header { border-bottom: 1px solid #E5E5E5; }
+		#stream-content { border-top: 1px solid white; }
+		.author { padding: 30px 0; }
 		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
 		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 
-		.sidebar { background-color: #FEFEFE; margin-top: 30px; }
+		.sidebar { margin-top: 30px; }
 
-		.post, .post-form { padding: 20px 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
-		.post:first-child { margin-top: 10px; }
-		.post:last-child { border-bottom: 0 none; }
+		div.post, .post-form { padding: 20px 0; /*border-bottom: 1px solid #eee;*/ border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 18px; line-height: 1.5; }
+		.post:first-child { border-top: none; }
+		.post:last-child { border-bottom: none; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
 
-		.infobox { padding: 30px 20px 0 20px; }
+		.infobox { padding: 30px 0 0 0; }
 
 		.hash { color: #08C; opacity: 0.6; font-weight: lighter ;}
-		.channels { margin-bottom: 0; }
+		.channels { margin-bottom: 0; background: none; }
 		.channels a { text-decoration: none; }
 		.channel { display: block; padding: 8px 14px; text-decoration: none; }
 		.channel .icon-tag, .channel .icon-home { opacity: 0.25; }
-		.channel:hover, .channel:hover .hash { background-color: #F5F5F5; color: #005580; }
+		.channel:hover, .channel:hover .hash { background-color: #FFF; color: #005580; }
 		.channel:hover .icon-tag { opacity: 0.5; }
 
-		.channels .active, .channels .active:hover, .channels .active .hash, .channels .active:hover .hash { background-color: #F5F5F5; color: #005580;}
+		.channels .active, .channels .active:hover, .channels .active .hash, .channels .active:hover .hash { background-color: #FFF; color: #005580;}
 
 		.persona-button { margin-top: 7px; }
 
@@ -96,9 +99,9 @@
 
 <div class="container" id="stream-container">
 
-	<div class="row">
-		<div class="span12" id="stream-header">
-			<div class="row">
+	<div class="row" id="stream-header">
+		<!-- div class="span12">
+			<div class="row" -->
 				<div class="span9">
 					<div class="author">
 						<div class="media">
@@ -115,8 +118,8 @@
 				<div class="span3">
 					<!-- TODO: Links to Twitter / Facebook / LinkedIn? -->
 				</div>
-			</div>
-		</div>
+			<!-- /div>
+		</div -->
 	</div>
 
 <?php echo $content; ?>
