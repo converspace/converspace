@@ -5,7 +5,7 @@
 			<?php if (isset($channel_name)): ?>
 			<div class="infobox" >
 			<div class="alert alert-info">
-			Showing posts from the #<strong><?php echo $channel_name ?></strong> channel. <a href="<?php echo SITE_BASE_URL ?>">Show all posts</a>.
+			Showing posts from the #<strong><?php echo $channel_name ?></strong> channel. <a href="<?php echo SITE_BASE_URL ?>">Show all posts</a>
 			</div>
 			</div>
 			<?php endif; ?>
