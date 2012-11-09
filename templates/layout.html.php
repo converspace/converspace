@@ -2,52 +2,43 @@
 <html>
 	<head>
     <meta charset="utf-8">
-    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0" -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title><?php echo SITE_TITLE ?></title>
 
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet">
-	<!-- link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet" -->
+	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/persona-buttons.css" rel="stylesheet">
-	<script src="https://login.persona.org/include.js"></script>
 	<style>
 
-		html ,body, #stream-content { min-height: 100% }
-		/*
-		body { padding: 0 20px; }
-		.navbar { margin: 0 -20px }
-		*/
 
 		#stream-container { margin-bottom: 20px; }
-		#stream-content { background: url(<?php echo SITE_BASE_URL ?>assets/img/separator.png) repeat-y 719px top;  }
 		#stream-header { border-bottom: 1px solid #eee; }
 		.author { padding: 30px 20px; }
+		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
+		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 
+		.sidebar { background-color: #FEFEFE; margin-top: 30px; }
 
 		.post, .post-form { padding: 20px 20px; border-bottom: 1px solid #eee; font-size: 18px; line-height: 1.5; }
-		.post:hover { background-color: #F5F5F5; }
+		.post:first-child { margin-top: 10px; }
 		.post:last-child { border-bottom: 0 none; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
-		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
-		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 
+		.infobox { padding: 30px 20px 0 20px; }
 
 		.hash { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; }
 		.channels a { text-decoration: none; }
 		.channel { display: block; padding: 8px 14px; text-decoration: none; }
-		.channel .icon-chevron-left { opacity: 0.25; }
+		.channel .icon-tag, .channel .icon-home { opacity: 0.25; }
 		.channel:hover, .channel:hover .hash { background-color: #F5F5F5; color: #005580; }
-		.channel:hover .icon-chevron-left { opacity: 0.5; }
+		.channel:hover .icon-tag { opacity: 0.5; }
 		.channels .active, .channels .active:hover { background-color: #08C; color: #FFF;}
 		.channels .active .hash, .channels .active:hover .hash { background-color: #08C; color: #FFF;}
-		.channels .active .icon-chevron-left, .channels .active:hover .icon-chevron-right { opacity: 1; }
-
-		.channel.first-child {-webkit-border-radius: 6px 6px 0 0;
--moz-border-radius: 6px 6px 0 0;
-border-radius: 6px 6px 0 0;}
+		.channels .active .icon-tag, .channels .active .icon-home, .channels .active:hover .icon-chevron-right { opacity: 1; }
 
 		.persona-button { margin-top: 7px; }
 
@@ -59,7 +50,16 @@ border-radius: 6px 6px 0 0;}
 <div class="navbar navbar-static-top">
 	<div class="navbar-inner">
 		<div class="container">
+
+		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</a>
+
 			<a class="brand" href="<?php echo SITE_BASE_URL ?>"><?php echo SITE_TITLE ?></a>
+
+<div class="nav-collapse collapse">
 
 			<?php if (isset($_SESSION['persona'])) : ?>
 
@@ -70,17 +70,26 @@ border-radius: 6px 6px 0 0;}
 				</ul>
 				<?php endif; ?>
 
+
 				<script>
 					var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
 				</script>
-				<a id="signout" href="#" class="persona-button orange pull-right"><span>Sign out <?php echo $_SESSION['persona']['email'] ?></span></a>
+				<!-- a id="signout" href="#" class="pull-right"><span>Sign out <?php echo $_SESSION['persona']['email'] ?></span></a -->
+				<ul class="nav pull-right">
+				<li><a href="#" id="signout">Logout</a></li>
+				</ul>
 
 			<?php else: ?>
 				<script>
 					var $loggedInUser = null;
 				</script>
-				<a id="signin" href="#" class="persona-button pull-right"><span>Sign in with Mozilla Persona</span></a>
+				<!-- a id="signin" href="#" class="pull-right"><span>Sign in with Mozilla Persona</span></a -->
+				<ul class="nav pull-right">
+				<li><a href="#" id="signin">Login</a></li>
+				</ul>
+
 			<?php endif; ?>
+</div>
 		</div>
 	</div>
 </div>
@@ -88,44 +97,33 @@ border-radius: 6px 6px 0 0;}
 
 <div class="container" id="stream-container">
 
-	<?php
-		function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
-		{
-			$url = 'http://www.gravatar.com/avatar/';
-			$url .= md5(strtolower(trim($email)));
-			$url .= "?s=$s&d=$d&r=$r";
-			if ( $img )
-			{
-				$url = "<img src=\"$url\"";
-				foreach ($atts as $key=>$val) $url .= " $key=\"$val\"";
-				$url .= ' />';
-			}
-
-			return $url;
-		}
-	?>
-	<div class="row" id="stream-header">
-		<div class="span9">
-			<div class="author">
-				<div class="media">
-					<a class="pull-left" href="<?php echo SITE_BASE_URL ?>channels/about">
-						<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
-					</a>
-					<div class="media-body">
-						<h1 class="author-name media-heading"><?php echo USER_NAME ?></h1>
-						<?php echo Markdown(USER_BIO) ?>
+	<div class="row">
+		<div class="span12" id="stream-header">
+			<div class="row">
+				<div class="span9">
+					<div class="author">
+						<div class="media">
+							<a class="pull-left" href="<?php echo SITE_BASE_URL ?>channels/about">
+								<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
+							</a>
+							<div class="media-body">
+								<h1 class="author-name media-heading"><?php echo USER_NAME ?></h1>
+								<?php echo Markdown(USER_BIO) ?>
+							</div>
+						</div>
 					</div>
 				</div>
+				<div class="span3">
+					<!-- TODO: Links to Twitter / Facebook / LinkedIn? -->
+				</div>
 			</div>
-		</div>
-		<div class="span3">
-			<!-- TODO: Links to Twitter / Facebook / LinkedIn? -->
 		</div>
 	</div>
 
 <?php echo $content; ?>
 </div>
 
+<script src="https://login.persona.org/include.js"></script>
 <script src="<?php echo SITE_BASE_URL ?>assets/js/jquery-1.8.2.min.js"></script>
 <script src="<?php echo SITE_BASE_URL ?>assets/js/bootstrap.min.js"></script>
 

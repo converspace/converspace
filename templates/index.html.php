@@ -2,19 +2,26 @@
 	<div class="row" id="stream-content">
 		<div class="span9 content">
 
+			<?php if (isset($channel_name)): ?>
+			<div class="infobox" >
+			<div class="alert alert-info">
+			Showing posts from the #<strong><?php echo $channel_name ?></strong> channel. <a href="<?php echo SITE_BASE_URL ?>">Show all posts</a>.
+			</div>
+			</div>
+			<?php endif; ?>
+
+			<?php if (!empty($_SESSION['alert'])) : ?>
+			<div class="infobox">
+			<div class="alert alert-<?php echo $_SESSION['alert']['type'] ?>">
+				<button type="button" class="close" data-dismiss="alert">x</button>
+				<?php echo $_SESSION['alert']['msg'] ?>
+			</div>
+			</div>
+			<?php unset($_SESSION['alert']) ?>
+			<?php endif; ?>
+
 			<?php if (isset($_SESSION['user'])) : ?>
 			<div class="post-form">
-
-				<?php if (!empty($_SESSION['alert'])) : ?>
-				<div style="padding: 5px 0;">
-				<div class="alert alert-<?php echo $_SESSION['alert']['type'] ?>">
-					<button type="button" class="close" data-dismiss="alert">x</button>
-					<?php echo $_SESSION['alert']['msg'] ?>
-				</div>
-				</div>
-				<?php unset($_SESSION['alert']) ?>
-				<?php endif; ?>
-
 				<form method="post" action="<?php echo SITE_BASE_URL ?>post">
 				<?php if (isset($post_edit)) : ?>
 					<textarea class="span8" rows="4" name="post[content]" placeholder="What's on your mind?"><?php if (isset($post_edit)) echo $posts[0]['raw'] ?></textarea>
@@ -56,14 +63,14 @@
 
 		<div class="span3 sidebar">
 
-			<ul class="unstyled channels ">
-				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name)) echo 'active' ?>"><i class="icon-chevron-left <?php if (!isset($channel_name)) echo 'icon-white' ?>"></i> Home</a></li>
+			<ul class="channels nav nav-tabs nav-stacked">
+				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name) and !isset($post_edit)) echo 'active' ?>"><i class="icon-home <?php if (!isset($channel_name) and !isset($post_edit)) echo 'icon-white' ?>"></i> Home</a></li>
 				<?php foreach ($channels as $channel): ?>
 
 					<?php if ($channel_name == $channel['name']): ?>
 					<li><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left  icon-white"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
-					<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-tag"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
 					<?php endif; ?>
 
 				<?php endforeach; ?>
