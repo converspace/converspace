@@ -116,4 +116,10 @@
 		return template\compose('index.html', compact('channel_name', 'channels', 'posts'), 'layout.html');
 	});
 
+
+	function dopplr_color($str)
+	{
+		return substr(md5($str), 0, 6);
+	}
+
 ?>

@@ -36,9 +36,8 @@
 		.channel .icon-tag, .channel .icon-home { opacity: 0.25; }
 		.channel:hover, .channel:hover .hash { background-color: #F5F5F5; color: #005580; }
 		.channel:hover .icon-tag { opacity: 0.5; }
-		.channels .active, .channels .active:hover { background-color: #08C; color: #FFF;}
-		.channels .active .hash, .channels .active:hover .hash { background-color: #08C; color: #FFF;}
-		.channels .active .icon-tag, .channels .active .icon-home, .channels .active:hover .icon-chevron-right { opacity: 1; }
+
+		.channels .active, .channels .active:hover, .channels .active .hash, .channels .active:hover .hash { background-color: #F5F5F5; color: #005580;}
 
 		.persona-button { margin-top: 7px; }
 

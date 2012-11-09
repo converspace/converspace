@@ -63,14 +63,14 @@
 
 		<div class="span3 sidebar">
 
-			<ul class="channels nav nav-tabs nav-stacked">
-				<li><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name) and !isset($post_edit)) echo 'active' ?>"><i class="icon-home <?php if (!isset($channel_name) and !isset($post_edit)) echo 'icon-white' ?>"></i> Home</a></li>
+			<ul class="unstyled channels">
+				<li style="border-left: 10px solid #<?php echo dopplr_color("Home") ?>;"><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name) and !isset($post_edit)) echo 'active' ?>"><!-- i class="icon-home <?php if (!isset($channel_name) and !isset($post_edit)) echo 'icon-white' ?>"></i --> Home</a></li>
 				<?php foreach ($channels as $channel): ?>
 
-					<?php if ($channel_name == $channel['name']): ?>
-					<li><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-chevron-left  icon-white"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<?php if (isset($channel_name) and ($channel_name == $channel['name'])): ?>
+					<li style="border-left: 10px solid #<?php echo dopplr_color("#{$channel['name']}") ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-chevron-left  icon-white"></i --> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
-					<li><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><i class="icon-tag"></i> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color("#{$channel['name']}") ?>;"><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
 					<?php endif; ?>
 
 				<?php endforeach; ?>
