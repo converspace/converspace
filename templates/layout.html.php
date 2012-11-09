@@ -51,7 +51,7 @@
 <body>
 
 <div class="navbar navbar-static-top" style="">
-	<div class="navbar-inner" style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;">
+	<div class="navbar-inner" style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: none; border-bottom: 1px solid #E5E5E5;">
 		<div class="container">
 
 		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
