@@ -17,23 +17,20 @@
 		.navbar-inner { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
 		#stream-container { margin-bottom: 20px; }
 		#stream-header { border-bottom: 1px solid #E5E5E5; }
-		#stream-content { border-top: 1px solid white; }
+		#stream-content { border-top: 1px solid white; padding-top: 30px;}
 		.author { padding: 30px 0; }
 		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
 		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 
-		.sidebar { margin-top: 30px; }
 
-		.post-form { border-bottom: 1px solid white; }
-		.post-form-inner { padding: 30px 0 10px 0; border-bottom: 1px solid #E5E5E5; }
+		.post-form { border-bottom: 1px solid white; margin-bottom: 30px; }
+		.post-form-inner { border-bottom: 1px solid #E5E5E5; padding-bottom: 10px; }
 		div.post { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
-		.post:first-child { border-top: none; }
+		.post:first-child { border-top: none; padding-top: 0; }
 		.post:last-child { border-bottom: none; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
-
-		.infobox { padding: 30px 0 0 0; }
 
 		.hash { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; background: none; }
