@@ -14,6 +14,7 @@
 
 			<?php if (isset($_SESSION['user'])) : ?>
 			<div class="post-form">
+				<div class="post-form-inner">
 				<form method="post" action="<?php echo SITE_BASE_URL ?>post">
 				<?php if (isset($post_edit)) : ?>
 					<textarea class="span9" rows="4" name="post[content]" placeholder="What's on your mind?"><?php if (isset($post_edit)) echo $posts[0]['raw'] ?></textarea>
@@ -26,6 +27,7 @@
 					<button type="submit" class="btn pull-right">Post</button>
 				<?php endif; ?>
 				</form>
+				</div>
 			</div>
 			<?php endif; ?>
 

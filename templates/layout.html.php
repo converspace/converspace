@@ -24,7 +24,8 @@
 
 		.sidebar { margin-top: 30px; }
 
-		.post-form { padding: 30px 0 10px 0; border-bottom: 1px solid #E5E5E5;}
+		.post-form { border-bottom: 1px solid white; }
+		.post-form-inner { padding: 30px 0 10px 0; border-bottom: 1px solid #E5E5E5; }
 		div.post { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
 		.post:first-child { border-top: none; }
 		.post:last-child { border-bottom: none; }
