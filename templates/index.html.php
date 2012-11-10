@@ -22,7 +22,7 @@
 					<input type="hidden" name="post[id]" value="<?php echo $posts[0]['id'] ?>">
 					<button type="submit" class="btn pull-right">Update</button>
 				<?php else: ?>
-					<textarea class="span9" rows="4" name="post" placeholder="What's on your mind?"></textarea>
+					<textarea class="span9" rows="4" name="post[content]" placeholder="What's on your mind?"></textarea>
 					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
 					<button type="submit" class="btn pull-right">Post</button>
 				<?php endif; ?>

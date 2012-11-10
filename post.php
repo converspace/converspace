@@ -27,21 +27,23 @@
 
 	app\post('/post', function($req) {
 
+		$is_private = isset($req['form']['private']) ? 1 : 0;
+		$post_content = $req['form']['post']['content'];
+		$now = date('Y-m-d H:i:s');
+
 		if (isset($req['form']['post']['id']))
 		{
 			//print_r($req['form']);exit;
+
 		}
 		else
 		{
-			$is_private = isset($req['form']['private']) ? 1 : 0;
-			$post = $req['form']['post'];
-			$now = date('Y-m-d H:i:s');
-			mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post, $now, $now, $is_private));
+			mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post_content, $now, $now, $is_private));
 			if (mysql\affected_rows() === 1)
 			{
 				$post_id = mysql\insert_id();
-				if (substr($post, 0, 2) == '# ') list($title, $post) = preg_split('/\n/', $post, 2);
-				preg_match_all(TAG_REGEX, $post, $channels);
+				if (substr($post_content, 0, 2) == '# ') list($title, $post_content) = preg_split('/\n/', $post_content, 2);
+				preg_match_all(TAG_REGEX, $post_content, $channels);
 
 				foreach($channels[3] as $channel_name)
 				{
