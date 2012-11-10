@@ -21,7 +21,7 @@
 		.author { padding: 30px 0; }
 		.author-name { font-size: 30px; font-weight: 900; line-height: 30px; letter-spacing: -1px; }
 		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
-
+		.infobox { margin-bottom: 30px; }
 
 		.post-form { border-bottom: 1px solid white; margin-bottom: 30px; }
 		.post-form-inner { border-bottom: 1px solid #E5E5E5; padding-bottom: 10px; }
