@@ -50,55 +50,53 @@
 </head>
 <body>
 
-<div class="navbar navbar-static-top" style="">
-	<div class="navbar-inner" style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: none; border-bottom: 1px solid #E5E5E5;">
-		<div class="container">
 
+<div class="container" id="stream-container">
+
+<div class="navbar " style="border-bottom: 1px solid white;">
+	<div class="navbar-inner" style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: none; border-bottom: 1px solid #E5E5E5; background: none; ">
 		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</a>
 
-			<a class="brand" href="<?php echo SITE_BASE_URL ?>"><?php echo SITE_TITLE ?></a>
+		<a class="brand" href="<?php echo SITE_BASE_URL ?>"><?php echo SITE_TITLE ?></a>
 
-<div class="nav-collapse collapse">
+		<div class="nav-collapse collapse">
 
-			<?php if (isset($_SESSION['persona'])) : ?>
+		<?php if (isset($_SESSION['persona'])) : ?>
 
-				<?php if (isset($_SESSION['user'])) : ?>
-				<ul class="nav">
-					<li class="active"><a href="<?php echo SITE_BASE_URL ?>">Public</a></li>
-					<li><a href="#private">Private</a></li>
-				</ul>
-				<?php endif; ?>
-
-
-				<script>
-					var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
-				</script>
-				<!-- a id="signout" href="#" class="pull-right"><span>Sign out <?php echo $_SESSION['persona']['email'] ?></span></a -->
-				<ul class="nav pull-right">
-				<li><a href="#" id="signout">Logout</a></li>
-				</ul>
-
-			<?php else: ?>
-				<script>
-					var $loggedInUser = null;
-				</script>
-				<!-- a id="signin" href="#" class="pull-right"><span>Sign in with Mozilla Persona</span></a -->
-				<ul class="nav pull-right">
-				<li><a href="#" id="signin">Login</a></li>
-				</ul>
-
+			<?php if (isset($_SESSION['user'])) : ?>
+			<ul class="nav">
+				<li class="active"><a href="<?php echo SITE_BASE_URL ?>">Public</a></li>
+				<li><a href="#private">Private</a></li>
+			</ul>
 			<?php endif; ?>
-</div>
+
+
+			<script>
+				var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
+			</script>
+			<!-- a id="signout" href="#" class="pull-right"><span>Sign out <?php echo $_SESSION['persona']['email'] ?></span></a -->
+			<ul class="nav pull-right">
+			<li><a href="#" id="signout">Logout</a></li>
+			</ul>
+
+		<?php else: ?>
+			<script>
+				var $loggedInUser = null;
+			</script>
+			<!-- a id="signin" href="#" class="pull-right"><span>Sign in with Mozilla Persona</span></a -->
+			<ul class="nav pull-right">
+			<li><a href="#" id="signin">Login</a></li>
+			</ul>
+
+		<?php endif; ?>
 		</div>
+
 	</div>
 </div>
-
-
-<div class="container" id="stream-container" style="border-top: 1px solid white;">
 
 	<div class="row" id="stream-header">
 		<!-- div class="span12">
