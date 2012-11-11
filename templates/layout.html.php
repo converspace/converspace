@@ -32,7 +32,7 @@
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
 
-		.hash { color: #08C; opacity: 0.6; font-weight: lighter ;}
+		.deem { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; background: none; }
 		.channels a { text-decoration: none; }
 		.channel { display: block; padding: 8px 14px; text-decoration: none; }
