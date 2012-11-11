@@ -1,3 +1,5 @@
+* responsive vids (FitVids.js)
+* Reject empty posts
 * Auto-link @twitter_handles
 * Pagination/infinite scroll (currently only show 10 posts)
 * Fix cross symbol on alert boxes
