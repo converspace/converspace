@@ -42,7 +42,7 @@
 
 		.channels .active, .channels .active:hover, .channels .active .hash, .channels .active:hover .hash { background-color: #FFF; color: #005580;}
 
-		.persona-button { margin-top: 7px; }
+		.fluid-width-video-wrapper { margin-bottom: 20px; }
 
 	</style>
 
