@@ -126,6 +126,7 @@
 <script src="https://login.persona.org/include.js"></script>
 <script src="<?php echo SITE_BASE_URL ?>assets/js/jquery-1.8.2.min.js"></script>
 <script src="<?php echo SITE_BASE_URL ?>assets/js/bootstrap.min.js"></script>
+<script src="<?php echo SITE_BASE_URL ?>assets/js/jquery.fitvids.js"></script>
 
 <script>
 
@@ -163,6 +164,8 @@ $(document).ready(function() {
 			);
 		}
 	});
+
+	$(".posts").fitVids();
 
 });
 
