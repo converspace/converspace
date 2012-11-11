@@ -37,10 +37,10 @@
 		.channels a { text-decoration: none; }
 		.channel { display: block; padding: 8px 14px; text-decoration: none; }
 		.channel .icon-tag, .channel .icon-home { opacity: 0.25; }
-		.channel:hover, .channel:hover .hash { background-color: #FFF; color: #005580; }
+		.channel:hover, .channel:hover .deem { background-color: #FFF; color: #005580; }
 		.channel:hover .icon-tag { opacity: 0.5; }
 
-		.channels .active, .channels .active:hover, .channels .active .hash, .channels .active:hover .hash { background-color: #FFF; color: #005580;}
+		.channels .active, .channels .active:hover, .channels .active .deem, .channels .active:hover .deem { background-color: #FFF; color: #005580;}
 
 		.fluid-width-video-wrapper { margin-bottom: 20px; }
 
