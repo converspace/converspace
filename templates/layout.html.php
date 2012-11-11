@@ -23,12 +23,11 @@
 		.author p { font-size: 18px; font-weight: 200; line-height: 25px;; color: #999; }
 		.infobox { margin-bottom: 30px; }
 
-		.posts { border-bottom: 1px solid white; }
+		.posts { border-bottom: 1px solid white; margin-bottom: 30px; }
 		.post-form { border-bottom: 1px solid white; margin-bottom: 30px; }
 		.post-form-inner { border-bottom: 1px solid #E5E5E5; padding-bottom: 10px; }
 		.post { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
 		.post:first-child { border-top: none; padding-top: 0; }
-		.post:last-child { margin-bottom: 30px; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
