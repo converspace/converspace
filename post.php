@@ -31,9 +31,38 @@
 		$post_content = $req['form']['post']['content'];
 		$now = date('Y-m-d H:i:s');
 
+		$post_body = '';
+		if (substr($post_content, 0, 2) == '# ') list($post_title, $post_body) = preg_split('/\n/', $post_content, 2);
+		else $post_body = $post_content;
+		preg_match_all(TAG_REGEX, $post_body, $matches);
+		$post_channels = $matches[3];
+
+
 		if (isset($req['form']['post']['id']))
 		{
+			$post_id = $req['form']['post']['id'];
 			//print_r($req['form']);exit;
+			mysql\query("UPDATE posts SET content = '%s', updated_at = '%s', private = %d WHERE id = %d", array($post_content, $now, $is_private, $post_id));
+			if (mysql\affected_rows() === 1)
+			{
+				$channels_to_delete = array();
+				$existing_channels_rows = mysql\rows('select name from channels where post_id = %d', array($post_id));
+				foreach ($existing_channels_rows as $existing_channel_row)
+				{
+					if (false === ($key = array_search($existing_channel_row['name'], $post_channels)))
+					{
+						$channels_to_delete[] = $existing_channel_row['name'];
+					}
+					else unset($post_channels[$key]);
+				}
+
+				if (!empty($channels_to_delete)) mysql\query("DELETE FROM channels WHERE post_id = %d and name in ('".implode("','", $channels_to_delete)."')", array($post_id));
+
+				foreach($post_channels as $channel_name)
+				{
+					mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
+				}
+			}
 
 		}
 		else
@@ -42,10 +71,8 @@
 			if (mysql\affected_rows() === 1)
 			{
 				$post_id = mysql\insert_id();
-				if (substr($post_content, 0, 2) == '# ') list($title, $post_content) = preg_split('/\n/', $post_content, 2);
-				preg_match_all(TAG_REGEX, $post_content, $channels);
 
-				foreach($channels[3] as $channel_name)
+				foreach($post_channels as $channel_name)
 				{
 					mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 				}
