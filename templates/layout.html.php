@@ -28,6 +28,7 @@
 		.post-form-inner { border-bottom: 1px solid #E5E5E5; padding-bottom: 10px; }
 		.post { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
 		.post:first-child { border-top: none; padding-top: 0; }
+		.post:last-child { margin-bottom: 30px; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; }
