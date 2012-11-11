@@ -73,9 +73,9 @@
 				<?php foreach ($channels as $channel): ?>
 
 					<?php if (isset($channel_name) and ($channel_name == $channel['name'])): ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-chevron-left  icon-white"></i --> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-chevron-left  icon-white"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="hash">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php endif; ?>
 
 				<?php endforeach; ?>
