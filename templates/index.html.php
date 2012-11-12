@@ -5,7 +5,6 @@
 			<?php if (!empty($_SESSION['alert'])) : ?>
 			<div class="infobox">
 			<div class="alert alert-<?php echo $_SESSION['alert']['type'] ?>">
-				<button type="button" class="close" data-dismiss="alert">x</button>
 				<?php echo $_SESSION['alert']['msg'] ?>
 			</div>
 			</div>
