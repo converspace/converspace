@@ -42,11 +42,41 @@
 	});
 
 
-	app\get('/', function() {
+	app\get('/', function($req) {
 
-// TODO: Do channels also need a draft flag? Maybe just don't save channels for draft till they are published?
-		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows('select * from posts where private = 0 order by created_at desc limit 20');
+		if (isset($req['query']['before'])) $before = intval($req['query']['before']);
+		elseif (isset($req['query']['after'])) $after = intval($req['query']['after']);
+		$pager = array();
+
+		$channels = mysql\rows('SELECT name, count(*) as count FROM channels WHERE private = 0 GROUP BY name ORDER BY count DESC');
+
+		if (isset($before))
+		{
+			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 AND id < %d ORDER BY id DESC LIMIT 11', array($before));
+			if (count($md_posts) === 11)
+			{
+				$pager['before'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
+			$pager['after'] = $md_posts[0]['id'];
+		}
+		elseif (isset($after))
+		{
+			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 AND id > %d ORDER BY id ASC LIMIT 11', array($after));
+			if (count($md_posts) === 11)
+			{
+				$pager['after'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
+			$pager['before'] = $md_posts[0]['id'];
+			$md_posts = array_reverse($md_posts);
+		}
+		else
+		{
+			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 ORDER BY id DESC LIMIT 11');
+			if (count($md_posts) === 11) $pager['before'] = $md_posts[9]['id'];
+			array_pop($md_posts);
+		}
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
@@ -63,7 +93,7 @@
 			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('channels', 'posts', 'pager'), 'layout.html');
 	});
 
 # TODO: Remove this duplication of routes:
