@@ -78,6 +78,7 @@
 			array_pop($md_posts);
 		}
 
+
 		$posts = array();
 		foreach ($md_posts as $md_post)
 		{
@@ -132,8 +133,41 @@
 	app\get('/channels/[{channel}]', function($req) {
 
 		$channel_name = $req['matches']['channel'];
-		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows("select p.id, p.content, p.created_at from posts p, channels c where c.post_id = p.id and c.name = '%s' and p.private = 0 order by p.created_at desc limit 20", array($channel_name));
+		if (isset($req['query']['before'])) $before = intval($req['query']['before']);
+		elseif (isset($req['query']['after'])) $after = intval($req['query']['after']);
+		$pager = array();
+
+		$channels = mysql\rows('SELECT name, count(*) as count FROM channels WHERE private = 0 GROUP BY name ORDER BY count DESC');
+
+		if (isset($before))
+		{
+			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.id < %d AND p.private = 0 ORDER BY id DESC LIMIT 11", array($channel_name, $before));
+			if (count($md_posts) === 11)
+			{
+				$pager['before'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
+			$pager['after'] = $md_posts[0]['id'];
+		}
+		elseif (isset($after))
+		{
+			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.id > %d AND p.private = 0 ORDER BY id ASC LIMIT 11", array($channel_name, $after));
+			if (count($md_posts) === 11)
+			{
+				$pager['after'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
+			$pager['before'] = $md_posts[0]['id'];
+			$md_posts = array_reverse($md_posts);
+		}
+		else
+		{
+			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.private = 0 ORDER BY p.id DESC LIMIT 11", array($channel_name));
+
+			if (count($md_posts) === 11) $pager['before'] = $md_posts[9]['id'];
+			array_pop($md_posts);
+		}
+
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
@@ -150,7 +184,7 @@
 			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('channel_name', 'channels', 'posts'), 'layout.html');
+		return template\compose('index.html', compact('channel_name', 'channels', 'posts', 'pager'), 'layout.html');
 	});
 
 
