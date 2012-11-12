@@ -64,6 +64,15 @@
 				<?php endforeach; ?>
 			</div>
 
+			<ul class="pager">
+				<?php if (isset($after)): ?>
+				<li class="previous"><a href="?after=<?php echo $after ?>">&larr; Newer</a></li>
+				<?php endif; ?>
+				<?php if (isset($after)): ?>
+				<li class="next"><a href="?before=<?php echo $before ?>">Older &rarr;</a></li>
+				<?php endif; ?>
+			</ul>
+
 		</div>
 
 		<div class="span3 sidebar">
