@@ -12,7 +12,7 @@
 	<style>
 
 
-		body { background-color: #F3F3F3; padding: 0 20px; }
+		body { padding: 0 20px; }
 		.navbar { margin: 0 -20px; }
 		.navbar-inner { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
 		#stream-container { margin-bottom: 20px; }
@@ -26,11 +26,11 @@
 		.posts { border-bottom: 1px solid white; margin-bottom: 30px; }
 		.post-form { border-bottom: 1px solid white; margin-bottom: 30px; }
 		.post-form-inner { border-bottom: 1px solid #E5E5E5; padding-bottom: 10px; }
-		.post { padding: 20px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
+		.post { padding: 30px 0; border-bottom: 1px solid #E5E5E5; border-top: 1px solid white; font-size: 16px; }
 		.post:first-child { border-top: none; padding-top: 0; }
 		.post-permalink { font-size: 10px; color: #999;}
 		.post-permalink a { color: #999;}
-		.post h1 { font-weight: 200; font-size: 28px; }
+		.post h1 { font-weight: 200; font-size: 28px; margin-top: -5px;}
 
 		.deem { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; background: none; }
