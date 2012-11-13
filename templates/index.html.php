@@ -46,7 +46,7 @@
 					<?php echo $post['content'] ?>
 					<div class="post-permalink">
 
-						<a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo date('d M Y', strtotime($post['created_at'])); ?></a>
+						<a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></a>
 
 						<?php if (isset($_SESSION['user'])) : ?>
 							-
