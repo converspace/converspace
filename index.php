@@ -74,8 +74,11 @@
 		else
 		{
 			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 ORDER BY id DESC LIMIT 11');
-			if (count($md_posts) === 11) $pager['before'] = $md_posts[9]['id'];
-			array_pop($md_posts);
+			if (count($md_posts) === 11)
+			{
+				$pager['before'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
 		}
 
 
@@ -164,8 +167,11 @@
 		{
 			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.private = 0 ORDER BY p.id DESC LIMIT 11", array($channel_name));
 
-			if (count($md_posts) === 11) $pager['before'] = $md_posts[9]['id'];
-			array_pop($md_posts);
+			if (count($md_posts) === 11)
+			{
+				$pager['before'] = $md_posts[9]['id'];
+				array_pop($md_posts);
+			}
 		}
 
 
