@@ -1,6 +1,7 @@
 * Permalink display date formatting
 * Atom/RSS feed
 * PuSH Publisher
+* webmention or persona based commenting system?
 * Mark post as deleted (doing this directly in the db for now)
 * Private stream
 * fullscreen mode for writing posts
