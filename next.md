@@ -1,4 +1,3 @@
-* Permalink display date formatting
 * Atom/RSS feed
 * PuSH Publisher
 * webmention or persona based commenting system?
