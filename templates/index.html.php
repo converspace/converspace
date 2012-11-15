@@ -66,9 +66,13 @@
 			<ul class="pager">
 				<?php if (isset($pager['after'])): ?>
 				<li class="previous"><a href="?after=<?php echo $pager['after'] ?>">&larr; Newer</a></li>
+				<?php elseif (isset($post_neighbours['newer']['id'])): ?>
+				<li class="previous"><a href="<?php echo SITE_BASE_URL.'posts/'.$post_neighbours['newer']['id'] ?>">&larr; Newer</a></li>
 				<?php endif; ?>
 				<?php if (isset($pager['before'])): ?>
 				<li class="next"><a href="?before=<?php echo $pager['before'] ?>">Older &rarr;</a></li>
+				<?php elseif (isset($post_neighbours['older']['id'])): ?>
+				<li class="next"><a href="<?php echo SITE_BASE_URL.'posts/'.$post_neighbours['older']['id'] ?>">Older &rarr;</a></li>
 				<?php endif; ?>
 			</ul>
 

@@ -114,6 +114,9 @@
 		$post_edit = true;
 		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
 		$md_posts = mysql\rows("select * from posts where id = %d", array($req['matches']['post_id']));
+		$post_neighbours['older'] = mysql\row("select max(id) as id from posts where id < %d", array($req['matches']['post_id']));
+		$post_neighbours['newer'] = mysql\row("select min(id) as id from posts where id > %d", array($req['matches']['post_id']));
+
 
 		$posts = array();
 		foreach ($md_posts as $md_post)
@@ -130,7 +133,7 @@
 			$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
 		}
 
-		return template\compose('index.html', compact('channels', 'posts', 'post_edit'), 'layout.html');
+		return template\compose('index.html', compact('channels', 'posts', 'post_edit', 'post_neighbours'), 'layout.html');
 	});
 
 	app\get('/channels/[{channel}]', function($req) {
