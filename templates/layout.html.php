@@ -43,6 +43,7 @@
 		.channels .active, .channels .active:hover, .channels .active .deem, .channels .active:hover .deem { background-color: #FFF; color: #005580;}
 
 		.fluid-width-video-wrapper { margin-bottom: 20px; }
+		.pager { margin-top: 0px; margin-bottom: 30px; }
 
 	</style>
 
