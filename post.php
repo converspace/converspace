@@ -45,8 +45,7 @@
 			if (isset($req['form']['post']['id']))
 			{
 				$post_id = $req['form']['post']['id'];
-				//print_r($req['form']);exit;
-				mysql\query("UPDATE posts SET content = '%s', updated_at = '%s', private = %d WHERE id = %d", array($post_content, $now, $is_private, $post_id));
+				update_post($post_id, $post_content, $now, $is_private);
 				if (mysql\affected_rows() === 1)
 				{
 					$channels_to_delete = array();
@@ -60,25 +59,25 @@
 						else unset($post_channels[$key]);
 					}
 
-					if (!empty($channels_to_delete)) mysql\query("DELETE FROM channels WHERE post_id = %d and name in ('".implode("','", $channels_to_delete)."')", array($post_id));
+					if (!empty($channels_to_delete)) delete_post_channels($post_id, $channels_to_delete);
 
 					foreach($post_channels as $channel_name)
 					{
-						mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
+						add_post_channel($post_id, $channel_name, $now, $is_private);
 					}
 				}
 
 			}
 			else
 			{
-				mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post_content, $now, $now, $is_private));
+				add_post(($post_content, $now, $is_private)
 				if (mysql\affected_rows() === 1)
 				{
 					$post_id = mysql\insert_id();
 
 					foreach($post_channels as $channel_name)
 					{
-						mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
+						add_post_channel($post_id, $channel_name, $now, $is_private)
 					}
 
 					$_SESSION['alert']['msg'] = 'Post Saved!';
