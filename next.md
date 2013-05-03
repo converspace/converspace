@@ -1,4 +1,3 @@
-* Pagination for individual posts
 * Remove code duplication! There's only so much one can put up with!
 * Private stream
 * Atom/RSS feed
