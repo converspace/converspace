@@ -9,32 +9,13 @@
 	require __DIR__.'/vendor/phpish/template/template.php';
 	require __DIR__.'/vendor/michelf/php-markdown-extra/markdown.php';
 
-
 	use phpish\app;
 	use phpish\mysql;
 	use phpish\template;
 
 
 	require __DIR__.'/data.php';
-
-	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
-	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
-
-
-	function gravatar($email, $s=80, $d='mm', $r='g', $img=false, $atts=array())
-	{
-		$url = 'http://www.gravatar.com/avatar/';
-		$url .= md5(strtolower(trim($email)));
-		$url .= "?s=$s&d=$d&r=$r";
-		if ( $img )
-		{
-			$url = "<img src=\"$url\"";
-			foreach ($atts as $key=>$val) $url .= " $key=\"$val\"";
-			$url .= ' />';
-		}
-
-		return $url;
-	}
+	require __DIR__.'/helpers.php';
 
 
 	app\any('.*', function($req) {
@@ -91,8 +72,8 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
-			$content = preg_replace(TWITTER_USER_REGEX, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
+			$content = tag_syntax_filter($content);
+			$content = twitter_user_syntax_filter($content);
 
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
@@ -127,8 +108,8 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
-			$content = preg_replace(TWITTER_USER_REGEX, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
+			$content = tag_syntax_filter($content);
+			$content = twitter_user_syntax_filter($content);
 
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
@@ -187,8 +168,8 @@
 			if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
 			else $content = $md_post['content'];
 
-			$content = preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
-			$content = preg_replace(TWITTER_USER_REGEX, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
+			$content = tag_syntax_filter($content);
+			$content = twitter_user_syntax_filter($content);
 
 			if (!empty($title)) $content = "$title\n$content";
 			$content = Markdown($content);
@@ -197,11 +178,5 @@
 
 		return template\compose('index.html', compact('channel_name', 'channels', 'posts', 'pager'), 'layout.html');
 	});
-
-
-	function dopplr_color($str)
-	{
-		return substr(md5($str), 0, 6);
-	}
 
 ?>
