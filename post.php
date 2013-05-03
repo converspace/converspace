@@ -50,7 +50,7 @@
 				if (mysql\affected_rows() === 1)
 				{
 					$channels_to_delete = array();
-					$existing_channels_rows = mysql\rows('select name from channels where post_id = %d', array($post_id));
+					$existing_channels_rows = get_post_channels($post_id)
 					foreach ($existing_channels_rows as $existing_channel_row)
 					{
 						if (false === ($key = array_search($existing_channel_row['name'], $post_channels)))

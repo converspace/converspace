@@ -15,6 +15,8 @@
 	use phpish\template;
 
 
+	require __DIR__.'/data.php';
+
 	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
 	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
 
@@ -48,11 +50,11 @@
 		elseif (isset($req['query']['after'])) $after = intval($req['query']['after']);
 		$pager = array();
 
-		$channels = mysql\rows('SELECT name, count(*) as count FROM channels WHERE private = 0 GROUP BY name ORDER BY count DESC');
+		$channels = get_channels();
 
 		if (isset($before))
 		{
-			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 AND id < %d ORDER BY id DESC LIMIT 11', array($before));
+			$md_posts = get_posts_before($before);
 			if (count($md_posts) === 11)
 			{
 				$pager['before'] = $md_posts[9]['id'];
@@ -62,7 +64,7 @@
 		}
 		elseif (isset($after))
 		{
-			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 AND id > %d ORDER BY id ASC LIMIT 11', array($after));
+			$md_posts = get_posts_after($after);
 			if (count($md_posts) === 11)
 			{
 				$pager['after'] = $md_posts[9]['id'];
@@ -73,7 +75,7 @@
 		}
 		else
 		{
-			$md_posts = mysql\rows('SELECT * FROM posts WHERE private = 0 ORDER BY id DESC LIMIT 11');
+			$md_posts = get_posts();
 			if (count($md_posts) === 11)
 			{
 				$pager['before'] = $md_posts[9]['id'];
@@ -112,10 +114,10 @@
 	app\get('/posts/[{post_id}]', function($req) {
 
 		$post_edit = true;
-		$channels = mysql\rows('select name, count(*) as count from channels where private = 0 group by name order by count desc');
-		$md_posts = mysql\rows("select * from posts where id = %d", array($req['matches']['post_id']));
-		$post_neighbours['older'] = mysql\row("select max(id) as id from posts where id < %d", array($req['matches']['post_id']));
-		$post_neighbours['newer'] = mysql\row("select min(id) as id from posts where id > %d", array($req['matches']['post_id']));
+		$channels = get_channels();
+		$md_posts = get_post($req['matches']['post_id']);
+		$post_neighbours['older'] = get_older_post_id($req['matches']['post_id']);
+		$post_neighbours['newer'] = get_newer_post_id($req['matches']['post_id']);
 
 
 		$posts = array();
@@ -143,11 +145,11 @@
 		elseif (isset($req['query']['after'])) $after = intval($req['query']['after']);
 		$pager = array();
 
-		$channels = mysql\rows('SELECT name, count(*) as count FROM channels WHERE private = 0 GROUP BY name ORDER BY count DESC');
+		$channels = get_channels();
 
 		if (isset($before))
 		{
-			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.id < %d AND p.private = 0 ORDER BY id DESC LIMIT 11", array($channel_name, $before));
+			$md_posts = get_channel_posts_before($channel_name, $before);
 			if (count($md_posts) === 11)
 			{
 				$pager['before'] = $md_posts[9]['id'];
@@ -157,7 +159,7 @@
 		}
 		elseif (isset($after))
 		{
-			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.id > %d AND p.private = 0 ORDER BY id ASC LIMIT 11", array($channel_name, $after));
+			$md_posts = get_channel_posts_after($channel_name, $after);
 			if (count($md_posts) === 11)
 			{
 				$pager['after'] = $md_posts[9]['id'];
@@ -168,7 +170,7 @@
 		}
 		else
 		{
-			$md_posts = mysql\rows("SELECT p.id, p.content, p.created_at FROM posts p, channels c WHERE c.post_id = p.id AND c.name = '%s' AND p.private = 0 ORDER BY p.id DESC LIMIT 11", array($channel_name));
+			$md_posts = get_channel_posts($channel_name);
 
 			if (count($md_posts) === 11)
 			{
