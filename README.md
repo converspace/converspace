@@ -12,5 +12,8 @@ Personal publishing platform for social blogging. Kinda like what blogs should h
 * Like popular blogging software, is built on LAMP, the least common denominator platform, to facilitate mass-adoption of self-hosting.
 
 
-http://avc.blogs.com/a_vc/2007/12/social-blogging.html
-http://readwrite.com/2007/12/10/the_evolution_of_personal_publ
+
+## Stuff that's along the same lines
+
+* http://avc.blogs.com/a_vc/2007/12/social-blogging.html
+* http://readwrite.com/2007/12/10/the_evolution_of_personal_publ
