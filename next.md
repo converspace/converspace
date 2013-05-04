@@ -1,4 +1,4 @@
-* Remove code duplication! There's only so much one can put up with!
+* implement get_post()
 * Private stream
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)

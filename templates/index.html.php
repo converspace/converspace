@@ -1,4 +1,8 @@
+<?php
 
+	$channels = db_get_channels();
+
+?>
 	<div class="row" id="stream-content">
 		<div class="span9 content">
 
@@ -31,7 +35,7 @@
 			<?php endif; ?>
 
 
-			<?php if (isset($channel_name)): ?>
+			<?php if (!empty($channel_name)): ?>
 			<div class="infobox" >
 			<div class="alert alert-info">
 			Showing posts from the #<strong><?php echo $channel_name ?></strong> channel. <a href="<?php echo SITE_BASE_URL ?>">Show all posts</a>
@@ -81,10 +85,10 @@
 		<div class="span3 sidebar">
 
 			<ul class="unstyled channels">
-				<li style="border-left: 10px solid #<?php echo dopplr_color("Home") ?>;"><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (!isset($channel_name) and !isset($post_edit)) echo 'active' ?>"><!-- i class="icon-home <?php if (!isset($channel_name) and !isset($post_edit)) echo 'icon-white' ?>"></i --> Home</a></li>
+				<li style="border-left: 10px solid #<?php echo dopplr_color("Home") ?>;"><a href="<?php echo SITE_BASE_URL ?>" class="channel <?php if (empty($channel_name) and !isset($post_edit)) echo 'active' ?>"><!-- i class="icon-home <?php if (!isset($channel_name) and !isset($post_edit)) echo 'icon-white' ?>"></i --> Home</a></li>
 				<?php foreach ($channels as $channel): ?>
 
-					<?php if (isset($channel_name) and ($channel_name == $channel['name'])): ?>
+					<?php if (!empty($channel_name) and ($channel_name == $channel['name'])): ?>
 					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-chevron-left  icon-white"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
 					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
