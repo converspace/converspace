@@ -154,7 +154,7 @@
 	});
 
 
-	app\get('/[{channel}]', function($req) {
+	app\get('/[{channel}/]', function($req) {
 
 		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
 		list($posts, $pager) = get_posts($req, $channel_name);

@@ -54,11 +54,11 @@
 
 						<?php if (isset($_SESSION['user'])) : ?>
 							-
-							<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
+							<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
 							-
-							<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
+							<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
 							-
-							<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL."posts/{$post['id']}") ?>" target="_blank">Share on Google+</a>
+							<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
 
 						<?php endif; ?>
 
@@ -89,9 +89,9 @@
 
 				<?php foreach ($channels as $channel): ?>
 					<?php if (!empty($channel_name) and ($channel_name == $channel['name'])): ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL.$channel['name'] ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL.$channel['name'].'/' ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL.$channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL.$channel['name'].'/' ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</ul>

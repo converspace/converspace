@@ -84,7 +84,7 @@
 			function tag_syntax_filter($content)
 			{
 				$tag_regex = '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms';
-				return preg_replace($tag_regex, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'channels/$3" rel="tag">$3</a>', $content);
+				return preg_replace($tag_regex, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
 			}
 
 
