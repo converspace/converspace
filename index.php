@@ -19,7 +19,7 @@
 
 	require __DIR__.'/data.php';
 	require __DIR__.'/helpers.php';
-	require __DIR__.'/posts.php';
+	require __DIR__.'/models/posts.php';
 
 
 	app\any('.*', function($req) {
@@ -29,23 +29,19 @@
 	});
 
 
-	app\get('/[channels/[{channel}]]', function($req) {
+	app\get('/[channels/{channel}]', function($req) {
 
-		list($posts, $pager, $channel_name) = get_posts($req);
+		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
+		list($posts, $pager) = get_posts($req, $channel_name);
 		return template\compose('index.html', compact('posts', 'pager', 'channel_name'), 'layout.html');
 	});
 
 
-# TODO: look at AtomPub?
+	app\get('/posts/{post_id}', function($req) {
 
-	app\get('/posts/[{post_id}]', function($req) {
-
-		$post_edit = true;
-		$md_posts = db_get_post($req['matches']['post_id']);
-		$post_neighbours['older'] = db_get_older_post_id($req['matches']['post_id']);
-		$post_neighbours['newer'] = db_get_newer_post_id($req['matches']['post_id']);
-		$posts = prepare_posts($md_posts);
-		return template\compose('index.html', compact('posts', 'post_edit', 'post_neighbours'), 'layout.html');
+		$individual_post = true;
+		list($posts, $pager) = get_post($req['matches']['post_id']);
+		return template\compose('index.html', compact('posts', 'pager', 'individual_post'), 'layout.html');
 	});
 
 

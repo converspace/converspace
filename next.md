@@ -1,4 +1,4 @@
-* implement get_post()
+* Rethink URI space
 * Private stream
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)

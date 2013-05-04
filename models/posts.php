@@ -1,8 +1,22 @@
 <?php
 
-	function get_posts($req)
+
+	function get_post($post_id)
 	{
-		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
+		$pager = array();
+		$md_posts = db_get_post($post_id);
+		$posts = prepare_posts($md_posts);
+
+		$older_post = db_get_older_post_id($post_id);
+		if (isset($older_post['id'])) $pager['before'] = $older_post['id'];
+		$newer_post = db_get_newer_post_id($post_id);
+		if (isset($newer_post['id'])) $pager['after'] = $newer_post['id'];
+
+		return array($posts, $pager);
+	}
+
+	function get_posts($req, $channel_name)
+	{
 		$pager = array();
 		$more_posts = array();
 		list($direction, $from_post_id) = direction_and_from_post_id($req['query']);
@@ -12,7 +26,7 @@
 		if (!is_homepage($from_post_id)) $pager[opp_direction($direction)] = $md_posts[0]['id'];
 		if ('after' == $direction) $md_posts = array_reverse($md_posts);
 		$posts = prepare_posts($md_posts);
-		return array($posts, $pager, $channel_name);
+		return array($posts, $pager);
 	}
 
 		function direction_and_from_post_id($query)
