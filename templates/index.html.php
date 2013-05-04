@@ -50,7 +50,7 @@
 					<?php echo $post['content'] ?>
 					<div class="post-permalink">
 
-						<a href="<?php echo SITE_BASE_URL ?>posts/<?php echo $post['id'] ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></a>
+						<a href="<?php echo SITE_BASE_URL.$post['id'] ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></a>
 
 						<?php if (isset($_SESSION['user'])) : ?>
 							-
@@ -71,12 +71,12 @@
 				<?php if (!isset($individual_post) and isset($pager['after'])): ?>
 				<li class="previous"><a href="?after=<?php echo $pager['after'] ?>">&larr; Newer</a></li>
 				<?php elseif (isset($pager['after'])): ?>
-				<li class="previous"><a href="<?php echo SITE_BASE_URL.'posts/'.$pager['after'] ?>">&larr; Newer</a></li>
+				<li class="previous"><a href="<?php echo SITE_BASE_URL.$pager['after'] ?>">&larr; Newer</a></li>
 				<?php endif; ?>
 				<?php if (!isset($individual_post) and isset($pager['before'])): ?>
 				<li class="next"><a href="?before=<?php echo $pager['before'] ?>">Older &rarr;</a></li>
 				<?php elseif (isset($pager['before'])): ?>
-				<li class="next"><a href="<?php echo SITE_BASE_URL.'posts/'.$pager['before'] ?>">Older &rarr;</a></li>
+				<li class="next"><a href="<?php echo SITE_BASE_URL.$pager['before'] ?>">Older &rarr;</a></li>
 				<?php endif; ?>
 			</ul>
 
@@ -89,9 +89,9 @@
 
 				<?php foreach ($channels as $channel): ?>
 					<?php if (!empty($channel_name) and ($channel_name == $channel['name'])): ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel active" href="<?php echo SITE_BASE_URL.$channel['name'] ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php else: ?>
-					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL ?>channels/<?php echo $channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
+					<li style="border-left: 10px solid #<?php echo dopplr_color($channel['name']) ?>;"><a class="channel" href="<?php echo SITE_BASE_URL.$channel['name'] ?>"><!-- i class="icon-tag"></i --> <span class="deem">#</span><?php echo $channel['name'] ?></a></li>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</ul>

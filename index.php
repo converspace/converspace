@@ -29,21 +29,6 @@
 	});
 
 
-	app\get('/[channels/{channel}]', function($req) {
-
-		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
-		list($posts, $pager) = get_posts($req, $channel_name);
-		return template\compose('index.html', compact('posts', 'pager', 'channel_name'), 'layout.html');
-	});
-
-
-	app\get('/posts/{post_id}', function($req) {
-
-		$individual_post = true;
-		list($posts, $pager) = get_post($req['matches']['post_id']);
-		return template\compose('index.html', compact('posts', 'pager', 'individual_post'), 'layout.html');
-	});
-
 
 	app\post('/post', function($req) {
 
@@ -158,6 +143,22 @@
 				else error_log('Somebody logged in.');
 			}
 		}
+	});
+
+
+	app\get('/{post_id:digits}', function($req) {
+
+		$individual_post = true;
+		list($posts, $pager) = get_post($req['matches']['post_id']);
+		return template\compose('index.html', compact('posts', 'pager', 'individual_post'), 'layout.html');
+	});
+
+
+	app\get('/[{channel}]', function($req) {
+
+		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
+		list($posts, $pager) = get_posts($req, $channel_name);
+		return template\compose('index.html', compact('posts', 'pager', 'channel_name'), 'layout.html');
 	});
 
 ?>
