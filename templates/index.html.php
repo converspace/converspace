@@ -33,6 +33,7 @@
 			<?php endif; ?>
 
 
+			<?php if ($posts) : ?>
 			<?php if (!empty($channel_name)): ?>
 			<div class="infobox" >
 			<div class="alert alert-info">
@@ -40,9 +41,11 @@
 			</div>
 			</div>
 			<?php endif; ?>
+			<?php endif; ?>
 
 
 			<div class="posts">
+				<?php if ($posts) : ?>
 				<?php foreach ($posts as $post): ?>
 				<div class="post">
 					<?php echo $post['content'] ?>
@@ -63,8 +66,10 @@
 					</div>
 				</div>
 				<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
 
+			<?php if ($posts) : ?>
 			<ul class="pager">
 				<?php if (!isset($individual_post) and isset($pager['after'])): ?>
 				<li class="previous"><a href="?after=<?php echo $pager['after'] ?>">&larr; Newer</a></li>
@@ -77,6 +82,7 @@
 				<li class="next"><a href="<?php echo SITE_BASE_URL.$pager['before'] ?>">Older &rarr;</a></li>
 				<?php endif; ?>
 			</ul>
+			<?php endif; ?>
 
 		</div>
 
