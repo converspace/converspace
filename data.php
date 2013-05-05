@@ -50,6 +50,16 @@
 		return mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post_content, $now, $now, $is_private));
 	}
 
+	function db_is_successfully_added()
+	{
+		return (mysql\affected_rows() === 1);
+	}
+
+	function db_insert_id()
+	{
+		return mysql\insert_id();
+	}
+
 	function db_update_post($post_id, $post_content, $now, $is_private)
 	{
 		return mysql\query("UPDATE posts SET content = '%s', updated_at = '%s', private = %d WHERE id = %d", array($post_content, $now, $is_private, $post_id));

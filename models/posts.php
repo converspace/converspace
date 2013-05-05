@@ -1,5 +1,73 @@
 <?php
 
+	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
+	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
+
+
+	function extract_tags_from_post($content)
+	{
+		preg_match_all(TAG_REGEX, $content, $matches);
+		return $matches[3];
+	}
+
+
+	function extract_title_and_body_from_post($md_content)
+	{
+		$title = $body = '';
+		if (substr($md_content, 0, 2) == '# ') list($title, $body) = preg_split('/\n/', $md_content, 2);
+		else $body = $md_content;
+		return compact('title', 'body');
+	}
+
+
+	function add_post($post_content, $now, $is_private, $post_channels)
+	{
+		db_add_post($post_content, $now, $is_private);
+		if (db_is_successfully_added())
+		{
+			$post_id = db_insert_id();
+
+			foreach($post_channels as $channel_name)
+			{
+				db_add_post_channel($post_id, $channel_name, $now, $is_private);
+			}
+
+			session_alert('success', 'Post Saved!');
+			return $post_id;
+		}
+		else
+		{
+			error_log('Error while saving post: '.mysql\error());
+			session_alert('error', 'Sorry! Error while saving post!');
+		}
+	}
+
+
+	function update_post($post_id, $post_content, $now, $is_private, $post_channels)
+	{
+		db_update_post($post_id, $post_content, $now, $is_private);
+		if (mysql\affected_rows() === 1)
+		{
+			$channels_to_delete = array();
+			$existing_channels_rows = db_get_post_channels($post_id);
+			foreach ($existing_channels_rows as $existing_channel_row)
+			{
+				if (false === ($key = array_search($existing_channel_row['name'], $post_channels)))
+				{
+					$channels_to_delete[] = $existing_channel_row['name'];
+				}
+				else unset($post_channels[$key]);
+			}
+
+			if (!empty($channels_to_delete)) delete_post_channels($post_id, $channels_to_delete);
+
+			foreach($post_channels as $channel_name)
+			{
+				db_add_post_channel($post_id, $channel_name, $now, $is_private);
+			}
+		}
+	}
+
 
 	function get_post($post_id)
 	{
@@ -66,16 +134,11 @@
 			$posts = array();
 			foreach ($md_posts as $md_post)
 			{
-				$content = $title = '';
-				if (substr($md_post['content'], 0, 2) == '# ') list($title, $content) = preg_split('/\n/', $md_post['content'], 2);
-				else $content = $md_post['content'];
-
-				$content = tag_syntax_filter($content);
-				$content = twitter_user_syntax_filter($content);
-
-				if (!empty($title)) $content = "$title\n$content";
-				$content = Markdown($content);
-				$posts[] = array('title'=>$title, 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'title'=>$title);
+				$post = extract_title_and_body_from_post($md_post['content']);
+				$post['body'] = tag_syntax_filter($post['body']);
+				$post['body'] = twitter_user_syntax_filter($post['body']);
+				$content = Markdown(implode("\n", $post));
+				$posts[] = array('title'=>$post['title'], 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at']);
 			}
 
 			return $posts;
@@ -83,15 +146,13 @@
 
 			function tag_syntax_filter($content)
 			{
-				$tag_regex = '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms';
-				return preg_replace($tag_regex, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
+				return preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
 			}
 
 
 			function twitter_user_syntax_filter($content)
 			{
-				$twitter_user_regex = '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms';
-				return preg_replace($twitter_user_regex, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
+				return preg_replace(TWITTER_USER_REGEX, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
 			}
 
 ?>
