@@ -1,4 +1,4 @@
-* Private stream
+* Show private posts and channels to logged in user.
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)
 * Atom/RSS feed
