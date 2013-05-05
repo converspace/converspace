@@ -27,8 +27,11 @@
 
 		if (is_null($type) and is_null($msg))
 		{
-			$alert = array('type'=>$_SESSION['alert']['type'], 'msg'=>$_SESSION['alert']['msg']);
-			unset($_SESSION['alert']);
+			if (isset($_SESSION['alert']) and !empty($_SESSION['alert']))
+			{
+				$alert = array('type'=>$_SESSION['alert']['type'], 'msg'=>$_SESSION['alert']['msg'], 'sess'=>$_SESSION);
+				unset($_SESSION['alert']);
+			}
 		}
 		else
 		{
