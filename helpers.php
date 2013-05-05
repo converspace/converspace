@@ -21,4 +21,22 @@
 		return substr(md5($str), 0, 6);
 	}
 
+	function session_alert($type=NULL, $msg=NULL)
+	{
+		$alert = array();
+
+		if (is_null($type) and is_null($msg))
+		{
+			$alert = array('type'=>$_SESSION['alert']['type'], 'msg'=>$_SESSION['alert']['msg']);
+			unset($_SESSION['alert']);
+		}
+		else
+		{
+			$alert = array('type'=>$type, 'msg'=>$msg);
+			$_SESSION['alert'] = $alert;
+		}
+
+		return $alert;
+	}
+
 ?>

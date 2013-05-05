@@ -6,13 +6,12 @@
 	<div class="row" id="stream-content">
 		<div class="span9 content">
 
-			<?php if (!empty($_SESSION['alert'])) : ?>
+			<?php if ($alert = session_alert()) : ?>
 			<div class="infobox">
-			<div class="alert alert-<?php echo $_SESSION['alert']['type'] ?>">
-				<?php echo $_SESSION['alert']['msg'] ?>
+			<div class="alert alert-<?php echo $alert['type'] ?>">
+				<?php echo $alert['msg'] ?>
 			</div>
 			</div>
-			<?php unset($_SESSION['alert']) ?>
 			<?php endif; ?>
 
 			<?php if (isset($_SESSION['user'])) : ?>

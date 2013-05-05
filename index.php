@@ -29,16 +29,39 @@
 	});
 
 
+	app\post('/signout', function() {
+
+		unset($_SESSION['persona'], $_SESSION['user']);
+		session_destroy();
+	});
+
+
+	app\post('/persona-verifier', function($req) {
+
+		if (isset($req['form']['assertion']))
+		{
+			$response = http\request(
+				"POST https://verifier.login.persona.org/verify",
+				'',
+				//TODO: Remove hardcoded audience 127.0.0.1
+				array('assertion'=>$req['form']['assertion'], 'audience'=>PERSONA_AUDIENCE)
+			);
+
+			if ('okay' == $response['status'])
+			{
+				$_SESSION['persona'] = $response;
+				if (USER_EMAIL == $response['email']) $_SESSION['user'] = $response;
+				else error_log('Somebody logged in.');
+			}
+		}
+	});
+
 
 	app\post('/post', function($req) {
 
-		$_SESSION['alert'] = array();
-
 		if (!isset($_SESSION['user']))
 		{
-			$_SESSION['alert']['msg'] = 'You are not authorized to post.';
-			$_SESSION['alert']['type'] = 'error';
-
+			session_alert('error', 'You are not authorized to post.');
 			return app\response_302(SITE_BASE_URL);
 		}
 		else return app\next($req);
@@ -101,48 +124,18 @@
 						db_add_post_channel($post_id, $channel_name, $now, $is_private);
 					}
 
-					$_SESSION['alert']['msg'] = 'Post Saved!';
-					$_SESSION['alert']['type'] = 'success';
+					session_alert('success', 'Post Saved!');
 				}
 				else
 				{
 					error_log('Error while saving post: '.mysql\error());
-					$_SESSION['alert']['msg'] = 'Sorry! Error while saving post! ';
-					$_SESSION['alert']['type'] = 'error';
+					session_alert('error', 'Sorry! Error while saving post!');
 				}
 			}
 		}
 
-		return app\response_302(SITE_BASE_URL);
+		return app\response_302(SITE_BASE_URL.$post_id);
 
-	});
-
-
-	app\post('/signout', function() {
-
-		unset($_SESSION['persona'], $_SESSION['user']);
-		session_destroy();
-	});
-
-
-	app\post('/persona-verifier', function($req) {
-
-		if (isset($req['form']['assertion']))
-		{
-			$response = http\request(
-				"POST https://verifier.login.persona.org/verify",
-				'',
-				//TODO: Remove hardcoded audience 127.0.0.1
-				array('assertion'=>$req['form']['assertion'], 'audience'=>PERSONA_AUDIENCE)
-			);
-
-			if ('okay' == $response['status'])
-			{
-				$_SESSION['persona'] = $response;
-				if (USER_EMAIL == $response['email']) $_SESSION['user'] = $response;
-				else error_log('Somebody logged in.');
-			}
-		}
 	});
 
 
