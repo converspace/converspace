@@ -25,8 +25,7 @@
 					<button type="submit" class="btn pull-right">Update</button>
 				<?php else: ?>
 					<textarea class="span9" rows="4" name="post[content]" placeholder="What's on your mind?"></textarea>
-					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
-					<button type="submit" class="btn pull-right">Post</button>
+					<div class="clearfix"><button type="submit" class="btn pull-right">Post</button></div>
 				<?php endif; ?>
 				</form>
 				</div>

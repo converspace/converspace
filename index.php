@@ -75,11 +75,10 @@
 
 		if (!empty($post_content))
 		{
-			$is_private = isset($req['form']['private']) ? 1 : 0;
 			$now = date('Y-m-d H:i:s');
 			$post = extract_title_and_body_from_post($post_content);
 			$post_channels = extract_tags_from_post($post['body']);
-
+			$is_private = in_array('private', $post_channels) ? 1 : 0;
 
 			if (isset($req['form']['post']['id']))
 			{
