@@ -1,4 +1,5 @@
-* Show private posts and channels to logged in user.
+* 404 handling for individual post
+* Allow public posts with private tags?
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)
 * Atom/RSS feed

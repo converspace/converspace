@@ -67,14 +67,6 @@
 
 		<?php if (isset($_SESSION['persona'])) : ?>
 
-			<?php if (isset($_SESSION['user'])) : ?>
-			<ul class="nav">
-				<li class="active"><a href="<?php echo SITE_BASE_URL ?>">Public</a></li>
-				<li><a href="#private">Private</a></li>
-			</ul>
-			<?php endif; ?>
-
-
 			<script>
 				var $loggedInUser = "<?php echo $_SESSION['persona']['email'] ?>";
 			</script>

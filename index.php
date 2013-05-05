@@ -25,7 +25,8 @@
 	app\any('.*', function($req) {
 		session_start();
 		mysql\connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE_NAME);
-		return app\next($req);
+		$authorized = isset($_SESSION['user']);
+		return app\next($req, $authorized);
 	});
 
 
@@ -96,19 +97,19 @@
 	});
 
 
-	app\get('/{post_id:digits}', function($req) {
+	app\get('/{post_id:digits}', function($req, $authorized=false) {
 
 		$individual_post = true;
-		list($posts, $pager) = get_post($req['matches']['post_id']);
-		return template\compose('index.html', compact('posts', 'pager', 'individual_post'), 'layout.html');
+		list($posts, $pager) = get_post($req['matches']['post_id'], $authorized);
+		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post'), 'layout.html');
 	});
 
 
-	app\get('/[{channel}/]', function($req) {
+	app\get('/[{channel}/]', function($req, $authorized=false) {
 
 		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
-		list($posts, $pager) = get_posts($req, $channel_name);
-		return template\compose('index.html', compact('posts', 'pager', 'channel_name'), 'layout.html');
+		list($posts, $pager) = get_posts($req, $channel_name, $authorized);
+		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'channel_name'), 'layout.html');
 	});
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-	$channels = db_get_channels();
+	$channels = db_get_channels($authorized);
 
 ?>
 	<div class="row" id="stream-content">

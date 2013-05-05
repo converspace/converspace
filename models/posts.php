@@ -69,26 +69,26 @@
 	}
 
 
-	function get_post($post_id)
+	function get_post($post_id, $authorized)
 	{
 		$pager = array();
-		$md_posts = db_get_post($post_id);
+		$md_posts = db_get_post($post_id, $authorized);
 		$posts = prepare_posts($md_posts);
 
-		$older_post = db_get_older_post_id($post_id);
+		$older_post = db_get_older_post_id($post_id, $authorized);
 		if (isset($older_post['id'])) $pager['before'] = $older_post['id'];
-		$newer_post = db_get_newer_post_id($post_id);
+		$newer_post = db_get_newer_post_id($post_id, $authorized);
 		if (isset($newer_post['id'])) $pager['after'] = $newer_post['id'];
 
 		return array($posts, $pager);
 	}
 
-	function get_posts($req, $channel_name)
+	function get_posts($req, $channel_name, $authorized)
 	{
 		$pager = array();
 		$more_posts = array();
 		list($direction, $from_post_id) = direction_and_from_post_id($req['query']);
-		$md_posts = empty($channel_name) ? db_get_posts($direction, $from_post_id) : db_get_channel_posts($channel_name, $direction, $from_post_id);
+		$md_posts = empty($channel_name) ? db_get_posts($direction, $from_post_id, $authorized) : db_get_channel_posts($channel_name, $direction, $from_post_id, $authorized);
 		if (count($md_posts) === 11) $more_posts = array_pop($md_posts);
 		if ($more_posts) $pager[$direction] = $md_posts[9]['id'];
 		if (!is_homepage($from_post_id)) $pager[opp_direction($direction)] = $md_posts[0]['id'];
