@@ -22,6 +22,16 @@
 	require __DIR__.'/models/posts.php';
 
 
+	// Cool URIs don't change
+		app\get('/posts/{post_id:digits}', function($req) {
+			return app\response_302(SITE_BASE_URL.$req['matches']['post_id']);
+		});
+
+		app\get('/channels/{channel}', function($req) {
+			return app\response_302(SITE_BASE_URL.$req['matches']['channel'].'/');
+		});
+
+
 	app\any('.*', function($req) {
 		session_start();
 		mysql\connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE_NAME);
