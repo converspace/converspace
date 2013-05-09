@@ -2,6 +2,7 @@
 
 	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
 	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
+	define('TRAILING_TAGS_REGEX', '/\n\n  ([^\n]*)$/s');
 
 
 	function extract_tags_from_post($content)
@@ -135,6 +136,9 @@
 			foreach ($md_posts as $md_post)
 			{
 				$post = extract_title_and_body_from_post($md_post['content']);
+				$post['body'] = strip_empty_lines($post['body']);
+				$post['body'] = normalize_line_ending($post['body']);
+				$post['body'] = trailing_tags_filter($post['body']);
 				$post['body'] = tag_syntax_filter($post['body']);
 				$post['body'] = twitter_user_syntax_filter($post['body']);
 				$content = Markdown(implode("\n", $post));
@@ -144,15 +148,29 @@
 			return $posts;
 		}
 
+			function normalize_line_ending($content)
+			{
+				return preg_replace('/\r\n?/', "\n", $content);
+			}
+
+			function strip_empty_lines($content)
+			{
+				return preg_replace('/^[ \t]+$/m', '', $content);
+			}
+
 			function tag_syntax_filter($content)
 			{
 				return preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
 			}
 
-
 			function twitter_user_syntax_filter($content)
 			{
 				return preg_replace(TWITTER_USER_REGEX, '$1<span class="deem">@</span><a href="https://twitter.com/$3">$3</a>', $content);
+			}
+
+			function trailing_tags_filter($content)
+			{
+				return preg_replace(TRAILING_TAGS_REGEX, "\n\n  <div class=\"additional_tags\">\n$1\n</div>", $content);
 			}
 
 ?>

@@ -1,6 +1,7 @@
-* Allow public posts with private tags?
+* Trailing tags filter
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)
+* Show post counts for tags
 * Atom/RSS feed
 * PuSH Publisher
 * webmention or persona based commenting system?

@@ -45,6 +45,9 @@
 		.fluid-width-video-wrapper { margin-bottom: 20px; }
 		.pager { margin-top: 0px; margin-bottom: 30px; }
 
+		.additional_tags  { font-size: 14px; color: #999; }
+		.additional_tags a, .additional_tags .deem {  color: #999; }
+
 	</style>
 
 </head>
