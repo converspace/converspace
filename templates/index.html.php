@@ -20,9 +20,8 @@
 				<form method="post" action="<?php echo SITE_BASE_URL ?>post">
 				<?php if (isset($individual_post)) : ?>
 					<textarea class="span9" rows="4" name="post[content]" placeholder="What's on your mind?"><?php if (isset($individual_post)) echo $posts[0]['raw'] ?></textarea>
-					<label class="checkbox inline"><input type="checkbox" name="private" value="1"> Private</label>
 					<input type="hidden" name="post[id]" value="<?php echo $posts[0]['id'] ?>">
-					<button type="submit" class="btn pull-right">Update</button>
+					<div class="clearfix"><button type="submit" class="btn pull-right">Update</button></div>
 				<?php else: ?>
 					<textarea class="span9" rows="4" name="post[content]" placeholder="What's on your mind?"></textarea>
 					<div class="clearfix"><button type="submit" class="btn pull-right">Post</button></div>
