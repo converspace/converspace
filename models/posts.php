@@ -24,7 +24,7 @@
 	function add_post($post_content, $now, $is_private, $post_channels)
 	{
 		db_add_post($post_content, $now, $is_private);
-		if (db_is_successfully_added())
+		if (db_one_row_affected())
 		{
 			$post_id = db_insert_id();
 
@@ -47,7 +47,7 @@
 	function update_post($post_id, $post_content, $now, $is_private, $post_channels)
 	{
 		db_update_post($post_id, $post_content, $now, $is_private);
-		if (mysql\affected_rows() === 1)
+		if (db_one_row_affected())
 		{
 			$channels_to_delete = array();
 			$existing_channels_rows = db_get_post_channels($post_id);

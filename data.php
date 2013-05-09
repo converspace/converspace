@@ -76,7 +76,7 @@
 		return mysql\query("INSERT INTO posts (content, created_at, updated_at, private) VALUES ('%s', '%s', '%s', %d)", array($post_content, $now, $now, $is_private));
 	}
 
-	function db_is_successfully_added()
+	function db_one_row_affected()
 	{
 		return (mysql\affected_rows() === 1);
 	}
