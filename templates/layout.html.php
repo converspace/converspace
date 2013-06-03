@@ -31,6 +31,7 @@
 		.post-permalink, .post-actions { font-size: 10px; color: #999;}
 		.post-permalink a, .post-actions a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; margin-top: -5px;}
+		.post-content {padding-top: 6px;}
 
 		.deem { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; background: none; }
@@ -97,13 +98,13 @@
 		<!-- div class="span12">
 			<div class="row" -->
 				<div class="span9">
-					<div class="author">
+					<div class="author h-card">
 						<div class="media">
 							<a class="pull-left" href="<?php echo SITE_BASE_URL ?>channels/about">
-								<?php echo gravatar(USER_EMAIL, 420, 'mm', 'g', true, array('class'=>'media-object img-polaroid', "width"=>80)) ?>
+								<img src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid u-photo" width="80" />
 							</a>
 							<div class="media-body">
-								<h1 class="author-name media-heading"><?php echo USER_NAME ?></h1>
+								<h1 class="author-name media-heading p-name"><?php echo USER_NAME ?></h1>
 								<?php echo Markdown(USER_BIO) ?>
 							</div>
 						</div>
