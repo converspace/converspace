@@ -160,7 +160,7 @@
 
 			function tag_syntax_filter($content)
 			{
-				return preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
+				return preg_replace(TAG_REGEX, '$1<span class="deem">#</span><a class="p-category" href="'.SITE_BASE_URL.'$3/" rel="tag">$3</a>', $content);
 			}
 
 			function twitter_user_syntax_filter($content)
