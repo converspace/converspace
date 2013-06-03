@@ -47,13 +47,13 @@
 				<?php if ($posts) : ?>
 				<?php foreach ($posts as $post): ?>
 					<div class="media post h-entry">
-						<a class="pull-left" href="#">
-						<img src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" />
+						<a class="pull-left p-author h-card" href="<?php echo SITE_BASE_URL ?>">
+						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" />
 						</a>
 						<div class="media-body">
-							<div class="post-permalink"><a class="pull-right u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></a></div>
+							<div class="post-permalink"><a class="pull-right u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date('Y-m-d', strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a></div>
 							<h4 class="media-heading"><?php echo USER_NAME ?></h4>
-							<div class="post-content e-content"><?php echo $post['content'] ?></div>
+							<div class="post-content e-content p-name p-summary"><?php echo $post['content'] ?></div>
 							<div class="post-actions">
 
 								<?php if (isset($_SESSION['user'])) : ?>

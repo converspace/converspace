@@ -100,7 +100,7 @@
 				<div class="span9">
 					<div class="author h-card">
 						<div class="media">
-							<a class="pull-left" href="<?php echo SITE_BASE_URL ?>channels/about">
+							<a class="pull-left u-url" href="<?php echo SITE_BASE_URL ?>">
 								<img src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid u-photo" width="80" />
 							</a>
 							<div class="media-body">
