@@ -107,6 +107,14 @@
 	});
 
 
+	app\any('/{post_id:digits}', function($req, $authorized=false) {
+		$response =  app\next($req, $authorized);
+		return app\response($response, 200, array
+		(
+			"Link"=>'<http://'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"'
+		));
+	});
+
 	app\get('/{post_id:digits}', function($req, $authorized=false) {
 
 		$individual_post = true;
