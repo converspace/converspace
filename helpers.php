@@ -8,7 +8,7 @@
 		$response_headers = $matches = array();
 		$target_webmention_endpoint = false;
 		$response_body = http\request("GET $target", array(), array(), $response_headers);
-		if (isset($response_headers['link']) and preg_match('#<(httpds?://[^>]+)>; rel="http://webmention.org/"#', $response_headers['link'], $matches))
+		if (isset($response_headers['link']) and preg_match('#<(https?://[^>]+)>; rel="http://webmention.org/"#', $response_headers['link'], $matches))
 		{
 			$target_webmention_endpoint = $matches[1];
 		}
