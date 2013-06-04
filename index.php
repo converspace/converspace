@@ -107,6 +107,12 @@
 	});
 
 
+	// test with curl -d "source=foo.com&target=bar.com" <webmention-endpoint>
+	app\post('/webmention', function($req) {
+		return "Coming soon";
+	});
+
+	// test with curl -I <URL>
 	app\any('/{post_id:digits}', function($req, $authorized=false) {
 		$response =  app\next($req, $authorized);
 		return app\response($response, 200, array
