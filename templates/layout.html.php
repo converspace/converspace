@@ -9,6 +9,9 @@
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="<?php echo SITE_BASE_URL ?>assets/css/persona-buttons.css" rel="stylesheet">
+	<?php if (isset($individual_post)) : ?>
+	<link href="<?php echo SITE_BASE_URL.'webmention' ?>" rel="http://webmention.org/" />
+	<?php endif; ?>
 	<style>
 
 
