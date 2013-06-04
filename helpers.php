@@ -1,5 +1,31 @@
 <?php
 
+	use phpish\http;
+
+
+	function send_webmention($source, $target)
+	{
+		$response_headers = $matches = array();
+		$target_webmention_endpoint = false;
+		$response_body = http\request("GET $target", array(), array(), $response_headers);
+		if (isset($response_headers['link']) and preg_match('#<(httpds?://[^>]+)>; rel="http://webmention.org/"#', $response_headers['link'], $matches))
+		{
+			$target_webmention_endpoint = $matches[1];
+		}
+		elseif (preg_match('#<link href="([^"]+)" rel="http://webmention.org/" ?/?>#i', $response_body, $matches))
+		{
+			$target_webmention_endpoint = $matches[1];
+		}
+
+		if ($target_webmention_endpoint)
+		{
+			$response_body = http\request("POST $target_webmention_endpoint", array(), array('source'=>$source, 'target'=>$target), $response_headers);
+			print_r($response_headers);
+			print_r($response_body);
+		}
+
+	}
+
 	function gravatar_url($email, $s=80, $d='mm', $r='g', $img=false)
 	{
 		$url = 'http://www.gravatar.com/avatar/';

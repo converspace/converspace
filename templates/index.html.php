@@ -62,6 +62,8 @@
 									<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
 									-
 									<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
+									-
+									<a href="<?php echo SITE_BASE_URL ?>send-webmention/<?php echo $post['id'] ?>" target="_blank">Send WebMentions</a>
 								<?php endif; ?>
 
 							</div>

@@ -68,7 +68,7 @@
 	});
 
 
-	app\post('/post', function($req) {
+	app\post(array('/post', '/send-webmention'), function($req) {
 
 		if (!isset($_SESSION['user']))
 		{
@@ -107,18 +107,43 @@
 	});
 
 
+	app\post('/send-webmention', function($req) {
+		foreach ($req['form']['targets'] as $target) send_webmention($req['form']['source'], $target);
+	});
+
+
+	app\get('/send-webmention/{post_id:digits}', function($req) {
+		$post_id = $req['matches']['post_id'];
+		list($posts, $pager) = get_post($post_id, true);
+		$post = $posts[0];
+		$dom = new DOMDocument;
+		@$dom->loadHTML($post['content']);
+		$links = $dom->getElementsByTagName('a');
+		echo '<form method="post" action="'.SITE_BASE_URL.'send-webmention">';
+		echo '<input type="hidden" name="source" value="'.SITE_BASE_URL.$post_id.'">';
+		foreach ($links as $link){
+			$link_href = $link->getAttribute('href');
+			echo '<input type="checkbox" name="targets[]" value="'.$link_href.'">'.$link_href.'<br>';
+		}
+		echo '<input type="submit" name="action" value="Send WebMentions">';
+		echo '</form>';
+	});
+
+
 	// test with curl -d "source=foo.com&target=bar.com" <webmention-endpoint>
 	app\post('/webmention', function($req) {
 		// Figure out post_id of target
 		// Save to db
+		return app\response(array('result'=>'WebMention was successful'), 202);
 	});
+
 
 	// test with curl -I <URL>
 	app\any('/{post_id:digits}', function($req, $authorized=false) {
 		$response =  app\next($req, $authorized);
 		return app\response($response, 200, array
 		(
-			"Link"=>'<http://'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"'
+			"Link"=>'<'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"'
 		));
 	});
 
