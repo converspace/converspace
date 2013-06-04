@@ -109,7 +109,8 @@
 
 	// test with curl -d "source=foo.com&target=bar.com" <webmention-endpoint>
 	app\post('/webmention', function($req) {
-		return "Coming soon";
+		// Figure out post_id of target
+		// Save to db
 	});
 
 	// test with curl -I <URL>
