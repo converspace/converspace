@@ -52,19 +52,19 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpish/http",
-                "reference": "535f516f45685b675d21932b84b5e0897f5cc022"
+                "url": "https://github.com/phpish/http.git",
+                "reference": "1b8345b343422f8387a173656d71d4bf307ab85f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/http/archive/535f516f45685b675d21932b84b5e0897f5cc022.zip",
-                "reference": "535f516f45685b675d21932b84b5e0897f5cc022",
+                "url": "https://api.github.com/repos/phpish/http/zipball/1b8345b343422f8387a173656d71d4bf307ab85f",
+                "reference": "1b8345b343422f8387a173656d71d4bf307ab85f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1352102100",
+            "time": "1357508732",
             "type": "library",
             "installation-source": "source",
             "license": [
