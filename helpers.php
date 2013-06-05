@@ -12,7 +12,7 @@
 		{
 			$target_webmention_endpoint = $matches[1];
 		}
-		elseif (preg_match('#<link href="([^"]+)" rel="http://webmention.org/" ?/?>#i', $response_body, $matches))
+		elseif (preg_match('#<link href="([^"]+)" rel="http://webmention.org/" ?/?>#i', $response_body, $matches) or preg_match('#<link rel="http://webmention.org/" href="([^"]+)" ?/?>#i', $response_body, $matches))
 		{
 			$target_webmention_endpoint = $matches[1];
 		}
