@@ -51,12 +51,12 @@
 						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" />
 						</a>
 						<div class="media-body">
-							<div class="post-permalink"><a class="pull-right u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a></div>
-							<h4 class="media-heading"><?php echo USER_NAME ?></h4>
 							<div class="post-content e-content p-name p-summary"><?php echo $post['content'] ?></div>
 							<div class="post-actions">
 
+									<?php echo USER_NAME ?> posted on <a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
 								<?php if (isset($_SESSION['user'])) : ?>
+									-
 									<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
 									-
 									<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
