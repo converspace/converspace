@@ -54,7 +54,7 @@
 							<div class="post-content e-content p-name p-summary"><?php echo $post['content'] ?></div>
 							<div class="post-actions">
 
-									<?php echo USER_NAME ?> posted on <a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
+									<?php echo USER_NAME ?> on <a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
 								<?php if (isset($_SESSION['user'])) : ?>
 									-
 									<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
