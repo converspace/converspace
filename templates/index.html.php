@@ -48,24 +48,22 @@
 				<?php foreach ($posts as $post): ?>
 					<div class="media post h-entry">
 						<a class="pull-left p-author h-card" href="<?php echo SITE_BASE_URL ?>">
-						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" />
+						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" title="Sandeep Shetty" />
 						</a>
 						<div class="media-body">
 							<div class="post-content e-content p-name p-summary"><?php echo $post['content'] ?></div>
 							<div class="post-actions">
-
-									<?php echo USER_NAME ?> on <a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
+								<a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
 								<?php if (isset($_SESSION['user'])) : ?>
-									-
-									<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
-									-
-									<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
-									-
-									<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
-									-
-									<a href="<?php echo SITE_BASE_URL ?>send-webmention/<?php echo $post['id'] ?>" target="_blank">Send WebMentions</a>
+								-
+								<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
+								-
+								<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
+								-
+								<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
+								-
+								<a href="<?php echo SITE_BASE_URL ?>send-webmention/<?php echo $post['id'] ?>" target="_blank">Send WebMentions</a>
 								<?php endif; ?>
-
 							</div>
 						</div>
 					</div>
