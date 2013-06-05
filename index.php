@@ -68,7 +68,7 @@
 	});
 
 
-	app\post(array('/post', '/send-webmention'), function($req) {
+	app\any(array('/post', '/send-webmention'), function($req) {
 
 		if (!isset($_SESSION['user']))
 		{
