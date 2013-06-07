@@ -1,5 +1,7 @@
 <?php
 
+	use phpish\template;
+
 	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
 	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
 	define('TRAILING_TAGS_REGEX', '/\n\n  ([^\n]*)$/s');
@@ -138,11 +140,21 @@
 				$post = extract_title_and_body_from_post($md_post['content']);
 				$post['body'] = strip_empty_lines($post['body']);
 				$post['body'] = normalize_line_ending($post['body']);
+
+
+				$machinetags = extract_machinetags($post['body']);
+				$post['body'] = strip_machinetags($post['body'], $machinetags[0]);
+				if (isset($machinetags['repost']))
+				{
+					$repost = template\render('repost.html', $machinetags);
+					$post['body'] = "<div>Reposted a <a href=\"{$machinetags['repost']['url']}\">post</a> by <a href=\"{$machinetags['repost']['author_url']}\">{$machinetags['repost']['author']}</a>.</div>".$post['body'].$repost;
+				}
+
 				$post['body'] = trailing_tags_filter($post['body']);
 				$post['body'] = tag_syntax_filter($post['body']);
 				$post['body'] = twitter_user_syntax_filter($post['body']);
 				$content = Markdown(implode("\n", $post));
-				$posts[] = array('title'=>$post['title'], 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at']);
+				$posts[] = array('title'=>$post['title'], 'body'=>$post['body'], 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at']);
 			}
 
 			return $posts;

@@ -62,4 +62,35 @@
 		return $alert;
 	}
 
+
+	// https://gist.github.com/sandeepshetty/5725818
+	function extract_machinetags($str)
+	{
+		preg_match_all('/#(?P<namespace>[a-zA-Z_][a-zA-Z0-9_]+):(?P<predicate>[a-zA-Z_][a-zA-Z0-9_]+)=(["\'])?(?P<value>(?(3)(?:(?:(?!\3|\\\\).|\\\\\\3)*)|(?:[^\s]+)))(?(3)\\3)/s', $str, $matches);
+		$stripslashes = function (&$value, $key) {
+			$value = stripslashes($value);
+		};
+		array_walk($matches['value'], $stripslashes);
+		array_walk($matches[4], $stripslashes);
+
+		$machinetags = array();
+		$machinetags[0] = $matches[0];
+		foreach ($matches['namespace'] as $key=>$val)
+		{
+			$machinetags[$val][$matches['predicate'][$key]] = $matches['value'][$key];
+		}
+
+		return $machinetags;
+	}
+
+	function strip_machinetags($str, $machinetags)
+	{
+		foreach ($machinetags as $machinetag)
+		{
+			$str = str_replace($machinetag, '', $str);
+		}
+
+		return $str;
+	}
+
 ?>

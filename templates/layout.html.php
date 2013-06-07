@@ -34,6 +34,7 @@
 		.post-permalink, .post-actions { font-size: 10px; color: #999;}
 		.post-permalink a, .post-actions a { color: #999;}
 		.post h1 { font-weight: 200; font-size: 28px; margin-top: -5px;}
+		.repost { padding: 0 0 8px 0; font-size: 16px; }
 
 		.deem { color: #08C; opacity: 0.6; font-weight: lighter ;}
 		.channels { margin-bottom: 0; background: none; }
