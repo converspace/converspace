@@ -51,7 +51,8 @@
 						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" title="Sandeep Shetty" />
 						</a>
 						<div class="media-body">
-							<div class="post-content e-content p-name p-summary"><?php echo $post['content'] ?></div>
+							<div class="post-content e-content"><?php echo $post['content'] ?></div>
+							<div class="p-name p-summary" style="display:none"><?php echo $post['plaintext'] ?></div>
 							<div class="post-actions">
 								<a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
 								<?php if (isset($_SESSION['user'])) : ?>

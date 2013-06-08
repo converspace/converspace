@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<?php use \Michelf\MarkdownExtra; ?>
 	<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,7 +109,7 @@
 							</a>
 							<div class="media-body">
 								<h1 class="author-name media-heading p-name"><?php echo USER_NAME ?></h1>
-								<?php echo Markdown(USER_BIO) ?>
+								<?php echo MarkdownExtra::defaultTransform(USER_BIO) ?>
 							</div>
 						</div>
 					</div>

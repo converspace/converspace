@@ -63,15 +63,14 @@
 	}
 
 
-	// https://gist.github.com/sandeepshetty/5725818
+	// http://sandeep.shetty.in/2013/06/extracting-machine-triple-tags-from-a-string.html
 	function extract_machinetags($str)
 	{
-		preg_match_all('/#(?P<namespace>[a-zA-Z_][a-zA-Z0-9_]+):(?P<predicate>[a-zA-Z_][a-zA-Z0-9_]+)=(["\'])?(?P<value>(?(3)(?:(?:(?!\3|\\\\).|\\\\\\3)*)|(?:[^\s]+)))(?(3)\\3)/s', $str, $matches);
-		$stripslashes = function (&$value, $key) {
+		preg_match_all('/#(?P<namespace>[a-zA-Z_][a-zA-Z0-9_\-]+):(?P<predicate>[a-zA-Z_][a-zA-Z0-9_\-]+)=(["\'])?(?P<value>(?(3)(?:(?:(?!\3|\\\\).|\\\\\\3)*)|(?:[^\s]+)))(?(3)\\3)/s', $str, $matches);
+
+		array_walk($matches['value'], function (&$value, $key) {
 			$value = stripslashes($value);
-		};
-		array_walk($matches['value'], $stripslashes);
-		array_walk($matches[4], $stripslashes);
+		});
 
 		$machinetags = array();
 		$machinetags[0] = $matches[0];
@@ -90,7 +89,7 @@
 			$str = str_replace($machinetag, '', $str);
 		}
 
-		return $str;
+		return trim($str);
 	}
 
 ?>

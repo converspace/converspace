@@ -8,7 +8,8 @@
 	require __DIR__.'/vendor/phpish/mysql/mysql.php';
 	require __DIR__.'/vendor/phpish/template/template.php';
 	require __DIR__.'/vendor/phpish/http/http.php';
-	require __DIR__.'/vendor/michelf/php-markdown-extra/markdown.php';
+	require __DIR__.'/vendor/michelf/php-markdown/Michelf/Markdown.php';
+	require __DIR__.'/vendor/michelf/php-markdown/Michelf/MarkdownExtra.php';
 
 
 	use phpish\app;
@@ -88,6 +89,10 @@
 		{
 			$now = date('Y-m-d H:i:s');
 			$post = extract_title_and_body_from_post($post_content);
+
+			$machinetags = extract_machinetags($post['body']);
+			$post['body'] = strip_machinetags($post['body'], $machinetags[0]);
+
 			$post_channels = extract_tags_from_post($post['body']);
 			$is_private = in_array('private', $post_channels) ? 1 : 0;
 

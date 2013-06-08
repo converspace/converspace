@@ -1,6 +1,7 @@
 <?php
 
 	use phpish\template;
+	use \Michelf\MarkdownExtra;
 
 	define('TAG_REGEX', '/(^|\s|\()(#([a-zA-Z0-9_][a-zA-Z0-9\-_]*))/ms');
 	define('TWITTER_USER_REGEX', '/(^|\s|\()(@([a-zA-Z0-9_]+))/ms');
@@ -62,7 +63,7 @@
 				else unset($post_channels[$key]);
 			}
 
-			if (!empty($channels_to_delete)) delete_post_channels($post_id, $channels_to_delete);
+			if (!empty($channels_to_delete)) db_delete_post_channels($post_id, $channels_to_delete);
 
 			foreach($post_channels as $channel_name)
 			{
@@ -144,21 +145,72 @@
 
 				$machinetags = extract_machinetags($post['body']);
 				$post['body'] = strip_machinetags($post['body'], $machinetags[0]);
-				if (isset($machinetags['repost']))
-				{
-					$repost = template\render('repost.html', $machinetags);
-					$post['body'] = "<div>Reposted a <a href=\"{$machinetags['repost']['url']}\">post</a> by <a href=\"{$machinetags['repost']['author_url']}\">{$machinetags['repost']['author']}</a>.</div>".$post['body'].$repost;
-				}
+				$mention = get_mention($md_post['content']);
+
+				$plaintext = trim(implode("\n", $post));
 
 				$post['body'] = trailing_tags_filter($post['body']);
 				$post['body'] = tag_syntax_filter($post['body']);
 				$post['body'] = twitter_user_syntax_filter($post['body']);
-				$content = Markdown(implode("\n", $post));
-				$posts[] = array('title'=>$post['title'], 'body'=>$post['body'], 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at']);
+				$content = MarkdownExtra::defaultTransform(implode("\n", $post));
+
+				if ($mention)
+				{
+
+					$plaintext = trim(preg_replace('/^.+\n/', '', $plaintext));
+					$mention_type = $mention['type'];
+					$machinetags[$mention_type]['url'] = $mention['url'];
+					$post_activity_template = post_activity_template($mention, $machinetags);
+					$link_preview_template = template\render('link_preview.html', compact('machinetags', 'mention'));
+
+					$dom = new DOMDocument;
+					@$dom->loadHTML($content);
+					$finder = new DomXPath($dom);
+					$classname=$mention['class'];
+					$nodes = $finder->query("//a[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]");
+					if (count($nodes) === 1)
+					{
+						foreach($nodes as $node)
+						{
+							$link_preview = $dom->createDocumentFragment();
+							$link_preview->appendXML($link_preview_template);
+							$node->parentNode->replaceChild($link_preview, $node);
+						}
+
+						$content = $post_activity_template.hack_to_remove_saveHTML_crap($dom->saveHTML());
+					}
+				}
+
+				$posts[] = array('title'=>$post['title'], 'body'=>$post['body'], 'raw'=>$md_post['content'], 'content'=>$content, 'id'=>$md_post['id'], 'created_at'=>$md_post['created_at'], 'plaintext'=>$plaintext);
 			}
 
 			return $posts;
 		}
+
+			function hack_to_remove_saveHTML_crap($html)
+			{
+				return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $html));
+			}
+
+			function get_mention($post)
+			{
+				if (preg_match('/^\[[^\]]+\]\((?<url>[^\)]+)\)\{\.(?P<class>u-(?P<type>.+))\}/', $post, $matches))
+				{
+					return $matches;
+				}
+			}
+
+			function post_activity_template($mention, $machinetags)
+			{
+
+				$mention_type = $mention['type'];
+				$mention_class = $mention['class'];
+				$mention_url = $mention['url'];
+				$activity = array('repost'=>'Reposted', 'in-reply-to'=>'Commented on', 'like'=>'Liked');
+
+				return "<div>{$activity[$mention_type]} a <a class=\"$mention_class\" href=\"{$machinetags[$mention_type]['url']}\">post</a> by <a href=\"{$machinetags[$mention_type]['author_url']}\">{$machinetags[$mention_type]['author_name']}</a>.</div>";
+			}
+
 
 			function normalize_line_ending($content)
 			{
