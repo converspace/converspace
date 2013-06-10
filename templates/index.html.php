@@ -46,6 +46,7 @@
 			<div class="posts">
 				<?php if ($posts) : ?>
 				<?php foreach ($posts as $post): ?>
+
 					<div class="media post h-entry">
 						<a class="pull-left p-author h-card" href="<?php echo SITE_BASE_URL ?>">
 						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" title="Sandeep Shetty" />
@@ -53,19 +54,27 @@
 						<div class="media-body">
 							<div class="post-content e-content"><?php echo $post['content'] ?></div>
 							<div class="p-name p-summary" style="display:none"><?php echo $post['plaintext'] ?></div>
-							<div class="post-actions">
-								<a class="u-url" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
-								<?php if (isset($_SESSION['user'])) : ?>
-								-
-								<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
-								-
-								<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
-								-
-								<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
-								-
-								<a href="<?php echo SITE_BASE_URL ?>send-webmention/<?php echo $post['id'] ?>" target="_blank">Send WebMentions</a>
-								<?php endif; ?>
+							<div class="post-more">
+								<a class="more-link u-url" title="Permalink" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
+								<a class="more-link" title="Likes" href="<?php echo SITE_BASE_URL.$post['id'].'/likes' ?>"><i class="icon-thumbs-up"></i> <?php echo isset($mention_count[$post['id']]['like']) ? $mention_count[$post['id']]['like'] : 0 ?></a>
+								<a class="more-link" title="Reposts" href="<?php echo SITE_BASE_URL.$post['id'].'/reposts' ?>"><i class="icon-retweet"></i> <?php echo isset($mention_count[$post['id']]['repost']) ? $mention_count[$post['id']]['repost'] : 0 ?></a>
+								<a class="more-link" title="Mentions" href="<?php echo SITE_BASE_URL.$post['id'].'/mentions' ?>"><i class="icon-hand-right"></i> <?php echo isset($mention_count[$post['id']]['mention']) ? $mention_count[$post['id']]['mention'] : 0 ?></a>
+								<a class="more-link" title="Comments" href="<?php echo SITE_BASE_URL.$post['id'].'/comments' ?>"><i class="icon-comment"></i> <?php echo isset($mention_count[$post['id']]['in-reply-to']) ? $mention_count[$post['id']]['in-reply-to']: 0 ?></a>
 							</div>
+
+							<?php if (isset($_SESSION['user'])) : ?>
+							<div class="post-more">
+
+								<a href="https://twitter.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&text=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Twitter</a>
+								&middot;
+								<a href="http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode(ltrim($post['title'], '# ')) ?>&p[url]=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>&p[summary]=<?php echo urlencode($post['raw']) ?>" target="_blank">Share on Facebook</a>
+								&middot;
+								<a href="https://plus.google.com/share?url=<?php echo urlencode(SITE_BASE_URL.$post['id']) ?>" target="_blank">Share on Google+</a>
+								&middot;
+								<a href="<?php echo SITE_BASE_URL ?>send-webmention/<?php echo $post['id'] ?>" target="_blank">Send WebMentions</a>
+							</div>
+							<?php endif; ?>
+
 						</div>
 					</div>
 

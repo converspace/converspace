@@ -41,7 +41,7 @@
 		}
 		else
 		{
-			error_log('Error while saving post: '.mysql\error());
+			error_log('Error while saving post: '.db_error());
 			session_alert('error', 'Sorry! Error while saving post!');
 		}
 	}
@@ -78,7 +78,6 @@
 		$pager = array();
 		$md_posts = db_get_post($post_id, $authorized);
 		$posts = prepare_posts($md_posts);
-
 		$older_post = db_get_older_post_id($post_id, $authorized);
 		if (isset($older_post['id'])) $pager['before'] = $older_post['id'];
 		$newer_post = db_get_newer_post_id($post_id, $authorized);
@@ -236,5 +235,31 @@
 			{
 				return preg_replace(TRAILING_TAGS_REGEX, "\n\n  <div class=\"additional_tags\">\n$1\n</div>", $content);
 			}
+
+
+	function add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content)
+	{
+		return db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content);
+	}
+
+	function get_webmentions($post_id, $type)
+	{
+		return db_get_webmentions($post_id, $type);
+	}
+
+	function get_webmention_type_counts($post_id)
+	{
+		$counts = array();
+		$rows = db_get_webmention_type_counts($post_id);
+		if ($rows)
+		{
+			foreach ($rows as $row)
+			{
+				$counts[$row['type']] = $row['count'];
+			}
+		}
+
+		return $counts;
+	}
 
 ?>

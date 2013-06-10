@@ -10,17 +10,20 @@
 	require __DIR__.'/vendor/phpish/http/http.php';
 	require __DIR__.'/vendor/michelf/php-markdown/Michelf/Markdown.php';
 	require __DIR__.'/vendor/michelf/php-markdown/Michelf/MarkdownExtra.php';
+	require __DIR__.'/vendor/autoload.php';
 
 
 	use phpish\app;
 	use phpish\mysql;
 	use phpish\template;
 	use phpish\http;
+	use mf2\Parser;
 
 
 	require __DIR__.'/data.php';
 	require __DIR__.'/helpers.php';
 	require __DIR__.'/models/posts.php';
+
 
 
 	// Cool URIs don't change
@@ -69,7 +72,7 @@
 	});
 
 
-	app\any(array('/post', '/send-webmention'), function($req) {
+	app\any(array('/post', '/send-webmention', '/send-webmention/{post_id:digits}'), function($req) {
 
 		if (!isset($_SESSION['user']))
 		{
@@ -113,7 +116,7 @@
 
 
 	app\post('/send-webmention', function($req) {
-		foreach ($req['form']['targets'] as $target) send_webmention($req['form']['source'], $target);
+		foreach ($req['form']['targets'] as $target) $response[] = send_webmention($req['form']['source'], $target);
 	});
 
 
@@ -135,11 +138,41 @@
 	});
 
 
-	// test with curl -d "source=foo.com&target=bar.com" <webmention-endpoint>
+	// test with curl -i -d "source=foo.com&target=bar.com" <webmention-endpoint>
 	app\post('/webmention', function($req) {
-		// Figure out post_id of target
-		// Save to db
-		return app\response(array('result'=>'WebMention was successful'), 202);
+
+		if (isset($req['form']['target']) and isset($req['form']['source']) )
+		{
+			$source = $req['form']['source'];
+			$target = $req['form']['target'];
+
+			if (preg_match('#^'.SITE_BASE_URL.'(?P<post_id>[0-9]+)$#', $target, $matches))
+			{
+
+				list($posts, $pager) = get_post($matches['post_id'], true);
+				if (!empty($posts))
+				{
+					$response_body = http\request("GET $source", array(), array(), $response_headers);
+					$mf2parser = new Parser($response_body);
+					$mf2 = $mf2parser->parse();
+					$type = 'mention';
+					foreach ($mf2['items'] as $item)
+					{
+						if (in_array('h-entry', $item['type']))
+						{
+							if (isset($item['properties']['repost'])) $type = 'repost';
+							if (isset($item['properties']['like'])) $type = 'like';
+							if (isset($item['properties']['in-reply-to'])) $type = 'in-reply-to';
+						}
+					}
+
+					add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), $type, $response_body);
+					return app\response($mf2, 202);
+				}
+			}
+		}
+
+		return app\response('Bad Request', 400);
 	});
 
 
@@ -156,7 +189,30 @@
 
 		$individual_post = true;
 		list($posts, $pager) = get_post($req['matches']['post_id'], $authorized);
-		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post'), 'layout.html');
+		$mention_count = array();
+		$mention_count[$req['matches']['post_id']] = get_webmention_type_counts($req['matches']['post_id']);
+		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'), 'layout.html');
+	});
+
+
+	app\get('/{post_id:digits}/likes', function($req, $authorized=false) {
+
+		return app\response(get_webmentions($req['matches']['post_id'], 'like'));
+	});
+
+	app\get('/{post_id:digits}/reposts', function($req, $authorized=false) {
+
+		return app\response(get_webmentions($req['matches']['post_id'], 'repost'));
+	});
+
+	app\get('/{post_id:digits}/mentions', function($req, $authorized=false) {
+
+		return app\response(get_webmentions($req['matches']['post_id'], 'mention'));
+	});
+
+	app\get('/{post_id:digits}/comments', function($req, $authorized=false) {
+
+		return app\response(get_webmentions($req['matches']['post_id'], 'in-reply-to'));
 	});
 
 
@@ -164,7 +220,12 @@
 
 		$channel_name = isset($req['matches']['channel']) ? $req['matches']['channel'] : '';
 		list($posts, $pager) = get_posts($req, $channel_name, $authorized);
-		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'channel_name'), 'layout.html');
+		$mention_count = array();
+		foreach ($posts as $post)
+		{
+			$mention_count[$post['id']] = get_webmention_type_counts($post['id']);
+		}
+		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'channel_name', 'mention_count'), 'layout.html');
 	});
 
 ?>

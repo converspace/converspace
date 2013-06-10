@@ -5,7 +5,7 @@
 	</a>
 	<div class="media-body">
 		<div class="post-content"><?php echo MarkdownExtra::defaultTransform($machinetags[$mention['type']]['content']) ?></div>
-		<div class="post-actions">
+		<div class="post-more">
 			<a class="<?php echo $mention['class'] ?>" href="<?php echo $machinetags[$mention['type']]['url'] ?>"><time class="" datetime=""><?php echo $machinetags[$mention['type']]['published'] ?></time></a>
 		</div>
 	</div>

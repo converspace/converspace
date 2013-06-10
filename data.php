@@ -101,9 +101,31 @@
 		return mysql\query("DELETE FROM channels WHERE post_id = %d and name in ('".implode("','", $channels_to_delete)."')", array($post_id));
 	}
 
+	//TODO: Do an upsert here; add only if it doesn't exist.
 	function db_add_post_channel($post_id, $channel_name, $now, $is_private)
 	{
 		return mysql\query("INSERT INTO channels (name, post_id, created_at, private) VALUES ('%s', %d, '%s', %d)", array($channel_name, $post_id, $now, $is_private));
 	}
 
+
+	function db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content)
+	{
+		return mysql\query("INSERT INTO webmentions (post_id, source, source_hash, target, target_hash, created_at, updated_at, type, content) VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE updated_at = '%s', content = '%s'", array($post_id, $source, $source_hash, $target, $target_hash, $now, $now, $type, $content, $now, $content));
+	}
+
+	function db_get_webmentions($post_id, $type)
+	{
+		return mysql\rows("SELECT source FROM webmentions where post_id = %d and type = '%s' ORDER BY created_at", array($post_id, $type));
+	}
+
+	function db_get_webmention_type_counts($post_id)
+	{
+		return mysql\rows('SELECT type, count(type) as count FROM webmentions where post_id = %d GROUP BY type', array($post_id));
+	}
+
+
+	function db_error()
+	{
+		return mysql\error();
+	}
 ?>

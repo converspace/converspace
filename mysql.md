@@ -35,7 +35,30 @@ CREATE TABLE `channels` (
 	PRIMARY KEY (`id`),
 	KEY `channel` (`name`),
 	KEY `post` (`post_id`),
-	KEY `private` (`private`),
+	KEY `private` (`private`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `webmentions` (
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`post_id` int(11) unsigned NOT NULL,
+	`source` mediumtext,
+	`source_hash` varchar(255),
+	`target` mediumtext,
+	`target_hash` varchar(255),
+	`created_at` datetime,
+	`updated_at` datetime,
+	`type` varchar(255),
+	`content` longtext,
+	`author_name` varchar(255),
+	`author_url` mediumtext,
+	`author_photo` mediumtext,
+
+	PRIMARY KEY (`id`),
+	KEY `post` (`post_id`),
+	UNIQUE KEY `post_source` (`post_id`,`source_hash`),
+	KEY `type` (`type`),
+	KEY `created` (`created_at`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```

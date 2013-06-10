@@ -1,6 +1,53 @@
 {
-    "hash": "45f31bca6a404bd384cd25c34726cf26",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "5e7aa44b572f110517bfd11d20940715",
     "packages": [
+        {
+            "name": "mf2/mf2",
+            "version": "v0.1.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/php-mf2.git",
+                "reference": "v0.1.14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/v0.1.14",
+                "reference": "v0.1.14",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "webignition/absolute-url-deriver": "1.3.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "mf2\\Parser": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "homepage": "http://waterpigs.co.uk"
+                }
+            ],
+            "description": "A pure (generic) microformats-2 parser",
+            "keywords": [
+                "microformats",
+                "microformats 2",
+                "parser",
+                "semantic"
+            ],
+            "time": "2013-06-03 17:26:32"
+        },
         {
             "name": "michelf/php-markdown",
             "version": "dev-lib",
@@ -18,14 +65,12 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1365880738",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-lib": "1.3.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Michelf": ""
@@ -50,7 +95,8 @@
             "homepage": "http://michelf.ca/projects/php-markdown/",
             "keywords": [
                 "markdown"
-            ]
+            ],
+            "time": "2013-04-13 19:18:58"
         },
         {
             "name": "phpish/app",
@@ -69,9 +115,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1351197449",
             "type": "library",
-            "installation-source": "source",
             "license": [
                 "MIT"
             ],
@@ -84,7 +128,8 @@
                 }
             ],
             "description": "Request Handler",
-            "homepage": "https://github.com/phpish/app"
+            "homepage": "https://github.com/phpish/app",
+            "time": "2012-10-25 20:37:29"
         },
         {
             "name": "phpish/http",
@@ -103,9 +148,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1357508732",
             "type": "library",
-            "installation-source": "source",
             "license": [
                 "MIT"
             ],
@@ -120,10 +163,11 @@
             "description": "Convenience wrapper around cURL",
             "homepage": "https://github.com/phpish/http",
             "keywords": [
+                "api",
                 "curl",
-                "http",
-                "api"
-            ]
+                "http"
+            ],
+            "time": "2013-01-06 21:45:32"
         },
         {
             "name": "phpish/mysql",
@@ -142,9 +186,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1352535253",
             "type": "library",
-            "installation-source": "source",
             "license": [
                 "MIT"
             ],
@@ -163,7 +205,8 @@
                 "db",
                 "mysql",
                 "mysqli"
-            ]
+            ],
+            "time": "2012-11-10 08:14:13"
         },
         {
             "name": "phpish/template",
@@ -182,9 +225,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "1351282994",
             "type": "library",
-            "installation-source": "source",
             "license": [
                 "MIT"
             ],
@@ -197,10 +238,95 @@
                 }
             ],
             "description": "Capture output of and compose plain old PHP templates",
-            "homepage": "https://github.com/phpish/template"
+            "homepage": "https://github.com/phpish/template",
+            "time": "2012-10-26 20:23:14"
+        },
+        {
+            "name": "webignition/absolute-url-deriver",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webignition/absolute-url-deriver.git",
+                "reference": "1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webignition/absolute-url-deriver/zipball/1.3",
+                "reference": "1.3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "webignition/url": ">=1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Cram",
+                    "email": "jon@webignition.net"
+                }
+            ],
+            "description": "Derives an absolute URL from relative and source URLs",
+            "homepage": "https://github.com/webignition/absolute-url-deriver",
+            "keywords": [
+                "absolute",
+                "url"
+            ],
+            "time": "2013-03-18 12:54:57"
+        },
+        {
+            "name": "webignition/url",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webignition/url",
+                "reference": "1.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/webignition/url/zipball/1.4.1",
+                "reference": "1.4.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Cram",
+                    "email": "jon@webignition.net"
+                }
+            ],
+            "description": "Represents a URL, a library to be used in many other places. Applies semantically-lossless normalisation for comparisons.",
+            "homepage": "https://github.com/webignition/url",
+            "keywords": [
+                "url"
+            ],
+            "time": "2012-10-19 04:50:16"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
@@ -211,5 +337,11 @@
         "phpish/mysql": 20,
         "phpish/http": 20,
         "michelf/php-markdown": 20
-    }
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }
