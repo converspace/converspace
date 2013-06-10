@@ -52,8 +52,8 @@
 						<img alt="Sandeep Shetty" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" class="media-object img-polaroid" width="42" title="Sandeep Shetty" />
 						</a>
 						<div class="media-body">
-							<div class="post-content e-content"><?php echo $post['content'] ?></div>
-							<div class="p-name p-summary" style="display:none"><?php echo $post['plaintext'] ?></div>
+							<div class="post-content"><?php echo $post['content'] ?></div>
+							<div class="p-name p-summary e-content" style="display:none"><?php echo $post['plaintext'] ?></div>
 							<div class="post-more">
 								<a class="more-link u-url" title="Permalink" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
 								<a class="more-link" title="Likes" href="<?php echo SITE_BASE_URL.$post['id'].'/likes' ?>"><i class="icon-thumbs-up"></i> <?php echo isset($mention_count[$post['id']]['like']) ? $mention_count[$post['id']]['like'] : 0 ?></a>
