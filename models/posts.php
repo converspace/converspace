@@ -155,8 +155,7 @@
 
 				if ($mention)
 				{
-
-					$plaintext = trim(preg_replace('/^.+\n/', '', $plaintext));
+					$plaintext = trim(preg_replace('/^.+(\n)?/', '', $plaintext));
 					$plaintext = post_activity_plaintext_template($mention, $md_post, $plaintext);
 					$mention_type = $mention['type'];
 					$machinetags[$mention_type]['url'] = $mention['url'];
@@ -202,14 +201,13 @@
 
 			function post_activity_plaintext_template($mention, $post, $plaintext)
 			{
-
 				$mention_type = $mention['type'];
 				$mention_class = $mention['class'];
 				$mention_url = $mention['url'];
 				$activity = array('repost'=>'Reposted', 'like'=>'Liked');
 				if (isset($activity[$mention_type]))
 				{
-					return "{$activity[$mention_type]} this here: ".SITE_BASE_URL.$post['id'];
+					return "{$activity[$mention_type]} $mention_url\n$plaintext";
 				}
 				else return $plaintext;
 			}
