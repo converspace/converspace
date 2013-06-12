@@ -193,7 +193,7 @@
 
 			function get_mention($post)
 			{
-				if (preg_match('/^\[[^\]]+\]\((?<url>[^\)]+)\)\{\.(?P<class>u-(?P<type>.+))\}/', $post, $matches))
+				if (preg_match('/^\[(?<link_text>[^\]]+)\]\((?<url>[^\)]+)\)\{\.(?P<class>u-(?P<type>.+))\}/', $post, $matches))
 				{
 					return $matches;
 				}
@@ -204,10 +204,11 @@
 				$mention_type = $mention['type'];
 				$mention_class = $mention['class'];
 				$mention_url = $mention['url'];
+				$mention_link_text = $mention['link_text'];
 				$activity = array('repost'=>'Reposted', 'like'=>'Liked');
 				if (isset($activity[$mention_type]))
 				{
-					return "{$activity[$mention_type]} $mention_url\n$plaintext";
+					return "{$activity[$mention_type]} [$mention_link_text]($mention_url)\n$plaintext";
 				}
 				else return $plaintext;
 			}
