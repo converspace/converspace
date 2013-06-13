@@ -177,20 +177,42 @@
 
 
 	// test with curl -I <URL>
-	app\any('/{post_id:digits}', function($req, $authorized=false) {
+	app\any('/{post_id:digits}[.{content_type}]', function($req, $authorized=false) {
 		$response =  app\next($req, $authorized);
-		return app\response($response, 200, array
+		if (is_array($response) and isset($response['headers']))
+		{
+			$response['headers']['Link'] = '<'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"';
+			return $response;
+		}
+		else return app\response($response, 200, array
 		(
-			"Link"=>'<'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"'
+			'Link'=>'<'.SITE_BASE_URL.'webmention>; rel="http://webmention.org/"'
 		));
 	});
 
-	app\get('/{post_id:digits}', function($req, $authorized=false) {
+	app\get('/{post_id:digits}[.{content_type}]', function($req, $authorized=false) {
 
 		$individual_post = true;
 		list($posts, $pager) = get_post($req['matches']['post_id'], $authorized);
 		$mention_count = array();
 		$mention_count[$req['matches']['post_id']] = get_webmention_type_counts($req['matches']['post_id']);
+
+		if (isset($req['matches']['content_type']))
+		{
+			$content = template\render('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'));
+			$mf2parser = new Parser($content);
+			$mf2 = $mf2parser->parse();
+
+			if ('mf2' == $req['matches']['content_type'])
+			{
+				return app\response(json_pretty_print(json_encode($mf2)), 200, array('content-type'=>'application/json; charset=utf-8'));
+			}
+			elseif ('as' == $req['matches']['content_type'])
+			{
+				return app\response(template\render('index.as', compact('mf2')), 200, array('content-type'=>'application/json; charset=utf-8'));
+			}
+		}
+
 		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'), 'layout.html');
 	});
 
