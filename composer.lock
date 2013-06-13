@@ -103,19 +103,20 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpish/app",
-                "reference": "47c0cc7e372c8453835e20d9e497227e0b95cf65"
+                "url": "https://github.com/phpish/app.git",
+                "reference": "5734dcb56be43a8227a740b3dc5d34cb36bc6cc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/app/zipball/47c0cc7e372c8453835e20d9e497227e0b95cf65",
-                "reference": "47c0cc7e372c8453835e20d9e497227e0b95cf65",
+                "url": "https://api.github.com/repos/phpish/app/zipball/5734dcb56be43a8227a740b3dc5d34cb36bc6cc4",
+                "reference": "5734dcb56be43a8227a740b3dc5d34cb36bc6cc4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -129,7 +130,7 @@
             ],
             "description": "Request Handler",
             "homepage": "https://github.com/phpish/app",
-            "time": "2012-10-25 20:37:29"
+            "time": "2013-06-13 21:30:40"
         },
         {
             "name": "phpish/http",
