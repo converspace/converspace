@@ -155,7 +155,7 @@ code {
 	margin-left: 0;
 }
 
-.e-content {
+.h-entry .content {
 /* http://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
 	-ms-word-break: break-all;
 	word-break: break-all;
@@ -188,6 +188,8 @@ code {
 	font-size: 13px;
 	line-height: 10px;
 	text-decoration: none;
+	white-space: nowrap;
+	color: #999;
 }
 
 
@@ -203,7 +205,7 @@ code {
 	color: #999;
 }
 
-.pager a:hover {
+.post-footer a:hover, .pager a:hover {
 	color: #212121;
 }
 

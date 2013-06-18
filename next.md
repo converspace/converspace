@@ -1,14 +1,15 @@
-* Skeleton: Show mention counts.
+* Fix activity stream representation.
 * Skeleton: First-person narrative for share, like and comment.
 * Skeleton: New layout for content previews (share, like, comment)
 * Skeleton: Fix for global h-card (now that each post doesn't have a p-author)
 * Skeleton: Fix list styling.
 * Migrate to Share from Repost
-* Add titles to post pages and lists.
+* Add html.head.title to post pages and lists.
 * Pagination rel markup
 * go back to namespaced URLs: /channels/foobar, /posts/22 with support for older routes.
 * Atom/RSS feed
 * Tag-based navigation
+* Treat namespace of machinetags as regular tags so I also show posts with #like, #share, #in-reply-to (fix tag dedup bug)
 * About page (I need this to replace my existing blogger based about page)
 * Mention details UI.
 ** Properly parse microformats to extract h-entry and h-card

@@ -177,7 +177,7 @@
 
 
 	// test with curl -I <URL>
-	app\any('/{post_id:digits}[.{content_type}]', function($req, $authorized=false) {
+	app\any('/{post_id:digits}[\.{content_type}]', function($req, $authorized=false) {
 		$response =  app\next($req, $authorized);
 		if (is_array($response) and isset($response['headers']))
 		{
@@ -190,7 +190,7 @@
 		));
 	});
 
-	app\get('/{post_id:digits}[.{content_type}]', function($req, $authorized=false) {
+	app\get('/{post_id:digits}[\.{content_type}]', function($req, $authorized=false) {
 
 		$individual_post = true;
 		list($posts, $pager) = get_post($req['matches']['post_id'], $authorized);
@@ -219,22 +219,22 @@
 
 	app\get('/{post_id:digits}/likes', function($req, $authorized=false) {
 
-		return app\response(get_webmentions($req['matches']['post_id'], 'like'));
+		return get_webmentions($req['matches']['post_id'], 'like');
 	});
 
 	app\get('/{post_id:digits}/reposts', function($req, $authorized=false) {
 
-		return app\response(get_webmentions($req['matches']['post_id'], 'repost'));
+		return get_webmentions($req['matches']['post_id'], 'repost');
 	});
 
 	app\get('/{post_id:digits}/mentions', function($req, $authorized=false) {
 
-		return app\response(get_webmentions($req['matches']['post_id'], 'mention'));
+		return get_webmentions($req['matches']['post_id'], 'mention');
 	});
 
 	app\get('/{post_id:digits}/comments', function($req, $authorized=false) {
 
-		return app\response(get_webmentions($req['matches']['post_id'], 'in-reply-to'));
+		return get_webmentions($req['matches']['post_id'], 'in-reply-to');
 	});
 
 
