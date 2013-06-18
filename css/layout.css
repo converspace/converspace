@@ -64,6 +64,14 @@ code {
     padding: 3px 7px;
 }
 
+pre code {
+	display: block;
+}
+
+ul {
+	list-style-type: disc;
+	list-style-position: inside;
+}
 
 
 #header {
