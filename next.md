@@ -15,6 +15,7 @@
 * Allow for reposting and liking posts that don't have h-card and h-entry (See http://www.sandeep.io/53)
 * Implement webmention undo for unlike, etc. (based on source returning a 404 or not finding target there)
 
+* prune webfonts
 
 * fullscreen mode for writing posts
 * Mark post as deleted (doing this directly in the db for now)
