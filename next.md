@@ -4,7 +4,6 @@
 * Skeleton: Fix for global h-card (now that each post doesn't have a p-author)
 * Migrate to Share from Repost
 * Add html.head.title to post pages and lists.
-* Pagination rel markup
 * go back to namespaced URLs: /channels/foobar, /posts/22 with support for older routes.
 * Atom/RSS feed
 * Tag-based navigation

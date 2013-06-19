@@ -157,14 +157,14 @@
 	<div class="container pager">
 		<div class="twelve columns offset-by-two">
 			<?php if (!isset($individual_post) and isset($pager['after'])): ?>
-			<a class="newer" href="?after=<?php echo $pager['after'] ?>">&larr; Newer</a>
+			<a rel="prev" class="newer" href="?after=<?php echo $pager['after'] ?>">&larr; Newer</a>
 			<?php elseif (isset($pager['after'])): ?>
-			<a class="newer" href="<?php echo SITE_BASE_URL.$pager['after'] ?>">&larr; Newer</a>
+			<a rel="prev" class="newer" href="<?php echo SITE_BASE_URL.$pager['after'] ?>">&larr; Newer</a>
 			<?php endif; ?>
 			<?php if (!isset($individual_post) and isset($pager['before'])): ?>
-			<a class="older" href="?before=<?php echo $pager['before'] ?>">Older &rarr;</a>
+			<a rel="next" class="older" href="?before=<?php echo $pager['before'] ?>">Older &rarr;</a>
 			<?php elseif (isset($pager['before'])): ?>
-			<a class="older" href="<?php echo SITE_BASE_URL.$pager['before'] ?>">Older &rarr;</a>
+			<a rel="next" class="older" href="<?php echo SITE_BASE_URL.$pager['before'] ?>">Older &rarr;</a>
 			<?php endif; ?>
 		</div>
 	</div>
