@@ -73,6 +73,16 @@ ul {
 	list-style-position: inside;
 }
 
+a, a:visited, a:hover, a:focus, a:active {
+	color: #0F7ABE;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+
 
 #header {
 	/*background-color: #2A2D35;*/
@@ -128,6 +138,10 @@ ul {
 	/*color: white;*/
 }
 
+#header .h-card .bio a {
+	text-decoration: underline;
+}
+
 #header .h-card .bio, #header .h-card .bio a {
 	font-size: 14px;
 	line-height: 26px;
@@ -158,6 +172,9 @@ ul {
 	font-weight: lighter;
 }
 
+.h-entry .deem {
+	color: #0F7ABE;
+}
 
 .h-entry .u-url {
 	margin-left: 0;
@@ -235,7 +252,7 @@ ul {
 	background-color: #999;
 }
 
-a.foobar {
+.tags a.tag {
 	text-decoration: none;
 	font-size: 13px;
 	line-height: 10px;

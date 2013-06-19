@@ -167,7 +167,7 @@
 				<div class="tags">
 				<?php $channels = db_get_channels($authorized); ?>
 				<?php foreach ($channels as $channel): ?>
-					<a class="foobar" href="<?php echo SITE_BASE_URL.$channel['name'].'/' ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a>
+					<a class="tag" rel="tag" href="<?php echo SITE_BASE_URL.$channel['name'].'/' ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a>
 				<?php endforeach; ?>
 				</div>
 			</div>
