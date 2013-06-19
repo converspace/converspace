@@ -46,16 +46,6 @@
 
 	<!-- Primary Page Layout
 	================================================== -->
-	<div id="nav">
-		<div class="container">
-			<div class="twelve columns offset-by-two clearfix">
-				<?php $channels = db_get_channels($authorized); ?>
-				<?php foreach ($channels as $channel): ?>
-					<a class="foobar" href=""><span class="deem">#</span><?php echo $channel['name'] ?></a>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</div>
 
 	<div id="header">
 		<?php if (isset($_SESSION['persona'])) : ?>
@@ -169,6 +159,20 @@
 		</div>
 	</div>
 	<?php endif; ?>
+
+
+	<div id="nav">
+		<div class="container">
+			<div class="twelve columns offset-by-two">
+				<div class="tags">
+				<?php $channels = db_get_channels($authorized); ?>
+				<?php foreach ($channels as $channel): ?>
+					<a class="foobar" href="<?php echo SITE_BASE_URL.$channel['name'].'/' ?>"><span class="deem">#</span><?php echo $channel['name'] ?></a>
+				<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 <!-- End Document

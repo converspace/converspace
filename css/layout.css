@@ -153,8 +153,8 @@ ul {
 	display: block;
 }
 
-.channel .deem {
-	opacity: 0.6;
+.deem {
+	opacity: 0.8;
 	font-weight: lighter;
 }
 
@@ -222,11 +222,18 @@ ul {
 }
 
 #nav {
-	background-color: #2A2D35;
-	padding: 34px 0;
-	display: none;
+	padding: 50px 0 0 0;
 }
 
+
+#nav a {
+	color: #fff;
+}
+
+.tags {
+	padding: 31px;
+	background-color: #999;
+}
 
 a.foobar {
 	text-decoration: none;
