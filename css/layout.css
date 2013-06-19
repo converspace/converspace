@@ -243,6 +243,11 @@ a.foobar {
 	padding: 5px;
 }
 
+.infobox {
+	padding: 0 0 31px 0;
+	text-align: center;
+}
+
 /* #Page Styles
 ================================================== */
 
