@@ -82,6 +82,15 @@ a:hover, a:focus {
 	text-decoration: underline;
 }
 
+blockquote {
+	background-color: #f4f4f4;
+	border-left: 2px solid #ddd;
+	padding: 20px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
 
 
 #header {
