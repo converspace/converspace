@@ -160,7 +160,7 @@
 					$mention_type = $mention['type'];
 					$machinetags[$mention_type]['url'] = $mention['url'];
 					$post_activity_template = post_activity_template($mention, $machinetags);
-					$link_preview_template = template\render('link_preview.html', compact('machinetags', 'mention'));
+					$post_preview_template = template\render('post_preview.html', compact('machinetags', 'mention'));
 
 					$dom = new DOMDocument;
 					@$dom->loadHTML($content);
@@ -171,9 +171,9 @@
 					{
 						foreach($nodes as $node)
 						{
-							$link_preview = $dom->createDocumentFragment();
-							$link_preview->appendXML($link_preview_template);
-							$node->parentNode->replaceChild($link_preview, $node);
+							$post_preview = $dom->createDocumentFragment();
+							$post_preview->appendXML($post_preview_template);
+							$node->parentNode->replaceChild($post_preview, $node);
 						}
 
 						$content = $post_activity_template.hack_to_remove_saveHTML_crap($dom->saveHTML());
