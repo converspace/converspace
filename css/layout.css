@@ -92,6 +92,12 @@ blockquote p:last-child {
 	margin-bottom: 0;
 }
 
+ul {
+	/* hanging indents http://alistapart.com/article/taminglists/ */
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
 
 #header {
 	/*background-color: #2A2D35;*/
