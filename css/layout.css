@@ -98,6 +98,11 @@ ul {
 	text-indent: -1em;
 }
 
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+
 
 #header {
 	/*background-color: #2A2D35;*/
