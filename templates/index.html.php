@@ -128,10 +128,9 @@
 					<div class="post-footer">
 
 						<a class="u-url" title="Permalink" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><i class="icon-time"></i> <time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
-						<a title="Likes" href="<?php echo SITE_BASE_URL.$post['id'].'/likes' ?>"><i class="icon-thumbs-up-alt"></i> <?php echo isset($mention_count[$post['id']]['like']) ? $mention_count[$post['id']]['like'] : 0 ?> Likes</a>
-						<a title="Shares" href="<?php echo SITE_BASE_URL.$post['id'].'/reposts' ?>"><i class="icon-retweet"></i> <?php echo isset($mention_count[$post['id']]['repost']) ? $mention_count[$post['id']]['repost'] : 0 ?> Reposts</a>
-						<a title="Mentions" href="<?php echo SITE_BASE_URL.$post['id'].'/mentions' ?>"><i class="icon-hand-right"></i> <?php echo isset($mention_count[$post['id']]['mention']) ? $mention_count[$post['id']]['mention'] : 0 ?> Mentions</a>
+
 						<a title="Comments" href="<?php echo SITE_BASE_URL.$post['id'].'/comments' ?>"><i class="icon-comment-alt"></i> <?php echo isset($mention_count[$post['id']]['in-reply-to']) ? $mention_count[$post['id']]['in-reply-to'] : 0 ?> Comments</a>
+						<a title="Mentions" href="<?php echo SITE_BASE_URL.$post['id'].'/mentions' ?>"><i class="icon-hand-right"></i> <?php echo isset($mention_count[$post['id']]['mention']) ? $mention_count[$post['id']]['mention'] : 0 ?> Mentions</a>
 
 					</div>
 				</div>
