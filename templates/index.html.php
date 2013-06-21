@@ -128,16 +128,72 @@
 					<div class="post-footer">
 
 						<a class="u-url" title="Permalink" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><i class="icon-time"></i> <time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
-						<a title="Likes" href="<?php echo SITE_BASE_URL.$post['id'].'/likes' ?>"><i class="icon-thumbs-up-alt"></i> <?php echo isset($mention_count[$post['id']]['like']) ? $mention_count[$post['id']]['like'] : 0 ?> Likes</a>
-						<a title="Shares" href="<?php echo SITE_BASE_URL.$post['id'].'/reposts' ?>"><i class="icon-retweet"></i> <?php echo isset($mention_count[$post['id']]['repost']) ? $mention_count[$post['id']]['repost'] : 0 ?> Reposts</a>
-						<a title="Mentions" href="<?php echo SITE_BASE_URL.$post['id'].'/mentions' ?>"><i class="icon-hand-right"></i> <?php echo isset($mention_count[$post['id']]['mention']) ? $mention_count[$post['id']]['mention'] : 0 ?> Mentions</a>
-						<a title="Comments" href="<?php echo SITE_BASE_URL.$post['id'].'/comments' ?>"><i class="icon-comment-alt"></i> <?php echo isset($mention_count[$post['id']]['in-reply-to']) ? $mention_count[$post['id']]['in-reply-to'] : 0 ?> Comments</a>
+
+						<a title="Comments" href="<?php echo SITE_BASE_URL.$post['id'].'#comments' ?>"><i class="icon-comment-alt"></i> <?php echo isset($mention_count[$post['id']]['in-reply-to']) ? $mention_count[$post['id']]['in-reply-to'] : 0 ?> Comments</a>
+						<a title="Likes" href="<?php echo SITE_BASE_URL.$post['id'].'#likes' ?>"><i class="icon-thumbs-up-alt"></i> <?php echo isset($mention_count[$post['id']]['like']) ? $mention_count[$post['id']]['like'] : 0 ?> Likes</a>
+						<a title="Shares" href="<?php echo SITE_BASE_URL.$post['id'].'#reposts' ?>"><i class="icon-retweet"></i> <?php echo isset($mention_count[$post['id']]['repost']) ? $mention_count[$post['id']]['repost'] : 0 ?> Reposts</a>
+						<a title="Mentions" href="<?php echo SITE_BASE_URL.$post['id'].'#mentions' ?>"><i class="icon-hand-right"></i> <?php echo isset($mention_count[$post['id']]['mention']) ? $mention_count[$post['id']]['mention'] : 0 ?> Mentions</a>
 
 					</div>
 				</div>
 			</div>
 
 			<?php endforeach; ?>
+			<?php endif; ?>
+
+
+			<?php if (isset($individual_post)) : ?>
+			<div id="responses">
+				<div class="">
+					<div class="post-box">
+						<div class="content">
+							<h3 id="comments">Comments</h3>
+							<ul>
+							<?php
+								foreach(get_webmentions($posts[0]['id'], 'in-reply-to') as $mention)
+									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
+							?>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="">
+					<div class="post-box">
+						<div class="content">
+							<h3 id="likes">Likes</h3>
+							<?php
+								foreach(get_webmentions($posts[0]['id'], 'like') as $mention)
+									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
+							?>
+						</div>
+					</div>
+				</div>
+
+				<div class="">
+					<div class="post-box">
+						<div class="content">
+							<h3 id="reposts">Reposts</h3>
+							<?php
+								foreach(get_webmentions($posts[0]['id'], 'repost') as $mention)
+									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
+							?>
+						</div>
+					</div>
+				</div>
+
+				<div class="">
+					<div class="post-box">
+						<div class="content">
+							<h3 id="mentions">Mentions</h3>
+							<?php
+								foreach(get_webmentions($posts[0]['id'], 'mention') as $mention)
+									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
 			<?php endif; ?>
 
 		</div>

@@ -22,6 +22,7 @@
 
 	require __DIR__.'/data.php';
 	require __DIR__.'/helpers.php';
+	require __DIR__.'/webmention.php';
 	require __DIR__.'/models/posts.php';
 
 
@@ -116,7 +117,8 @@
 
 
 	app\post('/send-webmention', function($req) {
-		foreach ($req['form']['targets'] as $target) $response[] = send_webmention($req['form']['source'], $target);
+		foreach ($req['form']['targets'] as $target) $responses[] = send_webmention($req['form']['source'], $target);
+		print_R($responses);
 	});
 
 
@@ -153,19 +155,7 @@
 				if (!empty($posts))
 				{
 					$response_body = http\request("GET $source", array(), array(), $response_headers);
-					$mf2parser = new Parser($response_body);
-					$mf2 = $mf2parser->parse();
-					$type = 'mention';
-					foreach ($mf2['items'] as $item)
-					{
-						if (in_array('h-entry', $item['type']))
-						{
-							if (isset($item['properties']['repost'])) $type = 'repost';
-							if (isset($item['properties']['like'])) $type = 'like';
-							if (isset($item['properties']['in-reply-to'])) $type = 'in-reply-to';
-						}
-					}
-
+					$type = get_webmention_type($response_body);
 					add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), $type, $response_body);
 					return app\response($mf2, 202);
 				}
@@ -214,27 +204,6 @@
 		}
 
 		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'), 'layout.html');
-	});
-
-
-	app\get('/{post_id:digits}/likes', function($req, $authorized=false) {
-
-		return get_webmentions($req['matches']['post_id'], 'like');
-	});
-
-	app\get('/{post_id:digits}/reposts', function($req, $authorized=false) {
-
-		return get_webmentions($req['matches']['post_id'], 'repost');
-	});
-
-	app\get('/{post_id:digits}/mentions', function($req, $authorized=false) {
-
-		return get_webmentions($req['matches']['post_id'], 'mention');
-	});
-
-	app\get('/{post_id:digits}/comments', function($req, $authorized=false) {
-
-		return get_webmentions($req['matches']['post_id'], 'in-reply-to');
 	});
 
 

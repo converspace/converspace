@@ -201,7 +201,7 @@ sup {
 	margin-left: 0;
 }
 
-.h-entry .content {
+.h-entry .content, #responses .content {
 /* http://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
 	-ms-word-break: break-all;
 	word-break: break-all;
