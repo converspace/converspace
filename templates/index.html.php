@@ -169,7 +169,7 @@
 
 								<div class="response">
 									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
 									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
 									<div class="content">
@@ -189,7 +189,7 @@
 
 								<div class="response">
 									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
 									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
 								</div>
@@ -206,7 +206,7 @@
 
 								<div class="response">
 									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
 									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
 								</div>
