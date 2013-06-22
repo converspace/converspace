@@ -286,6 +286,16 @@ sup {
 	text-align: center;
 }
 
+.response img {
+	top: 4px;
+	margin-right: 10px;
+	position: relative;
+}
+
+.response content {
+	padding-bottom: 20px;
+}
+
 
 /* #Page Styles
 ================================================== */

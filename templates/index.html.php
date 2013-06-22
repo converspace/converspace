@@ -142,18 +142,41 @@
 			<?php endif; ?>
 
 
+<?php
+
+	function hcard_photo_fallback($author_photo)
+	{
+		if (empty($author_photo)) return SITE_BASE_URL.'img/no-hcard.png';
+		return $author_photo;
+	}
+
+	function hcard_url_fallback($author_url)
+	{
+		if (empty($author_url)) return '#';
+		return $author_url;;
+	}
+
+?>
+
+
 			<?php if (isset($individual_post)) : ?>
 			<div id="responses">
 				<div class="">
 					<div class="post-box">
 						<div class="content">
 							<h3 id="comments">Comments</h3>
-							<ul>
-							<?php
-								foreach(get_webmentions($posts[0]['id'], 'in-reply-to') as $mention)
-									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
-							?>
-							</ul>
+							<?php foreach(get_webmentions($posts[0]['id'], 'in-reply-to') as $mention): ?>
+
+								<div class="response">
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
+										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									</a>
+									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+									<div class="content">
+										<?php echo htmlentities($mention['content']); ?>
+									</div>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -162,10 +185,15 @@
 					<div class="post-box">
 						<div class="content">
 							<h3 id="likes">Likes</h3>
-							<?php
-								foreach(get_webmentions($posts[0]['id'], 'like') as $mention)
-									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
-							?>
+							<?php foreach(get_webmentions($posts[0]['id'], 'like') as $mention): ?>
+
+								<div class="response">
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
+										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									</a>
+									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -174,10 +202,15 @@
 					<div class="post-box">
 						<div class="content">
 							<h3 id="reposts">Reposts</h3>
-							<?php
-								foreach(get_webmentions($posts[0]['id'], 'repost') as $mention)
-									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
-							?>
+							<?php foreach(get_webmentions($posts[0]['id'], 'repost') as $mention): ?>
+
+								<div class="response">
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
+										<img alt="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									</a>
+									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -186,10 +219,15 @@
 					<div class="post-box">
 						<div class="content">
 							<h3 id="mentions">Mentions</h3>
-							<?php
-								foreach(get_webmentions($posts[0]['id'], 'mention') as $mention)
-									echo "<li><a href=\"{$mention['source']}\">{$mention['source']}</a></li>";
-							?>
+							<?php foreach(get_webmentions($posts[0]['id'], 'mention') as $mention): ?>
+
+								<div class="response">
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
+										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									</a>
+									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
