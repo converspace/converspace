@@ -115,7 +115,7 @@
 
 	function db_get_webmentions($post_id, $type)
 	{
-		return mysql\rows("SELECT source FROM webmentions where post_id = %d and type = '%s' ORDER BY created_at", array($post_id, $type));
+		return mysql\rows("SELECT * FROM webmentions where post_id = %d and type = '%s' ORDER BY created_at", array($post_id, $type));
 	}
 
 	function db_get_webmention_type_counts($post_id)
