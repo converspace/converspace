@@ -28,7 +28,7 @@
 	}
 
 
-	function get_webmention_data($response_body, $source)
+	function get_webmention_data($response_body, $source, $target)
 	{
 		$mf2parser = new Parser($response_body);
 		$mf2 = $mf2parser->parse();
@@ -40,9 +40,9 @@
 			if (in_array('h-entry', $item['type']) and empty($hentry))
 			{
 
-				if (isset($item['properties']['repost'])) $hentry['type'] = 'repost';
-				elseif (isset($item['properties']['like'])) $hentry['type'] = 'like';
-				elseif (isset($item['properties']['in-reply-to'])) $hentry['type'] = 'in-reply-to';
+				if (isset($item['properties']['repost']) and in_array($target, $item['properties']['repost'])) $hentry['type'] = 'repost';
+				elseif (isset($item['properties']['like']) and in_array($target, $item['properties']['like'])) $hentry['type'] = 'like';
+				elseif (isset($item['properties']['in-reply-to']) and in_array($target, $item['properties']['in-reply-to'])) $hentry['type'] = 'in-reply-to';
 				else $hentry['type'] = 'mention';
 
 				if (isset($item['properties']['summary'])) $hentry['content'] = $item['properties']['summary'][0];
