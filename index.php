@@ -150,20 +150,37 @@
 
 			if (preg_match('#^'.SITE_BASE_URL.'(?P<post_id>[0-9]+)$#', $target, $matches))
 			{
-
-				list($posts, $pager) = get_post($matches['post_id'], true);
-				if (!empty($posts))
+				if (is_valid_post($matches['post_id']))
 				{
-					$response_body = http\request("GET $source", array(), array(), $response_headers);
-					$type = get_webmention_type($response_body);
-					add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), $type, $response_body);
-					return app\response($mf2, 202);
+					try
+					{
+						$response_body = http\request("GET $source", array(), array(), $response_headers);
+						if (source_links_to_target($response_body, $target))
+						{
+							$hentry = get_webmention_data($response_body, $source);
+							$published = date('Y-m-d H:i:s',strtotime(@$hentry['published']));
+							add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), @$hentry['type'], @$hentry['content'], @$hentry['author']['name'], @$hentry['author']['url'], @$hentry['author']['photo'], $published);
+							return app\response(json_pretty_print(json_encode($hentry)), 200, array('content-type'=>'application/json; charset=utf-8'));
+						}
+						else app\response('Source URL does not contain a link to the target URL.', 400);
+					}
+					catch (http\ResponseException $e)
+					{
+						return app\response('Source URL not found.', 400);
+					}
 				}
+				else return app\response('Specified target URL not found.', 400);
 			}
 		}
 
 		return app\response('Bad Request', 400);
 	});
+
+		function is_valid_post($post_id)
+		{
+			list($posts, $pager) = get_post($post_id, true);
+			return !empty($posts);
+		}
 
 
 	// test with curl -I <URL>

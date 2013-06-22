@@ -28,22 +28,59 @@
 	}
 
 
-	function get_webmention_type($response_body)
+	function get_webmention_data($response_body, $source)
 	{
 		$mf2parser = new Parser($response_body);
 		$mf2 = $mf2parser->parse();
-		$type = 'mention';
+		$hcards = $hentry = $hentry_hcard = array();
 		foreach ($mf2['items'] as $item)
 		{
-			if (in_array('h-entry', $item['type']))
+			if (in_array('h-card', $item['type'])) $hcards[] = $item;
+
+			if (in_array('h-entry', $item['type']) and empty($hentry))
 			{
-				if (isset($item['properties']['repost'])) $type = 'repost';
-				if (isset($item['properties']['like'])) $type = 'like';
-				if (isset($item['properties']['in-reply-to'])) $type = 'in-reply-to';
+
+				if (isset($item['properties']['repost'])) $hentry['type'] = 'repost';
+				elseif (isset($item['properties']['like'])) $hentry['type'] = 'like';
+				elseif (isset($item['properties']['in-reply-to'])) $hentry['type'] = 'in-reply-to';
+				else $hentry['type'] = 'mention';
+
+				if (isset($item['properties']['summary'])) $hentry['content'] = $item['properties']['summary'][0];
+				elseif (isset($item['properties']['name'])) $hentry['content'] = $item['properties']['name'][0];
+
+				if (isset($item['properties']['published'])) $hentry['published'] = $item['properties']['published'];
+				if (isset($item['properties']['author'])) $hentry_hcard = $item['properties']['author'][0];
+
+				if (isset($item['properties']['url'])) $hentry['url'] = $item['properties']['url'];
 			}
 		}
 
-		return $type;
+		if (empty($hentry_hcard) and isset($hcards[0]))
+		{
+			$hentry_hcard = $hcards[0];
+		}
+
+		if (!isset($hentry['url'])) $hentry['url'] = $source;
+		if (isset($hentry_hcard['properties']['name'])) $hentry['author']['name'] = $hentry_hcard['properties']['name'][0];
+		if (isset($hentry_hcard['properties']['photo'])) $hentry['author']['photo'] = $hentry_hcard['properties']['photo'][0];
+		if (isset($hentry_hcard['properties']['url'])) $hentry['author']['url'] = $hentry_hcard['properties']['url'][0];
+
+		return $hentry;
+	}
+
+
+	function source_links_to_target($source_content, $target)
+	{
+		$dom = new DOMDocument;
+		@$dom->loadHTML($source_content);
+		$links = $dom->getElementsByTagName('a');
+		foreach ($links as $link)
+		{
+			$link_href = $link->getAttribute('href');
+			if ($target == $link_href) return true;
+		}
+
+		return false;
 	}
 
 ?>

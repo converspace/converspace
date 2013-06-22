@@ -52,6 +52,7 @@ CREATE TABLE `webmentions` (
 	`author_name` varchar(255),
 	`author_url` mediumtext,
 	`author_photo` mediumtext,
+	`published` datetime,
 
 	PRIMARY KEY (`id`),
 	KEY `post` (`post_id`),

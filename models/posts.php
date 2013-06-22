@@ -251,9 +251,9 @@
 			}
 
 
-	function add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content)
+	function add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content, $author_name, $author_url, $author_photo, $published)
 	{
-		return db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content);
+		return db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content, $author_name, $author_url, $author_photo, $published);
 	}
 
 	function get_webmentions($post_id, $type)

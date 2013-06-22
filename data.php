@@ -108,9 +108,9 @@
 	}
 
 
-	function db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content)
+	function db_add_webmention($post_id, $source, $source_hash, $target, $target_hash, $now, $type, $content, $author_name, $author_url, $author_photo, $published)
 	{
-		return mysql\query("INSERT INTO webmentions (post_id, source, source_hash, target, target_hash, created_at, updated_at, type, content) VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE updated_at = '%s', content = '%s'", array($post_id, $source, $source_hash, $target, $target_hash, $now, $now, $type, $content, $now, $content));
+		return mysql\query("INSERT INTO webmentions (post_id, source, source_hash, target, target_hash, created_at, updated_at, type, content, author_name, author_url, author_photo, published) VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE updated_at = '%s', content = '%s', author_name = '%s', author_url = '%s', author_photo = '%s', published = '%s'", array($post_id, $source, $source_hash, $target, $target_hash, $now, $now, $type, $content, $author_name, $author_url, $author_photo, $published, $now, $content, $author_name, $author_url, $author_photo, $published));
 	}
 
 	function db_get_webmentions($post_id, $type)
