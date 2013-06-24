@@ -39,6 +39,7 @@
 
 	<?php if (isset($individual_post)) : ?>
 	<link href="<?php echo SITE_BASE_URL.'webmention' ?>" rel="http://webmention.org/" />
+	<link rel="pingback" href="http://pingback.me/webmention?forward=<?php echo SITE_BASE_URL.'webmention' ?>" />
 	<?php endif; ?>
 
 </head>
@@ -150,10 +151,29 @@
 		return $author_photo;
 	}
 
-	function hcard_url_fallback($author_url)
+	function hcard_url_fallback($author_url, $source)
 	{
-		if (empty($author_url)) return '#';
-		return $author_url;;
+		if (empty($author_url)) return $source;
+		return $author_url;
+	}
+
+	function hcard_author_name_fallback($author_name)
+	{
+		if (empty($author_name)) return 'Someone';
+		return $author_name;
+	}
+
+	function hcard_author_fallback($author_name, $author_url, $source)
+	{
+		if (empty($author_name)) return 'Someone';
+		$author_url = hcard_url_fallback($author_url, $source);
+		return "<a href=\"$author_url\">$author_name</a>";
+	}
+
+	function comment_permalink_fallback($published, $source)
+	{
+		if (empty($published) or '0000-00-00 00:00:00' == $published) return "<a href=\"$source\">here</a>";
+		return "on <a href=\"$source\">".date('j M Y', strtotime($published)).'</a>';
 	}
 
 ?>
@@ -168,10 +188,11 @@
 							<?php foreach(get_webmentions($posts[0]['id'], 'in-reply-to') as $mention): ?>
 
 								<div class="response">
-									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url'], $mention['source']) ?>">
+										<img alt="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" title="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
-									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+									<?php echo hcard_author_fallback($mention['author_name'], $mention['author_url'], $mention['source']) ?> commented on this <?php echo comment_permalink_fallback($mention['published'], $mention['source']) ?>
+
 									<div class="content">
 										<?php echo htmlentities($mention['content']); ?>
 									</div>
@@ -188,10 +209,10 @@
 							<?php foreach(get_webmentions($posts[0]['id'], 'like') as $mention): ?>
 
 								<div class="response">
-									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url'], $mention['source']) ?>">
+										<img alt="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" title="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
-									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+									<?php echo hcard_author_fallback($mention['author_name'], $mention['author_url'], $mention['source']) ?> liked this <?php echo comment_permalink_fallback($mention['published'], $mention['source']) ?>.
 								</div>
 							<?php endforeach; ?>
 						</div>
@@ -205,10 +226,10 @@
 							<?php foreach(get_webmentions($posts[0]['id'], 'repost') as $mention): ?>
 
 								<div class="response">
-									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url'], $mention['source']) ?>">
+										<img alt="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" title="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
-									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+									<?php echo hcard_author_fallback($mention['author_name'], $mention['author_url'], $mention['source']) ?> reposted this <?php echo comment_permalink_fallback($mention['published'], $mention['source']) ?>.
 								</div>
 							<?php endforeach; ?>
 						</div>
@@ -222,10 +243,10 @@
 							<?php foreach(get_webmentions($posts[0]['id'], 'mention') as $mention): ?>
 
 								<div class="response">
-									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url']) ?>">
-										<img alt="<?php echo $mention['author_name'] ?>" title="<?php echo $mention['author_name'] ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
+									<a class="h-card" href="<?php echo hcard_url_fallback($mention['author_url'], $mention['source']) ?>">
+										<img alt="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" title="<?php echo hcard_author_name_fallback($mention['author_name']) ?>" width="22" src="<?php echo hcard_photo_fallback($mention['author_photo']) ?>" />
 									</a>
-									<a href="<?php echo $mention['source'] ?>"><?php echo $mention['source'] ?></a>
+									<?php echo hcard_author_fallback($mention['author_name'], $mention['author_url'], $mention['source']) ?> mentioned this <?php echo comment_permalink_fallback($mention['published'], $mention['source']) ?>.
 								</div>
 							<?php endforeach; ?>
 						</div>

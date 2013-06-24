@@ -292,8 +292,17 @@ sup {
 	position: relative;
 }
 
-.response content {
-	padding-bottom: 20px;
+.response .content {
+	padding-bottom: 31px;
+	margin-left: 42px;
+}
+
+.response .post-footer {
+	border-top: none;
+}
+
+.response .post-footer a {
+	margin-left: 0;
 }
 
 
