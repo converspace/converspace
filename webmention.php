@@ -48,7 +48,7 @@
 				if (isset($item['properties']['summary'])) $hentry['content'] = $item['properties']['summary'][0];
 				elseif (isset($item['properties']['name'])) $hentry['content'] = $item['properties']['name'][0];
 
-				if (isset($item['properties']['published'])) $hentry['published'] = $item['properties']['published'];
+				if (isset($item['properties']['published'])) $hentry['published'] = $item['properties']['published'][0];
 				if (isset($item['properties']['author'])) $hentry_hcard = $item['properties']['author'][0];
 
 				if (isset($item['properties']['url'])) $hentry['url'] = $item['properties']['url'];
