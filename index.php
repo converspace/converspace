@@ -158,7 +158,7 @@
 						if (source_links_to_target($response_body, $target))
 						{
 							$hentry = get_webmention_data($response_body, $source, $target);
-							$published = date('Y-m-d H:i:s',strtotime(@$hentry['published']));
+							$published = isset($hentry['published']) ? date('Y-m-d H:i:s', strtotime($hentry['published'])) : '';
 							add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), @$hentry['type'], @$hentry['content'], @$hentry['author']['name'], @$hentry['author']['url'], @$hentry['author']['photo'], $published);
 							return app\response(json_pretty_print(json_encode($hentry)), 200, array('content-type'=>'application/json; charset=utf-8'));
 						}
