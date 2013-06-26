@@ -1,6 +1,6 @@
 <?php
-	$h_entry = $mf2['items'][0]['properties'];
-	$h_card = $mf2['items'][0]['properties']['author'][0]['properties'];
+	$h_entry = $mf2['items'][1]['properties'];
+	$h_card = $mf2['items'][0]['properties'];
 	$verb = 'post'; $in_reply_to = false;
 	foreach ($mf2['items'] as $item)
 	{
