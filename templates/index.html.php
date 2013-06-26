@@ -194,7 +194,7 @@
 									<?php echo hcard_author_fallback($mention['author_name'], $mention['author_url'], $mention['source']) ?> commented on this <?php echo comment_permalink_fallback($mention['published'], $mention['source']) ?>
 
 									<div class="content">
-										<?php echo htmlentities($mention['content']); ?>
+										<?php echo htmlspecialchars($mention['content'], ENT_QUOTES); ?>
 									</div>
 								</div>
 							<?php endforeach; ?>
