@@ -7,16 +7,16 @@
     "packages": [
         {
             "name": "mf2/mf2",
-            "version": "v0.1.14",
+            "version": "v0.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/indieweb/php-mf2.git",
-                "reference": "v0.1.14"
+                "reference": "v0.1.17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/v0.1.14",
-                "reference": "v0.1.14",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/v0.1.17",
+                "reference": "v0.1.17",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,9 @@
             "require-dev": {
                 "phpunit/phpunit": "3.7.*"
             },
+            "suggest": {
+                "barnabywalters/mf-cleaner": "To more easily handle the canonical data php-mf2 gives you"
+            },
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -33,6 +36,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Barnaby Walters",
@@ -46,7 +52,7 @@
                 "parser",
                 "semantic"
             ],
-            "time": "2013-06-03 17:26:32"
+            "time": "2013-06-24 13:06:56"
         },
         {
             "name": "michelf/php-markdown",
