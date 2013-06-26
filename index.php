@@ -73,6 +73,11 @@
 	});
 
 
+	app\get('/mentions', function($req) {
+		return app\response(json_pretty_print(json_encode(get_all_webmentions())), 200, array('content-type'=>'application/json; charset=utf-8'));
+	});
+
+
 	app\any(array('/post', '/send-webmention', '/send-webmention/{post_id:digits}'), function($req) {
 
 		if (!isset($_SESSION['user']))

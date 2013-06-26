@@ -118,6 +118,12 @@
 		return mysql\rows("SELECT * FROM webmentions where post_id = %d and type = '%s' ORDER BY created_at", array($post_id, $type));
 	}
 
+	function db_get_all_webmentions()
+	{
+		return mysql\rows("SELECT id, post_id, type, source, target, author_name FROM webmentions ORDER BY updated_at DESC LIMIT 20");
+	}
+
+
 	function db_get_webmention_type_counts($post_id)
 	{
 		return mysql\rows('SELECT type, count(type) as count FROM webmentions where post_id = %d GROUP BY type', array($post_id));

@@ -261,6 +261,11 @@
 		return db_get_webmentions($post_id, $type);
 	}
 
+	function get_all_webmentions()
+	{
+		return db_get_all_webmentions();
+	}
+
 	function get_webmention_type_counts($post_id)
 	{
 		$counts = array();
