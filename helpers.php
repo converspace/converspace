@@ -117,4 +117,49 @@
 		return $result;
 	}
 
+
+
+	function hcard_photo_fallback($author_photo)
+	{
+		if (empty($author_photo)) return SITE_BASE_URL.'img/no-hcard.png';
+		return $author_photo;
+	}
+
+	function hcard_url_fallback($author_url, $source)
+	{
+		if (empty($author_url)) return $source;
+		return $author_url;
+	}
+
+	function hcard_author_name_fallback($author_name)
+	{
+		if (empty($author_name)) return 'Someone';
+		return $author_name;
+	}
+
+	function hcard_author_fallback($author_name, $author_url, $source)
+	{
+		if (empty($author_name)) return 'Someone';
+		$author_url = hcard_url_fallback($author_url, $source);
+		return "<a href=\"$author_url\">$author_name</a>";
+	}
+
+	function comment_permalink_fallback($published, $source)
+	{
+		if (empty($published) or '0000-00-00 00:00:00' == $published) return "<a href=\"$source\">here</a>";
+		return "on <a href=\"$source\">".date('j M Y', strtotime($published)).'</a>';
+	}
+
+	function mention_type_past_tense_linked($type, $target, $id)
+	{
+		$mentions = array (
+			'in-reply-to' => "<a href=\"$target#mention_$id\">commented</a> on",
+			'like' => "<a href=\"$target#mention_$id\">liked</a>",
+			'repost' => "<a href=\"$target#mention_$id\">reposted</a>",
+			'mention' => "<a href=\"$target#mention_$id\">mentioned</a>"
+		);
+
+		return isset($mentions[$type]) ? $mentions[$type] : 'mentioned';
+	}
+
 ?>

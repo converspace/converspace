@@ -74,7 +74,8 @@
 
 
 	app\get('/mentions', function($req) {
-		return app\response(json_pretty_print(json_encode(get_all_webmentions())), 200, array('content-type'=>'application/json; charset=utf-8'));
+		$mentions = get_all_webmentions();
+		return template\compose('mentions.html', compact('mentions'), 'layout.html');
 	});
 
 
