@@ -179,6 +179,14 @@ textarea {
 }
 
 
+#editor, #editor button {
+	margin-bottom: 0;
+}
+
+#editor button {
+	float: right;
+}
+
 .section {
 	/*padding: 50px 0;*/
 }

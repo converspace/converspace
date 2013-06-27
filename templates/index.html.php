@@ -11,14 +11,14 @@
 			<?php if (isset($_SESSION['user'])) : ?>
 			<div>
 				<div class="post-box">
-					<form method="post" action="<?php echo SITE_BASE_URL ?>post">
+					<form method="post" id="editor" action="<?php echo SITE_BASE_URL ?>post">
 					<?php if (isset($individual_post)) : ?>
-						<textarea rows="4" name="post[content]" placeholder="What's on your mind?"><?php if (isset($individual_post)) echo $posts[0]['raw'] ?></textarea>
+						<textarea rows="8" name="post[content]" placeholder="What's on your mind?"><?php if (isset($individual_post)) echo $posts[0]['raw'] ?></textarea>
 						<input type="hidden" name="post[id]" value="<?php echo $posts[0]['id'] ?>">
-						<div><button type="submit" >Update</button></div>
+						<div class="clearfix"><button type="submit">Update</button></div>
 					<?php else: ?>
-						<textarea rows="4" name="post[content]" placeholder="What's on your mind?"></textarea>
-						<div><button type="submit" >Post</button></div>
+						<textarea rows="8" name="post[content]" placeholder="What's on your mind?"></textarea>
+						<div class="clearfix"><button type="submit">Post</button></div>
 					<?php endif; ?>
 					</form>
 				</div>
