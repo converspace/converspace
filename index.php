@@ -73,9 +73,9 @@
 	});
 
 
-	app\get('/mentions', function($req) {
+	app\get('/mentions', function($req, $authorized) {
 		$mentions = get_all_webmentions();
-		return template\compose('mentions.html', compact('mentions'), 'layout.html');
+		return template\compose('mentions.html', compact('mentions', 'authorized'), 'layout.html');
 	});
 
 

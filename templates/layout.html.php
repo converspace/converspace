@@ -81,7 +81,7 @@
 		</div>
 	</div>
 
-	<?php if ($posts) : ?>
+	<?php if (isset($posts) and $posts) : ?>
 	<div class="container pager">
 		<div class="twelve columns offset-by-two">
 			<?php if (!isset($individual_post) and isset($pager['after'])): ?>
