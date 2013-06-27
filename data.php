@@ -120,7 +120,7 @@
 
 	function db_get_all_webmentions()
 	{
-		return mysql\rows("SELECT id, post_id, type, source, target, author_name FROM webmentions ORDER BY updated_at DESC LIMIT 20");
+		return mysql\rows("SELECT id, post_id, source, target, type, author_name, author_url, author_photo, published FROM webmentions ORDER BY updated_at DESC LIMIT 20");
 	}
 
 
