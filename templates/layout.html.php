@@ -64,7 +64,7 @@
 
 		<div class="container">
 			<div class="h-card twelve columns offset-by-two">
-				<a class="u-url" href="<?php echo SITE_BASE_URL ?>">
+				<a class="u-url u-uid" rel="me author" href="<?php echo SITE_BASE_URL ?>">
 					<img class="u-photo" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" width="80">
 				</a>
 				<p class="p-name"><?php echo USER_NAME ?></p>
