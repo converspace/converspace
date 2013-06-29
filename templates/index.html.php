@@ -46,7 +46,7 @@
 					<div class="content">
 						<?php echo $post['content'] ?>
 					</div>
-					<div class="p-name p-summary e-content" style="display:none"><?php echo $post['plaintext'] ?></div>
+					<div class="p-name p-summary e-content" style="display:none"><?php echo htmlspecialchars($post['plaintext'], ENT_QUOTES); ?></div>
 					<div class="post-footer">
 
 						<a class="u-url" title="Permalink" href="<?php echo SITE_BASE_URL.$post['id'] ?>"><i class="icon-time"></i> <time class="dt-published" datetime="<?php echo date(DATE_ATOM, strtotime($post['created_at'])); ?>"><?php echo date('j M Y', strtotime($post['created_at'])); ?></time></a>
