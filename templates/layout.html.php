@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="<?php if (!isset($individual_post)) echo "h-feed" ?>">
 <head>
 
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title><?php echo SITE_TITLE ?></title>
+	<title class="<?php if (!isset($individual_post)) echo "p-name" ?>"><?php echo SITE_TITLE ?></title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
@@ -63,7 +63,7 @@
 
 
 		<div class="container">
-			<div class="h-card twelve columns offset-by-two">
+			<div class="<?php if (!isset($individual_post)) echo "p-author " ?>h-card twelve columns offset-by-two">
 				<a class="u-url u-uid" rel="me author" href="<?php echo SITE_BASE_URL ?>">
 					<img class="u-photo" src="<?php echo gravatar_url(USER_EMAIL, 420, 'mm', 'g', true) ?>" width="80">
 				</a>
