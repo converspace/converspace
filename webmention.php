@@ -28,7 +28,7 @@
 	}
 
 
-	function get_webmention_data($response_body, $source, $target)
+	function get_mf2_data($response_body, $source, $target)
 	{
 		$mf2parser = new Parser($response_body);
 		$mf2 = $mf2parser->parse();
