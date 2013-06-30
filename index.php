@@ -124,7 +124,7 @@
 
 	app\post('/send-webmention', function($req) {
 		foreach ($req['form']['targets'] as $target) $responses[] = send_webmention($req['form']['source'], $target);
-		print_R($responses);
+		print_r($responses);
 	});
 
 
