@@ -210,9 +210,10 @@
 		$mention_count = array();
 		$mention_count[$req['matches']['post_id']] = get_webmention_type_counts($req['matches']['post_id']);
 
+		$content = template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'), 'layout.html');
+
 		if (isset($req['matches']['content_type']))
 		{
-			$content = template\render('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'));
 			$mf2parser = new Parser($content);
 			$mf2 = $mf2parser->parse();
 
@@ -226,7 +227,7 @@
 			}
 		}
 
-		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'individual_post', 'mention_count'), 'layout.html');
+		return $content;
 	});
 
 
