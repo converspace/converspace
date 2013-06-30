@@ -42,6 +42,8 @@
 	<link rel="pingback" href="http://pingback.me/webmention?forward=<?php echo SITE_BASE_URL.'webmention' ?>" />
 	<?php endif; ?>
 
+	<link href="http://h-reader.com/feed/atom?url=http://www.sandeep.io/" type="application/atom+xml" rel="updates alternate" title="Sitewide ATOM Feed">
+
 </head>
 <body>
 
