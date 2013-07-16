@@ -11,6 +11,7 @@
 	require __DIR__.'/vendor/michelf/php-markdown/Michelf/Markdown.php';
 	require __DIR__.'/vendor/michelf/php-markdown/Michelf/MarkdownExtra.php';
 	require __DIR__.'/vendor/autoload.php';
+	require __DIR__.'/url_to_absolute.php';
 
 
 	use phpish\app;
@@ -79,7 +80,7 @@
 	});
 
 
-	app\any(array('/post', '/send-webmention', '/send-webmention/{post_id:digits}'), function($req) {
+	app\any(array('/s/.*', '/post', '/send-webmention', '/send-webmention/{post_id:digits}'), function($req) {
 
 		if (!isset($_SESSION['user']))
 		{
@@ -88,6 +89,20 @@
 		}
 		else return app\next($req);
 
+	});
+
+
+	app\query('/s/publish', function($req) {
+		if (isset($req['query']['url']))
+		{
+			$url = $req['query']['url'];
+			$response_body = http\request("GET $url", array(), array(), $response_headers);
+			$mf2 = webmention\get_mf2($response_body, $url);
+			$h_entry = webmention\get_h_entry($mf2);
+			print_r($h_entry);
+			print_r(webmention\get_h_card($h_entry['properties'], $mf2, $url));
+			exit;
+		}
 	});
 
 
@@ -123,7 +138,7 @@
 
 
 	app\post('/send-webmention', function($req) {
-		foreach ($req['form']['targets'] as $target) $responses[] = send_webmention($req['form']['source'], $target);
+		foreach ($req['form']['targets'] as $target) $responses[] = webmention\send($req['form']['source'], $target);
 		print_r($responses);
 	});
 
@@ -161,9 +176,9 @@
 					try
 					{
 						$response_body = http\request("GET $source", array(), array(), $response_headers);
-						if (source_links_to_target($response_body, $target))
+						if (webmention\source_links_to_target($response_body, $target))
 						{
-							$hentry = get_mf2_data($response_body, $source, $target);
+							$hentry = webmention\get_mf2_data($response_body, $source, $target);
 							$published = isset($hentry['published']) ? date('Y-m-d H:i:s', strtotime($hentry['published'])) : '';
 							add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), @$hentry['type'], @$hentry['content'], @$hentry['author']['name'], @$hentry['author']['url'], @$hentry['author']['photo'], $published);
 							return app\response(json_pretty_print(json_encode($hentry)), 200, array('content-type'=>'application/json; charset=utf-8'));
@@ -242,5 +257,6 @@
 		}
 		return template\compose('index.html', compact('authorized', 'posts', 'pager', 'channel_name', 'mention_count'), 'layout.html');
 	});
+
 
 ?>

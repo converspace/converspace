@@ -1,10 +1,21 @@
 <?php
 
+	namespace webmention;
+
 	use phpish\http;
-	use mf2\Parser;
 
 
-	function discover_webmention_endpoint($target)
+	function send($source, $target)
+	{
+		if ($target_webmention_endpoint = discover($target))
+		{
+			$response_body = http\request("POST $target_webmention_endpoint", array(), array('source'=>$source, 'target'=>$target), $response_headers);
+			return array('headers'=>$response_headers, 'body'=>$response_body);
+		}
+	}
+
+
+	function discover($target)
 	{
 		$response_body = http\request("GET $target", array(), array(), $response_headers);
 		if (isset($response_headers['link']) and preg_match('#<(https?://[^>]+)>; rel="http://webmention.org/"#', $response_headers['link'], $matches))
@@ -18,19 +29,145 @@
 	}
 
 
-	function send_webmention($source, $target)
+	function source_links_to_target($source_body, $target)
 	{
-		if ($target_webmention_endpoint = discover_webmention_endpoint($target))
+		$dom = new \DOMDocument;
+		@$dom->loadHTML($source_body);
+		$links = $dom->getElementsByTagName('a');
+		foreach ($links as $link)
 		{
-			$response_body = http\request("POST $target_webmention_endpoint", array(), array('source'=>$source, 'target'=>$target), $response_headers);
-			return array('headers'=>$response_headers, 'body'=>$response_body);
+			$link_href = $link->getAttribute('href');
+			if ($target == $link_href) return true;
 		}
+
+		return false;
+	}
+
+
+	function get_mf2($source_body, $url)
+	{
+		$mf2parser = new \mf2\Parser($source_body);
+		return $mf2parser->parse();
+	}
+
+
+	function get_h_entry($mf2)
+	{
+		foreach ($mf2['items'] as $item)
+		{
+			if (in_array('h-entry', $item['type']))
+			{
+				return $item;
+			}
+		}
+	}
+
+
+	function get_h_card($h_entry_props, $mf2, $url)
+	{
+		// <div class="h-entry"><div class="p-author">John Doe</div> =>  author[0]='John Doe';
+		// <div class="h-entry"><div class="p-author h-card">John Doe</div> => author[0][type][0]=h-card, author[0][properties][name][0]='John Doe'
+		// <div class="h-entry"><div class="h-card"> => children[0][type][0] = h-card, children[0][properties][name][0] = John Doe
+
+		if (isset($h_entry_props['author']) and is_array($h_entry_props['author']))
+		{
+			foreach ($h_entry_props['author'] as $author)
+			{
+				if (isset($author['type']) and is_array($author['type']) and in_array('h-card', $author['type']))
+				{
+//https://rawgithub.com/sandeepshetty/authorship-test-cases/master/h-entry_with_p-author.html
+					return $author;
+				}
+			}
+		}
+		elseif (isset($mf2['rels']) and is_array($mf2['rels']) and isset($mf2['rels']['author']) and is_array($mf2['rels']['author']))
+		{
+//https://rawgithub.com/sandeepshetty/authorship-test-cases/master/h-entry_with_rel-author_pointing_to_h-card_with_u-url_equal_to_u-uid_equal_to_self.html
+			$rel_author_absolute_url = trim(url_to_absolute($url, $mf2['rels']['author'][0]));
+			$response_body = http\request("GET $rel_author_absolute_url", array(), array(), $response_headers);
+			$rel_author_mf2 = get_mf2($response_body, $rel_author_absolute_url);
+			$h_cards = get_top_level_h_cards($rel_author_mf2);
+
+			if ($h_cards)
+			{
+				foreach ($h_cards as $h_card)
+				{
+					if (isset($h_card['properties']['url']) and isset($h_card['properties']['uid']))
+					{
+						$u_uid = trim(url_to_absolute($rel_author_absolute_url, $h_card['properties']['uid'][0]));
+						foreach ($h_card['properties']['url'] as $h_card_u_url)
+						{
+							$u_url = trim(url_to_absolute($rel_author_absolute_url, $h_card_u_url));
+							if (($u_url == $u_uid) and ($u_uid == $rel_author_absolute_url)) return $h_card;
+						}
+					}
+				}
+
+	//https://rawgithub.com/sandeepshetty/authorship-test-cases/master/h-entry_with_rel-author_pointing_to_h-card_with_u-url_that_is_also_rel-me.html
+				foreach ($h_cards as $h_card)
+				{
+					if (isset($rel_author_mf2['rels']) and isset($rel_author_mf2['rels']['me']) and isset($h_card['properties']['url']))
+					{
+						$rel_mes = array_map(function ($rel_me) use ($rel_author_absolute_url) {
+							return trim(url_to_absolute($rel_author_absolute_url, $rel_me));
+						}, $rel_author_mf2['rels']['me']);
+
+						$u_urls = array_map(function ($u_url) use ($rel_author_absolute_url) {
+							return trim(url_to_absolute($rel_author_absolute_url, $u_url));
+						}, $h_card['properties']['url']);
+
+						if (array_intersect($rel_mes, $u_urls)) return $h_card;
+					}
+				}
+			}
+			else
+			{
+//https://rawgithub.com/sandeepshetty/authorship-test-cases/master/h-entry_with_rel-author_and_h-card_with_u-url_pointing_to_rel-author_href.html
+				$h_cards = get_top_level_h_cards($mf2);
+
+				foreach ($h_cards as $h_card)
+				{
+					if (isset($h_card['properties']['url']))
+					{
+						foreach ($h_card['properties']['url'] as $h_card_u_url)
+						{
+							$u_url = trim(url_to_absolute($rel_author_absolute_url, $h_card_u_url));
+							if (($u_url == $rel_author_absolute_url)) return $h_card;
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	function get_top_level_h_cards($mf2)
+	{
+		$h_cards = array();
+
+		foreach ($mf2['items'] as $item)
+		{
+			if (in_array('h-card', $item['type']))
+			{
+				$h_cards[] = $item;
+			}
+		}
+
+		return $h_cards;
+	}
+
+	function get_mention_type($h_entry_props, $target)
+	{
+		if (isset($h_entry_props['repost']) and in_array($target, $h_entry_props['repost'])) return 'repost';
+		if (isset($h_entry_props['like']) and in_array($target, $h_entry_props['like'])) return 'like';
+		if (isset($h_entry_props['in-reply-to']) and in_array($target, $h_entry_props['in-reply-to'])) return 'in-reply-to';
+		return 'mention';
 	}
 
 
 	function get_mf2_data($response_body, $source, $target)
 	{
-		$mf2parser = new Parser($response_body);
+		$mf2parser = new \mf2\Parser($response_body);
 		$mf2 = $mf2parser->parse();
 		$hcards = $hentry = $hentry_hcard = array();
 		foreach ($mf2['items'] as $item)
@@ -66,21 +203,6 @@
 		if (isset($hentry_hcard['properties']['url'])) $hentry['author']['url'] = $hentry_hcard['properties']['url'][0];
 
 		return $hentry;
-	}
-
-
-	function source_links_to_target($source_content, $target)
-	{
-		$dom = new DOMDocument;
-		@$dom->loadHTML($source_content);
-		$links = $dom->getElementsByTagName('a');
-		foreach ($links as $link)
-		{
-			$link_href = $link->getAttribute('href');
-			if ($target == $link_href) return true;
-		}
-
-		return false;
 	}
 
 ?>
