@@ -82,18 +82,18 @@
 						break;
 					case 'quoted_param_value_end':
 						if (';' == $chr) $state = 'param_value_end';
-						elseif (',' == $chr) $state = 'params_end';
+						elseif (',' == $chr) $state = 'end_of_params';
 						break;
 					case 'param_value_start':
 						if (';' == $chr) $state = 'param_value_end';
-						elseif (',' == $chr) $state = 'params_end';
+						elseif (',' == $chr) $state = 'end_of_params';
 						else $param_value .= $chr;
 						break;
 					case 'param_value_end':
 						$state = 'param_start';
 						$link[$param_name] = $param_value;
 						break;
-					case 'params_end':
+					case 'end_of_params':
 						$state = 'link_start';
 						$link[$param_name] = $param_value;
 						if (isset($link['rel'])) foreach (explode(' ', $link['rel']) as $rel) $links[$rel] = $link;
@@ -102,7 +102,6 @@
 			}
 
 			if ('link_start' != $state) {
-				$state = 'link_start';
 				$link[$param_name] = $param_value;
 				if (isset($link['rel'])) foreach (explode(' ', $link['rel']) as $rel) $links[$rel] = $link;
 				else $links[] = $link;
