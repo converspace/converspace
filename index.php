@@ -24,7 +24,9 @@
 	require __DIR__.'/data.php';
 	require __DIR__.'/helpers.php';
 	require __DIR__.'/webmention.php';
+	require __DIR__.'/link_header.php';
 	require __DIR__.'/models/posts.php';
+
 
 
 

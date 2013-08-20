@@ -3,6 +3,7 @@
 	namespace webmention;
 
 	use phpish\http;
+	use link_header;
 
 
 	function send($source, $target)
@@ -17,11 +18,15 @@
 
 	function discover($target)
 	{
+		$webmention_endpoint = NULL;
 		$response_body = http\request("GET $target", array(), array(), $response_headers);
-		if (isset($response_headers['link']) and preg_match('#<(https?://[^>]+)>; rel="http://webmention.org/"#', $response_headers['link'], $matches))
-		{
-			return $matches[1];
+		if (isset($response_headers['link'])) {
+
+			$links = link_header\parse($response_headers['link']);
+			if (isset($links['http://webmention.org/'])) $webmention_endpoint = $links['http://webmention.org/']['uri'];
+			elseif (isset($links['webmention'])) $webmention_endpoint = $links['webmention']['uri'];
 		}
+		if (!is_null($webmention_endpoint)) return $webmention_endpoint;
 		elseif (preg_match('#<link href="([^"]+)" rel="http://webmention.org/" ?/?>#i', $response_body, $matches) or preg_match('#<link rel="http://webmention.org/" href="([^"]+)" ?/?>#i', $response_body, $matches))
 		{
 			return $matches[1];
