@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5e7aa44b572f110517bfd11d20940715",
+    "hash": "e8a5d101c6f2856a2136fc0b01c90e66",
     "packages": [
         {
             "name": "mf2/mf2",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/indieweb/php-mf2.git",
-                "reference": "v0.1.19"
+                "reference": "5c2ef4cc8f095f391660fd356911ef21b39f0eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/v0.1.19",
-                "reference": "v0.1.19",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/5c2ef4cc8f095f391660fd356911ef21b39f0eec",
+                "reference": "5c2ef4cc8f095f391660fd356911ef21b39f0eec",
                 "shasum": ""
             },
             "require": {
@@ -111,18 +111,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/app.git",
-                "reference": "0eb03ea7d890dd00fc4effc474c5252798ba12b2"
+                "reference": "0bf63e24061e05de931ed39b34ff9534ac7ffe48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpish/app/zipball/0eb03ea7d890dd00fc4effc474c5252798ba12b2",
-                "reference": "0eb03ea7d890dd00fc4effc474c5252798ba12b2",
+                "url": "https://api.github.com/repos/phpish/app/zipball/0bf63e24061e05de931ed39b34ff9534ac7ffe48",
+                "reference": "0bf63e24061e05de931ed39b34ff9534ac7ffe48",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
+            "autoload": {
+                "files": [
+                    "app.php"
+                ]
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -137,7 +142,7 @@
             ],
             "description": "Request Handler",
             "homepage": "https://github.com/phpish/app",
-            "time": "2013-08-19 23:52:39"
+            "time": "2013-08-25 17:43:30"
         },
         {
             "name": "phpish/http",
@@ -145,18 +150,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/http.git",
-                "reference": "7d19a140d59a4a7a8ccd46ce445c5407f0b2bde5"
+                "reference": "e8970c5246a254a1edc81e4b9dc05169a4d1b53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpish/http/zipball/7d19a140d59a4a7a8ccd46ce445c5407f0b2bde5",
-                "reference": "7d19a140d59a4a7a8ccd46ce445c5407f0b2bde5",
+                "url": "https://api.github.com/repos/phpish/http/zipball/e8970c5246a254a1edc81e4b9dc05169a4d1b53a",
+                "reference": "e8970c5246a254a1edc81e4b9dc05169a4d1b53a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
+            "autoload": {
+                "files": [
+                    "http.php"
+                ]
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -176,26 +186,74 @@
                 "curl",
                 "http"
             ],
-            "time": "2013-08-20 00:10:11"
+            "time": "2013-08-25 18:04:05"
         },
         {
-            "name": "phpish/mysql",
+            "name": "phpish/link_header",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://github.com/phpish/mysql",
-                "reference": "2c2a7b83aa9707510b72218774698a59eb28dd60"
+                "url": "https://github.com/phpish/link_header.git",
+                "reference": "c3f1aaa47511d4d774456f888081f16a53dd0133"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/mysql/archive/2c2a7b83aa9707510b72218774698a59eb28dd60.zip",
-                "reference": "2c2a7b83aa9707510b72218774698a59eb28dd60",
+                "url": "https://api.github.com/repos/phpish/link_header/zipball/c3f1aaa47511d4d774456f888081f16a53dd0133",
+                "reference": "c3f1aaa47511d4d774456f888081f16a53dd0133",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
+            "autoload": {
+                "files": [
+                    "link_header.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Link header (RFC 5988) parser",
+            "homepage": "https://github.com/phpish/link_header",
+            "keywords": [
+                "http"
+            ],
+            "time": "2013-08-25 18:04:46"
+        },
+        {
+            "name": "phpish/mysql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpish/mysql.git",
+                "reference": "8e9121494d8001f08864e66b737d3ba43bb6ee41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpish/mysql/zipball/8e9121494d8001f08864e66b737d3ba43bb6ee41",
+                "reference": "8e9121494d8001f08864e66b737d3ba43bb6ee41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "mysql.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -215,26 +273,32 @@
                 "mysql",
                 "mysqli"
             ],
-            "time": "2012-11-10 08:14:13"
+            "time": "2013-08-25 18:03:22"
         },
         {
             "name": "phpish/template",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpish/template",
-                "reference": "62dfb46886254f855956e191b4d8c1ab464c1c86"
+                "url": "https://github.com/phpish/template.git",
+                "reference": "bfe13c50cf644a2a2affddc2b18fa98201434b86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/phpish/template/zipball/62dfb46886254f855956e191b4d8c1ab464c1c86",
-                "reference": "62dfb46886254f855956e191b4d8c1ab464c1c86",
+                "url": "https://api.github.com/repos/phpish/template/zipball/bfe13c50cf644a2a2affddc2b18fa98201434b86",
+                "reference": "bfe13c50cf644a2a2affddc2b18fa98201434b86",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "type": "library",
+            "autoload": {
+                "files": [
+                    "template.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -248,7 +312,52 @@
             ],
             "description": "Capture output of and compose plain old PHP templates",
             "homepage": "https://github.com/phpish/template",
-            "time": "2012-10-26 20:23:14"
+            "time": "2013-08-25 17:54:04"
+        },
+        {
+            "name": "phpish/webmention",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpish/webmention.git",
+                "reference": "80f3e75a2e22b438c6ab60c5635311f584a42b17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpish/webmention/zipball/80f3e75a2e22b438c6ab60c5635311f584a42b17",
+                "reference": "80f3e75a2e22b438c6ab60c5635311f584a42b17",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "phpish/http": "dev-master",
+                "phpish/link_header": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "webmention.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sandeep Shetty",
+                    "email": "sandeep.shetty@gmail.com",
+                    "homepage": "http://sandeep.shetty.in",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple Webmention (http://webmention.org/) client in PHP",
+            "homepage": "https://github.com/phpish/webmention",
+            "keywords": [
+                "pingback",
+                "webmention"
+            ],
+            "time": "2013-08-25 21:52:47"
         },
         {
             "name": "webignition/absolute-url-deriver",
@@ -256,12 +365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/absolute-url-deriver.git",
-                "reference": "1.3"
+                "reference": "65d31ed68ae3033c70263d15b5966f799168b9dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/absolute-url-deriver/zipball/1.3",
-                "reference": "1.3",
+                "url": "https://api.github.com/repos/webignition/absolute-url-deriver/zipball/65d31ed68ae3033c70263d15b5966f799168b9dd",
+                "reference": "65d31ed68ae3033c70263d15b5966f799168b9dd",
                 "shasum": ""
             },
             "require": {
@@ -297,13 +406,13 @@
             "version": "1.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webignition/url",
-                "reference": "1.4.1"
+                "url": "https://github.com/webignition/url.git",
+                "reference": "2280e4d31c7ff31c621bf24eb97081578f05fda4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/webignition/url/zipball/1.4.1",
-                "reference": "1.4.1",
+                "url": "https://api.github.com/repos/webignition/url/zipball/2280e4d31c7ff31c621bf24eb97081578f05fda4",
+                "reference": "2280e4d31c7ff31c621bf24eb97081578f05fda4",
                 "shasum": ""
             },
             "require": {
@@ -330,7 +439,7 @@
             "keywords": [
                 "url"
             ],
-            "time": "2012-10-19 04:50:16"
+            "time": "2012-10-19 11:50:16"
         }
     ],
     "packages-dev": [
@@ -345,6 +454,8 @@
         "phpish/template": 20,
         "phpish/mysql": 20,
         "phpish/http": 20,
+        "phpish/webmention": 20,
+        "phpish/link_header": 20,
         "michelf/php-markdown": 20
     },
     "platform": [

@@ -4,6 +4,9 @@
 		"phpish/template": "dev-master",
 		"phpish/mysql": "dev-master",
 		"phpish/http": "dev-master",
+		"phpish/webmention": "dev-master",
+		"phpish/http": "@dev",
+		"phpish/link_header": "@dev",
 		"michelf/php-markdown": "1.3.*@dev",
 		"mf2/mf2": "0.1.*"
 	}

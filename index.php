@@ -4,28 +4,19 @@
 	define('APPLICATION_ENV', preg_match('/^127\.0\.0\.1.*/', $_SERVER['HTTP_HOST']) ? 'development' : 'production');
 	require __DIR__.'/conf/'.APPLICATION_ENV.'.conf.php';
 
-	require __DIR__.'/vendor/phpish/app/app.php';
-	require __DIR__.'/vendor/phpish/mysql/mysql.php';
-	require __DIR__.'/vendor/phpish/template/template.php';
-	require __DIR__.'/vendor/phpish/http/http.php';
-	require __DIR__.'/vendor/michelf/php-markdown/Michelf/Markdown.php';
-	require __DIR__.'/vendor/michelf/php-markdown/Michelf/MarkdownExtra.php';
-	require __DIR__.'/vendor/autoload.php';
-	require __DIR__.'/url_to_absolute.php';
 
+	require __DIR__.'/vendor/autoload.php';
+	require __DIR__.'/data.php';
+	require __DIR__.'/helpers.php';
+	require __DIR__.'/models/posts.php';
+	require __DIR__.'/url_to_absolute.php';
+	require __DIR__.'/webmention_response.php';
 
 	use phpish\app;
 	use phpish\mysql;
 	use phpish\template;
 	use phpish\http;
 	use mf2\Parser;
-
-
-	require __DIR__.'/data.php';
-	require __DIR__.'/helpers.php';
-	require __DIR__.'/webmention.php';
-	require __DIR__.'/link_header.php';
-	require __DIR__.'/models/posts.php';
 
 
 
@@ -99,10 +90,10 @@
 		{
 			$url = $req['query']['url'];
 			$response_body = http\request("GET $url", array(), array(), $response_headers);
-			$mf2 = webmention\get_mf2($response_body, $url);
-			$h_entry = webmention\get_h_entry($mf2);
+			$mf2 = webmention_response\get_mf2($response_body, $url);
+			$h_entry = webmention_response\get_h_entry($mf2);
 			print_r($h_entry);
-			print_r(webmention\get_h_card($h_entry['properties'], $mf2, $url));
+			print_r(webmention_response\get_h_card($h_entry['properties'], $mf2, $url));
 			exit;
 		}
 	});
@@ -178,9 +169,9 @@
 					try
 					{
 						$response_body = http\request("GET $source", array(), array(), $response_headers);
-						if (webmention\source_links_to_target($response_body, $target))
+						if (webmention_response\source_links_to_target($response_body, $target))
 						{
-							$hentry = webmention\get_mf2_data($response_body, $source, $target);
+							$hentry = webmention_response\get_mf2_data($response_body, $source, $target);
 							$published = isset($hentry['published']) ? date('Y-m-d H:i:s', strtotime($hentry['published'])) : '';
 							add_webmention($matches['post_id'], $source, md5($source), $target, md5($target), date('Y-m-d H:i:s'), @$hentry['type'], @$hentry['content'], @$hentry['author']['name'], @$hentry['author']['url'], @$hentry['author']['photo'], $published);
 							return app\response(json_pretty_print(json_encode($hentry)), 200, array('content-type'=>'application/json; charset=utf-8'));
