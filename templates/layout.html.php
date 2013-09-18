@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="<?php echo SITE_BASE_URL ?>css/layout.css">
 
 	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
 	<!-- Favicons
@@ -33,7 +33,7 @@
 
 	<!--WEB FONTS-->
     <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <!-- link href="http://fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet" / -->
+    <!-- link href="//fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet" / -->
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300' rel='stylesheet' type='text/css' />
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
