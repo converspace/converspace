@@ -46,7 +46,7 @@
 					<div class="content">
 						<?php echo $post['content'] ?>
 					</div>
-                    <div style="display: hidden;" class="p-author">
+                    <div style="display: none;" class="p-author">
                         <?php echo USER_NAME ?>
                     </div>
 					<div class="p-name p-summary e-content" style="display:none"><?php echo htmlspecialchars($post['plaintext'], ENT_QUOTES); ?></div>
