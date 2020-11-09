@@ -1,27 +1,27 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
     ],
-    "hash": "e8a5d101c6f2856a2136fc0b01c90e66",
+    "content-hash": "5c26e40e7f3245ebd31ead7c96615994",
     "packages": [
         {
             "name": "mf2/mf2",
-            "version": "v0.1.19",
+            "version": "v0.1.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/indieweb/php-mf2.git",
-                "reference": "5c2ef4cc8f095f391660fd356911ef21b39f0eec"
+                "reference": "9094e4f7ad535e0796f5a384dec42bab81393e0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/5c2ef4cc8f095f391660fd356911ef21b39f0eec",
-                "reference": "5c2ef4cc8f095f391660fd356911ef21b39f0eec",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/9094e4f7ad535e0796f5a384dec42bab81393e0e",
+                "reference": "9094e4f7ad535e0796f5a384dec42bab81393e0e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "webignition/absolute-url-deriver": "1.3.*@stable"
+                "php": ">=5.3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*"
@@ -52,20 +52,24 @@
                 "parser",
                 "semantic"
             ],
-            "time": "2013-07-11 14:20:11"
+            "support": {
+                "issues": "https://github.com/indieweb/php-mf2/issues",
+                "source": "https://github.com/indieweb/php-mf2/tree/v0.1.23"
+            },
+            "time": "2013-10-20T12:25:50+00:00"
         },
         {
             "name": "michelf/php-markdown",
-            "version": "dev-lib",
+            "version": "1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "9dbd8352deac7d3a00ba9e2360b0d9f1c31b4b4c"
+                "reference": "fcdd3e0781ae40c2b9847874e0755ff4f5559688"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/9dbd8352deac7d3a00ba9e2360b0d9f1c31b4b4c",
-                "reference": "9dbd8352deac7d3a00ba9e2360b0d9f1c31b4b4c",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/fcdd3e0781ae40c2b9847874e0755ff4f5559688",
+                "reference": "fcdd3e0781ae40c2b9847874e0755ff4f5559688",
                 "shasum": ""
             },
             "require": {
@@ -103,20 +107,24 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2013-08-02 10:50:14"
+            "support": {
+                "issues": "https://github.com/michelf/php-markdown/issues",
+                "source": "https://github.com/michelf/php-markdown/tree/1.3"
+            },
+            "time": "2013-04-11T18:53:11+00:00"
         },
         {
             "name": "phpish/app",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/app.git",
-                "reference": "0bf63e24061e05de931ed39b34ff9534ac7ffe48"
+                "reference": "cb3a01ab54190f884aeacfb314d2d4942a874c4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpish/app/zipball/0bf63e24061e05de931ed39b34ff9534ac7ffe48",
-                "reference": "0bf63e24061e05de931ed39b34ff9534ac7ffe48",
+                "url": "https://api.github.com/repos/phpish/app/zipball/cb3a01ab54190f884aeacfb314d2d4942a874c4b",
+                "reference": "cb3a01ab54190f884aeacfb314d2d4942a874c4b",
                 "shasum": ""
             },
             "require": {
@@ -136,26 +144,29 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Request Handler",
             "homepage": "https://github.com/phpish/app",
-            "time": "2013-08-25 17:43:30"
+            "support": {
+                "issues": "https://github.com/phpish/app/issues",
+                "source": "https://github.com/phpish/app/tree/master"
+            },
+            "time": "2015-07-10T06:15:40+00:00"
         },
         {
             "name": "phpish/http",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/http.git",
-                "reference": "e8970c5246a254a1edc81e4b9dc05169a4d1b53a"
+                "reference": "bd6f604a2629687ebdcb637715d8ed571e6b3d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpish/http/zipball/e8970c5246a254a1edc81e4b9dc05169a4d1b53a",
-                "reference": "e8970c5246a254a1edc81e4b9dc05169a4d1b53a",
+                "url": "https://api.github.com/repos/phpish/http/zipball/bd6f604a2629687ebdcb637715d8ed571e6b3d1a",
+                "reference": "bd6f604a2629687ebdcb637715d8ed571e6b3d1a",
                 "shasum": ""
             },
             "require": {
@@ -175,8 +186,7 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Convenience wrapper around cURL",
@@ -186,11 +196,15 @@
                 "curl",
                 "http"
             ],
-            "time": "2013-08-25 18:04:05"
+            "support": {
+                "issues": "https://github.com/phpish/http/issues",
+                "source": "https://github.com/phpish/http/tree/master"
+            },
+            "time": "2014-11-23T23:33:44+00:00"
         },
         {
             "name": "phpish/link_header",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/link_header.git",
@@ -219,8 +233,7 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Link header (RFC 5988) parser",
@@ -228,11 +241,15 @@
             "keywords": [
                 "http"
             ],
-            "time": "2013-08-25 18:04:46"
+            "support": {
+                "issues": "https://github.com/phpish/link_header/issues",
+                "source": "https://github.com/phpish/link_header/tree/master"
+            },
+            "time": "2013-08-25T18:04:46+00:00"
         },
         {
             "name": "phpish/mysql",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/mysql.git",
@@ -261,8 +278,7 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Convenience wrapper around Mysqli",
@@ -273,11 +289,15 @@
                 "mysql",
                 "mysqli"
             ],
-            "time": "2013-08-25 18:03:22"
+            "support": {
+                "issues": "https://github.com/phpish/mysql/issues",
+                "source": "https://github.com/phpish/mysql/tree/v1.0.0"
+            },
+            "time": "2013-08-25T18:03:22+00:00"
         },
         {
             "name": "phpish/template",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/template.git",
@@ -306,32 +326,35 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Capture output of and compose plain old PHP templates",
             "homepage": "https://github.com/phpish/template",
-            "time": "2013-08-25 17:54:04"
+            "support": {
+                "issues": "https://github.com/phpish/template/issues",
+                "source": "https://github.com/phpish/template/tree/master"
+            },
+            "time": "2013-08-25T17:54:04+00:00"
         },
         {
             "name": "phpish/webmention",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpish/webmention.git",
-                "reference": "80f3e75a2e22b438c6ab60c5635311f584a42b17"
+                "reference": "b3328bc46a562c84b70a7f8d61b54b467ce3c345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpish/webmention/zipball/80f3e75a2e22b438c6ab60c5635311f584a42b17",
-                "reference": "80f3e75a2e22b438c6ab60c5635311f584a42b17",
+                "url": "https://api.github.com/repos/phpish/webmention/zipball/b3328bc46a562c84b70a7f8d61b54b467ce3c345",
+                "reference": "b3328bc46a562c84b70a7f8d61b54b467ce3c345",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "phpish/http": "dev-master",
-                "phpish/link_header": "dev-master"
+                "phpish/http": "v1.0.0",
+                "phpish/link_header": "v1.0.0"
             },
             "type": "library",
             "autoload": {
@@ -347,8 +370,7 @@
                 {
                     "name": "Sandeep Shetty",
                     "email": "sandeep.shetty@gmail.com",
-                    "homepage": "http://sandeep.shetty.in",
-                    "role": "Developer"
+                    "homepage": "http://sandeep.shetty.in"
                 }
             ],
             "description": "Simple Webmention (http://webmention.org/) client in PHP",
@@ -357,111 +379,22 @@
                 "pingback",
                 "webmention"
             ],
-            "time": "2013-08-25 21:52:47"
-        },
-        {
-            "name": "webignition/absolute-url-deriver",
-            "version": "1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webignition/absolute-url-deriver.git",
-                "reference": "65d31ed68ae3033c70263d15b5966f799168b9dd"
+            "support": {
+                "issues": "https://github.com/phpish/webmention/issues",
+                "source": "https://github.com/phpish/webmention/tree/v1.0.0"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webignition/absolute-url-deriver/zipball/65d31ed68ae3033c70263d15b5966f799168b9dd",
-                "reference": "65d31ed68ae3033c70263d15b5966f799168b9dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "webignition/url": ">=1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jon Cram",
-                    "email": "jon@webignition.net"
-                }
-            ],
-            "description": "Derives an absolute URL from relative and source URLs",
-            "homepage": "https://github.com/webignition/absolute-url-deriver",
-            "keywords": [
-                "absolute",
-                "url"
-            ],
-            "time": "2013-03-18 12:54:57"
-        },
-        {
-            "name": "webignition/url",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webignition/url.git",
-                "reference": "2280e4d31c7ff31c621bf24eb97081578f05fda4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webignition/url/zipball/2280e4d31c7ff31c621bf24eb97081578f05fda4",
-                "reference": "2280e4d31c7ff31c621bf24eb97081578f05fda4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jon Cram",
-                    "email": "jon@webignition.net"
-                }
-            ],
-            "description": "Represents a URL, a library to be used in many other places. Applies semantically-lossless normalisation for comparisons.",
-            "homepage": "https://github.com/webignition/url",
-            "keywords": [
-                "url"
-            ],
-            "time": "2012-10-19 11:50:16"
+            "time": "2020-11-09T21:46:51+00:00"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phpish/app": 20,
-        "phpish/template": 20,
-        "phpish/mysql": 20,
-        "phpish/http": 20,
-        "phpish/webmention": 20,
-        "phpish/link_header": 20,
         "michelf/php-markdown": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
