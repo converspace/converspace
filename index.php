@@ -1,10 +1,6 @@
 <?php
 
 
-	define('APPLICATION_ENV', preg_match('/^127\.0\.0\.1.*/', $_SERVER['HTTP_HOST']) ? 'development' : 'production');
-	require __DIR__.'/conf/'.APPLICATION_ENV.'.conf.php';
-
-
 	require __DIR__.'/vendor/autoload.php';
 	require __DIR__.'/data.php';
 	require __DIR__.'/helpers.php';
@@ -18,8 +14,7 @@
 	use phpish\http;
 	use mf2\Parser;
 
-
-
+	require __DIR__.'/conf/'.app\ENV.'.conf.php';
 
 	// Cool URIs don't change
 		app\get('/posts/{post_id:digits}', function($req) {
